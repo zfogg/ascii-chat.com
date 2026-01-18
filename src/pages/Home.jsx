@@ -155,7 +155,19 @@ cmake --preset default && cmake --build build
 
           <div className="space-y-8">
             <div>
-              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Local connection (no ACDS)</h3>
+              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Getting help</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# View built-in help
+`}</span>{`ascii-chat --help
+
+`}<span className="text-gray-500">{`# Read the full man page
+`}</span>{`man ascii-chat
+
+`}<span className="text-gray-500">{`# Get help for specific modes
+`}</span>{`ascii-chat <mode> --help`}</code></pre>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-purple-300 mb-3">Local connection (no ACDS)</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server binds to localhost
 `}</span>{`ascii-chat server
 
