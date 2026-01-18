@@ -403,10 +403,10 @@ target_link_libraries(myapp libasciichat::libasciichat)`}</code></pre>
 
                 <div>
                   <h4 className="text-pink-400 font-semibold mb-2">Include headers:</h4>
-                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-3 overflow-x-auto"><code className="text-teal-300">{`#include <asciichat/video/ascii.h>
-#include <asciichat/audio/audio.h>
-#include <asciichat/network/network.h>
-#include <asciichat/crypto/crypto.h>`}</code></pre>
+                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-3 overflow-x-auto"><code className="text-teal-300">{`#include <ascii-chat/video/ascii.h>
+#include <ascii-chat/audio/audio.h>
+#include <ascii-chat/network/network.h>
+#include <ascii-chat/crypto/crypto.h>`}</code></pre>
                 </div>
               </div>
             </div>
