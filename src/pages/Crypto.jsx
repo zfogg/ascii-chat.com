@@ -145,26 +145,20 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Verify with local public key file</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Client verifies server identity</span>
-ascii-chat happy-sunset-ocean --server-key ~/.ssh/server1.pub</code>
-              </pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Client verifies server identity
+`}</span>{`ascii-chat happy-sunset-ocean --server-key ~/.ssh/server1.pub`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-teal-300 mb-3">Verify with GitHub GPG keys</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Fetches server's GPG keys from GitHub</span>
-ascii-chat client happy-sunset-ocean --server-key github:zfogg.gpg</code>
-              </pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Fetches server's GPG keys from GitHub
+`}</span>{`ascii-chat happy-sunset-ocean --server-key github:zfogg.gpg`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-pink-300 mb-3">Verify with GPG key ID</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Verify against specific GPG key</span>
-ascii-chat client happy-sunset-ocean --server-key gpg:897607FA43DC66F6</code>
-              </pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Verify against specific GPG key
+`}</span>{`ascii-chat happy-sunset-ocean --server-key gpg:897607FA43DC66F6`}</code></pre>
             </div>
           </div>
         </section>
@@ -182,26 +176,22 @@ ascii-chat client happy-sunset-ocean --server-key gpg:897607FA43DC66F6</code>
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-cyan-300 mb-3">Whitelist file (authorized_keys format)</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Create allowed_clients.txt with one public key per line</span>
-cat allowed_clients.txt
-<span className="text-gray-500"># ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF... alice@example.com
-# ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG... bob@example.com</span>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Create allowed_clients.txt with one public key per line
+`}</span>{`cat allowed_clients.txt
+`}<span className="text-gray-500">{`# ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF... alice@example.com
+# ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG... bob@example.com
 
-<span className="text-gray-500"># Server only accepts whitelisted clients</span>
-ascii-chat server --key ~/.ssh/id_ed25519 --client-keys allowed_clients.txt</code>
-              </pre>
+`}</span><span className="text-gray-500">{`# Server only accepts whitelisted clients
+`}</span>{`ascii-chat server --key ~/.ssh/id_ed25519 --client-keys allowed_clients.txt`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Whitelist GitHub user's GPG keys</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Fetch all GPG keys from GitHub user</span>
-ascii-chat server --key gpg:MYKEYID --client-keys github:zfogg.gpg
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Fetch all GPG keys from GitHub user
+`}</span>{`ascii-chat server --key gpg:MYKEYID --client-keys github:zfogg.gpg
 
-<span className="text-gray-500"># Client must authenticate with their GPG key</span>
-ascii-chat client happy-sunset-ocean --key gpg:897607FA43DC66F6</code>
-              </pre>
+`}<span className="text-gray-500">{`# Client must authenticate with their GPG key
+`}</span>{`ascii-chat happy-sunset-ocean --key gpg:897607FA43DC66F6`}</code></pre>
             </div>
           </div>
         </section>
@@ -218,13 +208,11 @@ ascii-chat client happy-sunset-ocean --key gpg:897607FA43DC66F6</code>
             </p>
           </div>
 
-          <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-            <code className="text-teal-300"><span className="text-gray-500"># Server with encryption disabled</span>
-ascii-chat server --no-encrypt
+          <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server with encryption disabled
+`}</span>{`ascii-chat server --no-encrypt
 
-<span className="text-gray-500"># Client must also disable encryption</span>
-ascii-chat client 127.0.0.1 --no-encrypt</code>
-          </pre>
+`}<span className="text-gray-500">{`# Client must also disable encryption
+`}</span>{`ascii-chat client 127.0.0.1 --no-encrypt`}</code></pre>
         </section>
 
         {/* Technical Details */}

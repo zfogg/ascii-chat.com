@@ -141,20 +141,20 @@ cmake --preset default && cmake --build build
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Internet session with ACDS</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server registers with official ACDS
-`}</span>{`ascii-chat server --acds
+`}</span>{`ascii-chat server
 `}<span className="text-gray-500">{`# Session: happy-sunset-ocean
 
 `}</span><span className="text-gray-500">{`# Client looks up session and connects automatically
-`}</span>{`ascii-chat client happy-sunset-ocean`}</code></pre>
+`}</span>{`ascii-chat happy-sunset-ocean`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-teal-300 mb-3">Encrypted session with SSH keys</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server with Ed25519 key
-`}</span>{`ascii-chat server --key ~/.ssh/id_ed25519 --acds
+`}</span>{`ascii-chat server --key ~/.ssh/id_ed25519
 
 `}<span className="text-gray-500">{`# Client authenticates with their key
-`}</span>{`ascii-chat client happy-sunset-ocean --key ~/.ssh/id_ed25519`}</code></pre>
+`}</span>{`ascii-chat happy-sunset-ocean --key ~/.ssh/id_ed25519`}</code></pre>
             </div>
 
             <div>
