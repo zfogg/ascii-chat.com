@@ -12,6 +12,23 @@ export default function Crypto() {
           </p>
         </header>
 
+        {/* ACDS Note */}
+        <div className="mb-12 bg-purple-900/20 border border-purple-700/50 rounded-lg p-6">
+          <p className="text-gray-300">
+            <strong className="text-purple-300">Note:</strong> Looking for ACDS cryptography details or public keys?
+            See the{' '}
+            <a
+              href="https://discovery.ascii-chat.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-400 hover:text-cyan-300 transition-colors underline"
+            >
+              ACDS documentation
+            </a>
+            {' '}for discovery service crypto architecture.
+          </p>
+        </div>
+
         {/* Overview */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-cyan-900/50 pb-2">
@@ -203,35 +220,73 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
           </div>
         </section>
 
-        {/* Client Whitelisting */}
+        {/* Key Whitelisting */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-purple-400 mb-6 border-b border-purple-900/50 pb-2">
-            👥 Client Key Whitelisting
+            👥 Key Whitelisting
           </h2>
 
           <p className="text-gray-300 mb-6">
-            Restrict connections to known clients by maintaining an authorized_keys-style whitelist.
+            Restrict connections to known peers by maintaining whitelists of trusted public keys. Works both ways—servers can whitelist clients, and clients can whitelist servers.
           </p>
 
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div>
-              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Whitelist file (authorized_keys format)</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Create allowed_clients.txt with one public key per line
+              <h3 className="text-2xl font-semibold text-cyan-400 mb-4">Server Whitelisting Clients</h3>
+              <p className="text-gray-300 mb-4">Restrict which clients can connect to your server.</p>
+
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-lg font-semibold text-cyan-300 mb-3">Whitelist file (authorized_keys format)</h4>
+                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Create allowed_clients.txt with one public key per line
 `}</span>{`cat allowed_clients.txt
 `}<span className="text-gray-500">{`# ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF... alice@example.com
 # ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG... bob@example.com
 
 `}</span><span className="text-gray-500">{`# Server only accepts whitelisted clients
 `}</span>{`ascii-chat server --key ~/.ssh/id_ed25519 --client-keys allowed_clients.txt`}</code></pre>
-            </div>
+                </div>
 
-            <div>
-              <h3 className="text-xl font-semibold text-purple-300 mb-3">Whitelist GitHub user's GPG keys</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Fetch all GPG keys from GitHub user
+                <div>
+                  <h4 className="text-lg font-semibold text-purple-300 mb-3">Whitelist GitHub user's GPG keys</h4>
+                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Fetch all GPG keys from GitHub user
 `}</span>{`ascii-chat server --key gpg:MYKEYID --client-keys github:zfogg.gpg
 
 `}<span className="text-gray-500">{`# Client must authenticate with their GPG key
 `}</span>{`ascii-chat happy-sunset-ocean --key gpg:897607FA43DC66F6`}</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-semibold text-teal-400 mb-4">Client Whitelisting Servers</h3>
+              <p className="text-gray-300 mb-4">Only connect to servers with known, trusted keys.</p>
+
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-lg font-semibold text-teal-300 mb-3">Verify with local key file</h4>
+                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Client verifies server matches this exact key
+`}</span>{`ascii-chat happy-sunset-ocean --server-key ~/.ssh/known_server.pub`}</code></pre>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold text-pink-300 mb-3">Verify with GitHub SSH keys</h4>
+                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Fetches server's SSH keys from GitHub
+`}</span>{`ascii-chat happy-sunset-ocean --server-key github:zfogg.keys`}</code></pre>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold text-cyan-300 mb-3">Verify with GitHub GPG keys</h4>
+                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Fetches server's GPG keys from GitHub
+`}</span>{`ascii-chat happy-sunset-ocean --server-key github:zfogg.gpg`}</code></pre>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold text-purple-300 mb-3">Verify with GPG key ID</h4>
+                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Verify against specific GPG key from keyring
+`}</span>{`ascii-chat happy-sunset-ocean --server-key gpg:897607FA43DC66F6`}</code></pre>
+                </div>
+              </div>
             </div>
           </div>
         </section>
