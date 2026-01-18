@@ -53,9 +53,9 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-cyan-300 mb-3">📺 Terminal Video</h3>
+              <h3 className="text-xl font-semibold text-cyan-300 mb-3">📺 Terminal Video calls</h3>
               <p className="text-gray-300">
-                Webcam video rendered as ASCII art in real-time. Works in any terminal-rxvt-unicode, iTerm, Kitty, even SSH sessions.
+                Webcam video over tcp/ip rendered as ASCII art in real-time. Works in any terminal-rxvt-unicode, iTerm, Kitty, even SSH sessions.
               </p>
             </div>
 
@@ -74,23 +74,23 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
             </div>
 
             <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-pink-300 mb-3">🌍 Zero Config Discovery</h3>
+              <h3 className="text-xl font-semibold text-pink-300 mb-3">🌍 Zero Config Networking</h3>
               <p className="text-gray-300">
-                Share a memorable three-word string like <code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">happy-sunset-ocean</code> that users can connect with. Connection and NAT traversal transparently handled with UPnP and WebRTC support.
+                Share a memorable three-word string like <code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">happy-sunset-ocean</code> that users can connect with connection and NAT traversal transparently handled. Support for UPnP, WebRTC, and MDNS.
               </p>
             </div>
 
             <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-cyan-300 mb-3">👥 Multi-Client</h3>
               <p className="text-gray-300">
-                3+ people can join the same session. Video grid layout automatically adjusts, like Zoom but in your terminal.
+                3+ people can join the same session. Video grid layout automatically adjusts, like Zoom or Google Hangouts but in your terminal.
               </p>
             </div>
 
             <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-purple-300 mb-3">🎨 Customizable Rendering</h3>
               <p className="text-gray-300">
-                Choose ASCII palettes, color modes (mono/16/256/truecolor), and rendering styles. Half-block mode for higher detail.
+                Choose ASCII palettes, color modes (mono/16/256/truecolor), and rendering styles and modes.
               </p>
             </div>
           </div>
@@ -122,7 +122,7 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-purple-300 mb-3">macOS (Homebrew)</h3>
+              <h3 className="text-xl font-semibold text-purple-300 mb-3">Homebrew</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`brew tap zfogg/ascii-chat
 brew install ascii-chat`}</code></pre>
             </div>
@@ -331,6 +331,10 @@ cmake --preset default && cmake --build build
                 <strong className="text-cyan-400">ascii-chat</strong> and <strong className="text-purple-400">libasciichat</strong> are free and open source under the{' '}
                 <strong className="text-teal-400">MIT License</strong>.
               </p>
+              <p className="text-gray-300 mb-4">
+                Cross-platform: <strong className="text-cyan-400">Windows</strong>, <strong className="text-purple-400">Linux</strong>, and <strong className="text-teal-400">macOS</strong> on both{' '}
+                <strong className="text-pink-400">x86_64</strong> and <strong className="text-cyan-400">ARM64</strong>.
+              </p>
               <p className="text-gray-300">
                 Contributions welcome. Fork it and send pull requests.
               </p>
@@ -359,8 +363,8 @@ cmake --preset default && cmake --build build
                 <h4 className="text-cyan-300 font-semibold mb-3">Installing libasciichat</h4>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-gray-400 text-sm mb-2">macOS (Homebrew):</p>
-                    <pre className="bg-gray-900 border border-gray-800 rounded p-3"><code className="text-teal-300">{`brew install ascii-chat  # includes libasciichat`}</code></pre>
+                    <p className="text-gray-400 text-sm mb-2">Homebrew:</p>
+                    <pre className="bg-gray-900 border border-gray-800 rounded p-3"><code className="text-teal-300">{`brew install zfogg/ascii-chat/ascii-chat  # includes libasciichat`}</code></pre>
                   </div>
                   <div>
                     <p className="text-gray-400 text-sm mb-2">Arch Linux (AUR):</p>
