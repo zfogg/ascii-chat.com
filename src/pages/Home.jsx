@@ -125,7 +125,9 @@ brew install ascii-chat`}</code></pre>
 
             <div>
               <h3 className="text-xl font-semibold text-pink-300 mb-3">Arch Linux (AUR)</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`paru -S ascii-chat`}</code></pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`paru -S ascii-chat
+# or
+yay -S ascii-chat`}</code></pre>
             </div>
 
             <div>
