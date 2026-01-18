@@ -174,7 +174,7 @@ cmake --preset default && cmake --build build
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-teal-300 mb-3">Encrypted session with SSH keys</h3>
+              <h3 className="text-xl font-semibold text-teal-300 mb-3">Authenticated session with SSH keys</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server with Ed25519 key
 `}</span>{`ascii-chat server --key ~/.ssh/id_ed25519
 
