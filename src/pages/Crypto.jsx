@@ -68,8 +68,9 @@ export default function Crypto() {
                 <li><code className="text-cyan-400 bg-gray-950 px-2 py-1 rounded">Ed25519</code> - Identity signatures (64 bytes)</li>
                 <li><code className="text-purple-400 bg-gray-950 px-2 py-1 rounded">X25519</code> - ECDH key exchange (32 bytes)</li>
                 <li><code className="text-teal-400 bg-gray-950 px-2 py-1 rounded">XSalsa20-Poly1305</code> - AEAD cipher (encrypt + authenticate)</li>
-                <li><code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">BLAKE2b</code> - Key derivation function</li>
-                <li><code className="text-cyan-400 bg-gray-950 px-2 py-1 rounded">Argon2</code> - Password hashing (memory-hard KDF)</li>
+                <li><code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">Blowfish</code> - Block cipher (SSH private key encryption)</li>
+                <li><code className="text-cyan-400 bg-gray-950 px-2 py-1 rounded">BLAKE2b</code> - Key derivation function</li>
+                <li><code className="text-purple-400 bg-gray-950 px-2 py-1 rounded">Argon2</code> - Password hashing (memory-hard KDF)</li>
               </ul>
             </div>
 
