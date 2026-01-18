@@ -177,6 +177,15 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
             </TrackedLink>
 
             <TrackedLink
+              to="/env"
+              label="Home - Docs Environment Variables"
+              className="bg-gray-900/50 border border-green-900/50 rounded-lg p-4 hover:border-green-500/50 transition-colors"
+            >
+              <h3 className="text-green-300 font-semibold mb-1">🌍 Environment Variables</h3>
+              <p className="text-gray-400 text-sm">Configuration via environment</p>
+            </TrackedLink>
+
+            <TrackedLink
               href="https://zfogg.github.io/ascii-chat/"
               label="Home - Docs API"
               target="_blank"

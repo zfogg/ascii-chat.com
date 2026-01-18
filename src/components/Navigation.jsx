@@ -54,6 +54,17 @@ export default function Navigation() {
             >
               Man
             </TrackedLink>
+            <TrackedLink
+              to="/env"
+              label="Nav - Env"
+              className={`transition-colors ${
+                isActive('/env')
+                  ? 'text-green-400'
+                  : 'text-gray-400 hover:text-green-300'
+              }`}
+            >
+              Env
+            </TrackedLink>
           </div>
         </div>
       </div>

@@ -251,6 +251,9 @@ ascii-chat happy-sunset-ocean --key ~/.ssh/id_ed25519`}</code></pre>
 `}<span className="text-gray-500">{`# Or set passphrase via environment variable
 `}</span>{`export ASCII_CHAT_KEY_PASSWORD="my-passphrase"
 ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
+              <p className="text-gray-400 text-sm mt-3">
+                See <TrackedLink to="/env" label="Crypto - Env Vars Link" className="text-green-400 hover:text-green-300 underline">Environment Variables</TrackedLink> for all available configuration options.
+              </p>
             </div>
           </div>
         </section>
@@ -326,9 +329,12 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-teal-300 mb-3">Verify with GitHub GPG keys</h3>
+              <h3 className="text-xl font-semibold text-teal-300 mb-3">Verify with GitHub/GitLab GPG keys</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Fetches server's GPG keys from GitHub
-`}</span>{`ascii-chat happy-sunset-ocean --server-key github:zfogg.gpg`}</code></pre>
+`}</span>{`ascii-chat happy-sunset-ocean --server-key github:zfogg.gpg
+
+`}<span className="text-gray-500">{`# Or from GitLab
+`}</span>{`ascii-chat happy-sunset-ocean --server-key gitlab:zfogg.gpg`}</code></pre>
             </div>
 
             <div>
@@ -458,14 +464,17 @@ Connection refused. Remove the old key from known_hosts to continue.`}</code></p
               </div>
             </div>
 
-            <div className="bg-cyan-900/20 border border-cyan-700/50 rounded-lg p-6">
-              <h3 className="text-cyan-300 font-semibold mb-3">💡 Pro Tips</h3>
-              <ul className="space-y-2 text-gray-300 text-sm">
-                <li><strong className="text-cyan-400">Backup known_hosts:</strong> Keep a backup if you frequently connect to many servers. Losing this file means re-establishing trust on first connection.</li>
-                <li><strong className="text-purple-400">Manual verification:</strong> Use <code className="text-teal-400 bg-gray-950 px-2 py-1 rounded">--server-key</code> flag to bypass known_hosts and explicitly verify a server's key.</li>
-                <li><strong className="text-teal-400">ACDS sessions:</strong> ACDS lookups provide fresh key verification per session, so known_hosts is less critical when using ACDS.</li>
-                <li><strong className="text-pink-400">IP-based tracking:</strong> Known hosts are tracked by IP:port combination, not hostname. DNS changes won't trigger warnings.</li>
-              </ul>
+            <div className="bg-red-900/20 border border-red-700/50 rounded-lg p-6">
+              <h3 className="text-red-300 font-semibold mb-3">🚨 Disabling known hosts (don't do this)</h3>
+              <p className="text-gray-300 mb-3">
+                Set <code className="text-red-400 bg-gray-950 px-2 py-1 rounded">ASCII_CHAT_INSECURE_NO_HOST_IDENTITY_CHECK=1</code> to skip known hosts checks.
+              </p>
+              <p className="text-red-300 font-semibold mb-2">
+                ⚠️ This turns off MITM protection. Anyone can intercept your connection.
+              </p>
+              <p className="text-gray-300 text-sm">
+                Only use this for local testing. See <TrackedLink to="/env" label="Crypto - Env Vars Insecure" className="text-green-400 hover:text-green-300 underline">Environment Variables</TrackedLink> for details.
+              </p>
             </div>
           </div>
         </section>
@@ -477,7 +486,7 @@ Connection refused. Remove the old key from known_hosts to continue.`}</code></p
           </h2>
 
           <p className="text-gray-300 mb-6">
-            Restrict connections to known peers by maintaining whitelists of trusted public keys. Works both ways—servers can whitelist clients, and clients can whitelist servers.
+            Restrict connections to known peers by maintaining whitelists of trusted public keys. Works both ways: servers can whitelist clients, and clients can whitelist servers.
           </p>
 
           <div className="space-y-8">
