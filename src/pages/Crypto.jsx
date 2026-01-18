@@ -79,7 +79,7 @@ export default function Crypto() {
             <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
               <h3 className="text-cyan-300 font-semibold mb-3">The ACDS Trust Model: Bootstrapping Trust Over HTTPS</h3>
               <p className="text-gray-300 mb-3">
-                ACDS (ASCII-Chat Discovery Service) solves the trust problem elegantly by leveraging the <strong className="text-cyan-400">existing HTTPS PKI</strong> to bootstrap trust for raw TCP connections:
+                ACDS (ASCII-Chat Discovery Service) solves the trust problem by using the <strong className="text-cyan-400">existing HTTPS PKI</strong> to bootstrap trust for raw TCP connections:
               </p>
               <ol className="list-decimal list-inside space-y-2 text-gray-300">
                 <li>Client downloads ACDS public key from <TrackedLink href="https://discovery.ascii-chat.com/key.pub" label="Crypto - ACDS SSH Key" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 transition-colors underline">https://discovery.ascii-chat.com/key.pub</TrackedLink> (SSH) or <TrackedLink href="https://discovery.ascii-chat.com/key.gpg" label="Crypto - ACDS GPG Key" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 transition-colors underline">key.gpg</TrackedLink> (GPG), verified by system CA certificates via BearSSL</li>
@@ -91,7 +91,7 @@ export default function Crypto() {
                 Chain of trust: <span className="text-cyan-400">HTTPS CA</span> → <span className="text-purple-400">ACDS key</span> → <span className="text-teal-400">Session lookup</span> → <span className="text-pink-400">Server identity</span>
               </p>
               <p className="text-gray-300 mt-3">
-                ACDS is <strong className="text-pink-300">privacy-first</strong>: it only sees connection metadata (session strings, public keys, ICE candidates). Your video and audio flow peer-to-peer with end-to-end encryption—ACDS never touches your media.
+                ACDS only sees connection metadata (session strings, public keys, ICE candidates). Your video and audio flow peer-to-peer with end-to-end encryption. ACDS never touches your media.
               </p>
               <div className="bg-cyan-900/20 border border-cyan-700/50 rounded-lg p-4 mt-4">
                 <p className="text-gray-300 text-sm">
@@ -118,7 +118,7 @@ export default function Crypto() {
             <div className="bg-purple-900/20 border border-purple-700/50 rounded-lg p-6">
               <h3 className="text-purple-300 font-semibold mb-3">💡 Key Insight</h3>
               <p className="text-gray-300">
-                ascii-chat doesn't require a single trust model—it provides <strong>multiple independent verification mechanisms</strong> that can be mixed and matched. Use password-only for quick sessions. Use SSH keys for stronger identity. Use ACDS for zero-config convenience. Stack all three for maximum paranoia. The protocol supports graceful degradation: more verification methods = stronger security, but defaults work without any configuration.
+                You can mix and match verification methods. Password-only for quick sessions. SSH keys for stronger identity. ACDS for zero-config. Stack all three if you want. More verification = stronger security, but defaults work without configuration.
               </p>
             </div>
           </div>
@@ -227,7 +227,7 @@ export default function Crypto() {
           </h2>
 
           <p className="text-gray-300 mb-6">
-            Use your existing SSH Ed25519 keys for authentication. No need to generate new keys—ascii-chat reads the same keys you use for GitHub, servers, and git.
+            Use your existing SSH Ed25519 keys for authentication. ascii-chat reads the same keys you use for GitHub, servers, and git.
           </p>
 
           <div className="space-y-6">
@@ -262,7 +262,7 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
           </h2>
 
           <p className="text-gray-300 mb-6">
-            GPG Ed25519 keys work via <strong className="text-teal-300">gpg-agent</strong>—no passphrase prompts needed. Perfect for automated deployments.
+            GPG Ed25519 keys work via <strong className="text-teal-300">gpg-agent</strong>. No passphrase prompts.
           </p>
 
           <div className="space-y-6">
@@ -284,7 +284,7 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
           </h2>
 
           <p className="text-gray-300 mb-6">
-            Simple password encryption for quick sessions. Can be combined with key authentication for defense-in-depth.
+            Simple password encryption for quick sessions. Combine with key authentication for defense-in-depth.
           </p>
 
           <div className="space-y-6">
@@ -346,7 +346,7 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
           </h2>
 
           <p className="text-gray-300 mb-6">
-            ascii-chat uses an SSH-style <strong className="text-teal-300">Trust-On-First-Use (TOFU)</strong> model to track server identities. The first time you connect to a server, its public key is saved. Subsequent connections verify the key hasn't changed—protecting against MITM attacks.
+            ascii-chat tracks server identities with an SSH-style <strong className="text-teal-300">Trust-On-First-Use (TOFU)</strong> model. The first time you connect to a server, its public key is saved. Subsequent connections verify the key hasn't changed.
           </p>
 
           <div className="space-y-6">
@@ -422,7 +422,7 @@ Connection refused. Remove the old key from known_hosts to continue.`}</code></p
             <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-6">
               <h3 className="text-pink-300 font-semibold mb-3">🔧 What to Do When Keys Change</h3>
               <p className="text-gray-300 mb-4">
-                Key changes happen for legitimate reasons (server reinstalled, key rotated) and malicious reasons (MITM attack). <strong className="text-pink-400">Always verify before proceeding.</strong>
+                Key changes happen for legitimate reasons (server reinstalled, key rotated) and malicious reasons (MITM attack). Verify before proceeding.
               </p>
 
               <div className="space-y-4">

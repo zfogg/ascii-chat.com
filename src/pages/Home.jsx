@@ -22,25 +22,57 @@ export default function Home() {
           </p>
         </header>
 
-        {/* Quick Start */}
+        {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-cyan-900/50 pb-2">
-            ⚡ Quick Start
+          <h2 className="text-3xl font-bold text-teal-400 mb-6 border-b border-teal-900/50 pb-2">
+            📦 Installation
           </h2>
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-purple-300 mb-3">Start a server</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`# Register with ACDS and get a session string
-ascii-chat server`}<span className="text-gray-500">{`
-# Session: happy-sunset-ocean`}</span></code></pre>
+              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Pre-built static binaries (all platforms)</h3>
+              <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
+                <p className="text-gray-300 mb-3">
+                  Download pre-built static binaries for <strong className="text-cyan-400">macOS</strong>, <strong className="text-purple-400">Linux</strong>, and <strong className="text-teal-400">Windows</strong>:
+                </p>
+                <TrackedLink
+                  href="https://github.com/zfogg/ascii-chat/releases/latest"
+                  label="Home - Download Latest Release"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+                >
+                  📦 Download Latest Release
+                </TrackedLink>
+              </div>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-purple-300 mb-3">Join a session</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`# Connect using the session string
-ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
-# That's it! No configuration needed.`}</span></code></pre>
+              <h3 className="text-xl font-semibold text-purple-300 mb-3">Homebrew</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`brew tap zfogg/ascii-chat
+brew install ascii-chat`}</code></pre>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-pink-300 mb-3">Arch Linux (AUR)</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`paru -S ascii-chat
+# or
+yay -S ascii-chat`}</code></pre>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-teal-300 mb-3">Build from source</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`git clone https://github.com/zfogg/ascii-chat.git
+cd ascii-chat
+
+# Linux/macOS
+./scripts/install-deps.sh
+
+# Windows
+./scripts/install-deps.ps1
+
+cmake --preset default && cmake --build build
+./build/bin/ascii-chat`}</code></pre>
             </div>
           </div>
         </section>
@@ -96,57 +128,25 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
           </div>
         </section>
 
-        {/* Installation */}
+        {/* Quick Start */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-teal-400 mb-6 border-b border-teal-900/50 pb-2">
-            📦 Installation
+          <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-cyan-900/50 pb-2">
+            ⚡ Quick Start
           </h2>
 
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div>
-              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Pre-built static binaries (all platforms)</h3>
-              <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
-                <p className="text-gray-300 mb-3">
-                  Download pre-built static binaries for <strong className="text-cyan-400">macOS</strong>, <strong className="text-purple-400">Linux</strong>, and <strong className="text-teal-400">Windows</strong>:
-                </p>
-                <TrackedLink
-                  href="https://github.com/zfogg/ascii-chat/releases/latest"
-                  label="Home - Download Latest Release"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-                >
-                  📦 Download Latest Release
-                </TrackedLink>
-              </div>
+              <h3 className="text-xl font-semibold text-purple-300 mb-3">Start a server</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`# Register with ACDS and get a session string
+ascii-chat server`}<span className="text-gray-500">{`
+# Session: happy-sunset-ocean`}</span></code></pre>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-purple-300 mb-3">Homebrew</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`brew tap zfogg/ascii-chat
-brew install ascii-chat`}</code></pre>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold text-pink-300 mb-3">Arch Linux (AUR)</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`paru -S ascii-chat
-# or
-yay -S ascii-chat`}</code></pre>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold text-teal-300 mb-3">Build from source</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`git clone https://github.com/zfogg/ascii-chat.git
-cd ascii-chat
-
-# Linux/macOS
-./scripts/install-deps.sh
-
-# Windows
-./scripts/install-deps.ps1
-
-cmake --preset default && cmake --build build
-./build/bin/ascii-chat`}</code></pre>
+              <h3 className="text-xl font-semibold text-purple-300 mb-3">Join a session</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`# Connect using the session string
+ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
+# That's it! No configuration needed.`}</span></code></pre>
             </div>
           </div>
         </section>
