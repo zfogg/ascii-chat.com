@@ -880,6 +880,58 @@ ascii-chat client [::1]:8080</pre>
 <pre>ascii-chat client example.com --key github:username</pre>
 </section>
 <section class="Ss">
+<h2 class="Ss" id="Stream_video_file_as_ASCII_art"><a class="permalink" href="#Stream_video_file_as_ASCII_art">Stream
+  video file as ASCII art</a></h2>
+<pre>ascii-chat mirror --file video.mp4 --color-mode truecolor</pre>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>Plays an MP4 video file as ASCII art. Works with any video format
+      supported by FFmpeg (MP4, MOV, AVI, MKV, WebM).</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Play_animated_GIF_as_ASCII"><a class="permalink" href="#Play_animated_GIF_as_ASCII">Play
+  animated GIF as ASCII</a></h2>
+<pre>ascii-chat mirror --file animation.gif --loop</pre>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>Loops an animated GIF continuously. Great for testing or creating looping
+      ASCII animations.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Display_image_as_ASCII"><a class="permalink" href="#Display_image_as_ASCII">Display
+  image as ASCII</a></h2>
+<pre>ascii-chat mirror --file photo.jpg --snapshot</pre>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>Converts a JPEG or PNG image to ASCII art. Useful for one-off ASCII
+      conversions of photos.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Stream_audio_visualized_as_ASCII"><a class="permalink" href="#Stream_audio_visualized_as_ASCII">Stream
+  audio visualized as ASCII</a></h2>
+<pre>ascii-chat mirror --file song.mp3 --test-pattern</pre>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>Plays audio from an MP3 file. Use with <b>--test-pattern</b> to show a
+      visual pattern while audio plays. Note: Pure audio files don't have video
+      frames, so combine with test pattern or another visual source.</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="Pipe_video_through_stdin"><a class="permalink" href="#Pipe_video_through_stdin">Pipe
+  video through stdin</a></h2>
+<pre>cat video.mp4 | ascii-chat mirror --file -</pre>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>Streams video from stdin. Use - as the filename to read from standard
+      input. Useful for chaining with other commands or streaming from network
+      sources.</dd>
+</dl>
+</section>
+<section class="Ss">
 <h2 class="Ss" id="Use_Unicode_block_characters_for_higher_contrast"><a class="permalink" href="#Use_Unicode_block_characters_for_higher_contrast">Use
   Unicode block characters for higher contrast</a></h2>
 <pre>ascii-chat client --palette blocks --utf8</pre>

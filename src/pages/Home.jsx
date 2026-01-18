@@ -155,6 +155,16 @@ cmake --preset default && cmake --build build
             💻 Usage Examples
           </h2>
 
+          <div className="bg-purple-900/20 border border-purple-700/50 rounded-lg p-4 mb-6">
+            <p className="text-gray-300 text-sm">
+              💡 For complete documentation of all command-line flags and configuration file options, see the{' '}
+              <a href="/man" className="text-cyan-400 hover:text-cyan-300 transition-colors underline">
+                man page
+              </a>
+              .
+            </p>
+          </div>
+
           <div className="space-y-8">
             <div>
               <h3 className="text-xl font-semibold text-cyan-300 mb-3">Getting help</h3>
