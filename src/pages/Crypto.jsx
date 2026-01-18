@@ -44,6 +44,44 @@ export default function Crypto() {
           </div>
         </section>
 
+        {/* Technical Details */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-teal-400 mb-6 border-b border-teal-900/50 pb-2">
+            🔬 Technical Details
+          </h2>
+
+          <div className="space-y-6">
+            <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
+              <h3 className="text-cyan-300 font-semibold mb-3">Handshake Protocol</h3>
+              <ol className="list-decimal list-inside space-y-2 text-gray-300">
+                <li>Client and server exchange Ed25519 public keys (optional identity verification)</li>
+                <li>Both sides generate ephemeral X25519 keypairs</li>
+                <li>Diffie-Hellman key exchange computes shared secret</li>
+                <li>Shared secret derives session keys for XSalsa20-Poly1305 encryption</li>
+                <li>All packets encrypted with session keys</li>
+              </ol>
+            </div>
+
+            <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
+              <h3 className="text-purple-300 font-semibold mb-3">Encryption Algorithms</h3>
+              <ul className="space-y-2 text-gray-300">
+                <li><code className="text-cyan-400 bg-gray-950 px-2 py-1 rounded">Ed25519</code> - Identity signatures (64 bytes)</li>
+                <li><code className="text-purple-400 bg-gray-950 px-2 py-1 rounded">X25519</code> - ECDH key exchange (32 bytes)</li>
+                <li><code className="text-teal-400 bg-gray-950 px-2 py-1 rounded">XSalsa20-Poly1305</code> - AEAD cipher (encrypt + authenticate)</li>
+                <li><code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">BLAKE2b</code> - Key derivation function</li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-900/50 border border-teal-900/30 rounded-lg p-6">
+              <h3 className="text-teal-300 font-semibold mb-3">Perfect Forward Secrecy</h3>
+              <p className="text-gray-300">
+                Each connection generates new ephemeral keys. Even if your long-term SSH/GPG key is compromised,
+                past sessions cannot be decrypted. Keys are never stored—only used for the duration of the connection.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* SSH Keys */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-purple-400 mb-6 border-b border-purple-900/50 pb-2">
@@ -213,44 +251,6 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
 
 `}<span className="text-gray-500">{`# Client must also disable encryption
 `}</span>{`ascii-chat client 127.0.0.1 --no-encrypt`}</code></pre>
-        </section>
-
-        {/* Technical Details */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-teal-400 mb-6 border-b border-teal-900/50 pb-2">
-            🔬 Technical Details
-          </h2>
-
-          <div className="space-y-6">
-            <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
-              <h3 className="text-cyan-300 font-semibold mb-3">Handshake Protocol</h3>
-              <ol className="list-decimal list-inside space-y-2 text-gray-300">
-                <li>Client and server exchange Ed25519 public keys (optional identity verification)</li>
-                <li>Both sides generate ephemeral X25519 keypairs</li>
-                <li>Diffie-Hellman key exchange computes shared secret</li>
-                <li>Shared secret derives session keys for XSalsa20-Poly1305 encryption</li>
-                <li>All packets encrypted with session keys</li>
-              </ol>
-            </div>
-
-            <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
-              <h3 className="text-purple-300 font-semibold mb-3">Encryption Algorithms</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li><code className="text-cyan-400 bg-gray-950 px-2 py-1 rounded">Ed25519</code> - Identity signatures (64 bytes)</li>
-                <li><code className="text-purple-400 bg-gray-950 px-2 py-1 rounded">X25519</code> - ECDH key exchange (32 bytes)</li>
-                <li><code className="text-teal-400 bg-gray-950 px-2 py-1 rounded">XSalsa20-Poly1305</code> - AEAD cipher (encrypt + authenticate)</li>
-                <li><code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">BLAKE2b</code> - Key derivation function</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-900/50 border border-teal-900/30 rounded-lg p-6">
-              <h3 className="text-teal-300 font-semibold mb-3">Perfect Forward Secrecy</h3>
-              <p className="text-gray-300">
-                Each connection generates new ephemeral keys. Even if your long-term SSH/GPG key is compromised,
-                past sessions cannot be decrypted. Keys are never stored—only used for the duration of the connection.
-              </p>
-            </div>
-          </div>
         </section>
 
         {/* Resources */}
