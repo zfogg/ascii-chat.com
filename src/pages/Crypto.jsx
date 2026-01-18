@@ -1,3 +1,5 @@
+import Footer from '../components/Footer'
+
 export default function Crypto() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
@@ -340,14 +342,7 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
         </section>
 
         {/* Footer */}
-        <footer className="border-t border-gray-800 pt-8 text-center">
-          <a
-            href="/"
-            className="text-cyan-400 hover:text-cyan-300 transition-colors"
-          >
-            ← Back to Home
-          </a>
-        </footer>
+        <Footer />
       </div>
     </div>
   )

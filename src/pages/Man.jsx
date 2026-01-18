@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Footer from '../components/Footer'
 
 export default function Man() {
   const [manHtml, setManHtml] = useState('')
@@ -38,14 +39,9 @@ export default function Man() {
         />
 
         {/* Footer */}
-        <footer className="border-t border-gray-800 pt-8 mt-16 text-center">
-          <a
-            href="/"
-            className="text-cyan-400 hover:text-cyan-300 transition-colors"
-          >
-            ← Back to Home
-          </a>
-        </footer>
+        <div className="mt-16">
+          <Footer />
+        </div>
       </div>
     </div>
   )
