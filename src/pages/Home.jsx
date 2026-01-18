@@ -207,9 +207,51 @@ cmake --preset default && cmake --build build
             </div>
 
             <div>
+              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Server whitelisting clients with GitHub SSH keys</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server whitelists GitHub user's SSH keys
+`}</span>{`ascii-chat server --key ~/.ssh/id_ed25519 --client-keys github:zfogg
+
+`}<span className="text-gray-500">{`# Only clients with those keys can connect
+`}</span>{`ascii-chat happy-sunset-ocean --key ~/.ssh/id_ed25519`}</code></pre>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-purple-300 mb-3">Client whitelisting server with GitHub GPG keys</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server with GPG key
+`}</span>{`ascii-chat server --key gpg:897607FA43DC66F6
+
+`}<span className="text-gray-500">{`# Client verifies server against GitHub GPG keys
+`}</span>{`ascii-chat happy-sunset-ocean --server-key github:zfogg.gpg`}</code></pre>
+            </div>
+
+            <div>
               <h3 className="text-xl font-semibold text-pink-300 mb-3">Mirror mode (test webcam locally)</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# View your webcam as ASCII without connecting anywhere
 `}</span>{`ascii-chat mirror --palette blocks --color-mode truecolor`}</code></pre>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Stream video file as ASCII art</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Play MP4 video as ASCII (also works with MOV, AVI, MKV, WebM)
+`}</span>{`ascii-chat client --file video.mp4 --color-mode truecolor`}</code></pre>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-purple-300 mb-3">Play animated GIF</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Loop an animated GIF continuously
+`}</span>{`ascii-chat client --file animation.gif --loop`}</code></pre>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-teal-300 mb-3">Convert image to ASCII</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Display JPEG or PNG image as ASCII art
+`}</span>{`ascii-chat client --file photo.jpg --snapshot`}</code></pre>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-pink-300 mb-3">Pipe video through stdin</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Stream from stdin (useful for chaining commands)
+`}</span>{`cat video.mp4 | ascii-chat client --file -`}</code></pre>
             </div>
           </div>
         </section>
