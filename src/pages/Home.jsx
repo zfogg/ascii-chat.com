@@ -134,7 +134,13 @@ yay -S ascii-chat`}</code></pre>
               <h3 className="text-xl font-semibold text-teal-300 mb-3">Build from source</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`git clone https://github.com/zfogg/ascii-chat.git
 cd ascii-chat
+
+# Linux/macOS
 ./scripts/install-deps.sh
+
+# Windows
+./scripts/install-deps.ps1
+
 cmake --preset default && cmake --build build
 ./build/bin/ascii-chat`}</code></pre>
             </div>
