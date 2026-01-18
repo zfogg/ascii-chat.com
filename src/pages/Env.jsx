@@ -4,25 +4,25 @@ import TrackedLink from '../components/TrackedLink'
 export default function Env() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header */}
-        <header className="mb-16">
-          <h1 className="text-5xl font-bold mb-4">
+        <header className="mb-12 sm:mb-16">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             <span className="text-green-400">🌍</span> Environment Variables
           </h1>
-          <p className="text-xl text-gray-300">
+          <p className="text-lg sm:text-xl text-gray-300">
             Configuration through environment variables
           </p>
         </header>
 
         {/* Security Variables */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-green-400 mb-6 border-b border-green-900/50 pb-2">
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-green-400 mb-4 sm:mb-6 border-b border-green-900/50 pb-2">
             🔒 Security Variables
           </h2>
 
           <div className="space-y-6">
-            <div className="bg-gray-900/50 border border-green-900/30 rounded-lg p-6">
+            <div className="bg-gray-900/50 border border-green-900/30 rounded-lg p-4 sm:p-6">
               <h3 className="text-green-300 font-semibold text-xl mb-3">
                 <code className="bg-gray-950 px-3 py-1 rounded">ASCII_CHAT_INSECURE_NO_HOST_IDENTITY_CHECK</code>
               </h3>

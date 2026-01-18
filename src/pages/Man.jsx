@@ -21,13 +21,13 @@ export default function Man() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="max-w-5xl mx-auto px-6 py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header */}
-        <header className="mb-12">
-          <h1 className="text-5xl font-bold mb-4">
+        <header className="mb-8 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             <span className="text-cyan-400">📖</span> Man Page
           </h1>
-          <p className="text-xl text-gray-300">
+          <p className="text-lg sm:text-xl text-gray-300">
             Complete command-line reference for ascii-chat
           </p>
         </header>

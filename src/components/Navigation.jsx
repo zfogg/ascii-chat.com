@@ -8,19 +8,19 @@ export default function Navigation() {
 
   return (
     <nav className="border-b border-gray-800 bg-gray-950/50 backdrop-blur-sm sticky top-0 z-50">
-      <div className="max-w-5xl mx-auto px-6 py-4">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           <TrackedLink
             to="/"
             label="Nav - Logo"
-            className="text-2xl font-bold"
+            className="text-xl sm:text-2xl font-bold"
           >
             <span className="text-cyan-400">ascii</span>
             <span className="text-purple-400">-</span>
             <span className="text-teal-400">chat</span>
           </TrackedLink>
 
-          <div className="flex gap-6">
+          <div className="flex gap-3 sm:gap-6 text-sm sm:text-base">
             <TrackedLink
               to="/"
               label="Nav - Home"

@@ -4,13 +4,13 @@ import TrackedLink from '../components/TrackedLink'
 export default function Crypto() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header */}
-        <header className="mb-16">
-          <h1 className="text-5xl font-bold mb-4">
+        <header className="mb-12 sm:mb-16">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             <span className="text-purple-400">🔐</span> Cryptography
           </h1>
-          <p className="text-xl text-gray-300">
+          <p className="text-lg sm:text-xl text-gray-300">
             End-to-end encryption with Ed25519 authentication and X25519 key exchange
           </p>
         </header>
@@ -34,13 +34,13 @@ export default function Crypto() {
         </div>
 
         {/* Philosophy */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-pink-400 mb-6 border-b border-pink-900/50 pb-2">
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-pink-400 mb-4 sm:mb-6 border-b border-pink-900/50 pb-2">
             🎯 Design Philosophy
           </h2>
 
           <div className="space-y-6">
-            <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-6">
+            <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-4 sm:p-6">
               <h3 className="text-pink-300 font-semibold mb-3">The Core Problem: Trust Without Infrastructure</h3>
               <p className="text-gray-300 mb-3">
                 HTTPS can rely on Certificate Authorities because there's a globally trusted PKI. ascii-chat has no such infrastructure for raw TCP connections. Yet users need both <strong className="text-cyan-300">privacy</strong> (against passive eavesdropping) and <strong className="text-purple-300">security</strong> (against active MITM attacks).

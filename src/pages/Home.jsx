@@ -4,10 +4,10 @@ import TrackedLink from '../components/TrackedLink'
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header */}
-        <header className="mb-16 text-center">
-          <h1 className="text-6xl font-bold mb-4">
+        <header className="mb-12 sm:mb-16 text-center">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
             <span className="text-cyan-400">💻</span>
             <span className="text-purple-400">📸</span>{' '}
             <span className="text-cyan-400">ascii</span>
@@ -16,22 +16,22 @@ export default function Home() {
             <span className="text-pink-400">🔡</span>
             <span className="text-purple-400">💬</span>
           </h1>
-          <p className="text-2xl text-gray-300 mb-2">Video chat in your terminal</p>
-          <p className="text-gray-400">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-2">Video chat in your terminal</p>
+          <p className="text-sm sm:text-base text-gray-400">
             Real-time terminal-based video conferencing with ASCII art rendering, end-to-end encryption, and audio support
           </p>
         </header>
 
         {/* Installation */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-teal-400 mb-6 border-b border-teal-900/50 pb-2">
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-teal-400 mb-4 sm:mb-6 border-b border-teal-900/50 pb-2">
             📦 Installation
           </h2>
 
           <div className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Pre-built static binaries (all platforms)</h3>
-              <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
+              <h3 className="text-lg sm:text-xl font-semibold text-cyan-300 mb-3">Pre-built static binaries (all platforms)</h3>
+              <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-4 sm:p-6">
                 <p className="text-gray-300 mb-3">
                   Download pre-built static binaries for <strong className="text-cyan-400">macOS</strong>, <strong className="text-purple-400">Linux</strong>, and <strong className="text-teal-400">Windows</strong>:
                 </p>
@@ -78,49 +78,49 @@ cmake --preset default && cmake --build build
         </section>
 
         {/* Features */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-purple-400 mb-6 border-b border-purple-900/50 pb-2">
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-purple-400 mb-4 sm:mb-6 border-b border-purple-900/50 pb-2">
             ✨ Features
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-cyan-300 mb-3">📺 Terminal Video calls</h3>
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+            <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-semibold text-cyan-300 mb-3">📺 Terminal Video calls</h3>
               <p className="text-gray-300">
                 Webcam video over tcp/ip rendered as ASCII art in real-time. Works in any terminal-rxvt-unicode, iTerm, Kitty, even SSH sessions.
               </p>
             </div>
 
-            <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-purple-300 mb-3">🔒 End-to-End Encryption</h3>
+            <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-semibold text-purple-300 mb-3">🔒 End-to-End Encryption</h3>
               <p className="text-gray-300">
                 Ed25519 authentication with X25519 key exchange. Your video and audio never leave the secure tunnel between peers. SSH and GPG key supported. GitHub and GitLab integrations.
               </p>
             </div>
 
-            <div className="bg-gray-900/50 border border-teal-900/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-teal-300 mb-3">🎤 Voice Chat</h3>
+            <div className="bg-gray-900/50 border border-teal-900/30 rounded-lg p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-semibold text-teal-300 mb-3">🎤 Voice Chat</h3>
               <p className="text-gray-300">
                 Real-time audio with Opus encoding. Talk while you see each other's ASCII faces. WebRTC AEC3 echo cancellation integration. Multi-client audio mixing supported.
               </p>
             </div>
 
-            <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-pink-300 mb-3">🌍 Zero Config Networking</h3>
+            <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-semibold text-pink-300 mb-3">🌍 Zero Config Networking</h3>
               <p className="text-gray-300">
                 Share a memorable three-word string like <code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">happy-sunset-ocean</code> that users can connect with connection and NAT traversal transparently handled. Support for UPnP, WebRTC, and mDNS.
               </p>
             </div>
 
-            <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-cyan-300 mb-3">👥 Multi-Client</h3>
+            <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-semibold text-cyan-300 mb-3">👥 Multi-Client</h3>
               <p className="text-gray-300">
                 3+ people can join the same session. Video grid layout automatically adjusts, like Zoom or Google Hangouts but in your terminal.
               </p>
             </div>
 
-            <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-purple-300 mb-3">🎨 Customizable Rendering</h3>
+            <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-semibold text-purple-300 mb-3">🎨 Customizable Rendering</h3>
               <p className="text-gray-300">
                 Choose ASCII palettes, color modes (mono/16/256/truecolor), and rendering styles and modes.
               </p>
@@ -129,12 +129,12 @@ cmake --preset default && cmake --build build
         </section>
 
         {/* Quick Start */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-cyan-900/50 pb-2">
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-4 sm:mb-6 border-b border-cyan-900/50 pb-2">
             ⚡ Quick Start
           </h2>
 
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Start a server</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`# Register with ACDS and get a session string
@@ -152,12 +152,12 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
         </section>
 
         {/* Links */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-cyan-900/50 pb-2">
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-4 sm:mb-6 border-b border-cyan-900/50 pb-2">
             📚 Documentation
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             <TrackedLink
               to="/man"
               label="Home - Docs Man Page"
@@ -210,8 +210,8 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
         </section>
 
         {/* Examples */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-pink-400 mb-6 border-b border-pink-900/50 pb-2">
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-pink-400 mb-4 sm:mb-6 border-b border-pink-900/50 pb-2">
             💻 Usage Examples
           </h2>
 
@@ -329,8 +329,8 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
         </section>
 
         {/* Open Source */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-cyan-900/50 pb-2">
+        <section className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-4 sm:mb-6 border-b border-cyan-900/50 pb-2">
             💝 Open Source
           </h2>
 
