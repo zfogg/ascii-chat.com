@@ -1,4 +1,5 @@
 import Footer from '../components/Footer'
+import TrackedLink from '../components/TrackedLink'
 
 export default function Crypto() {
   return (
@@ -19,14 +20,15 @@ export default function Crypto() {
           <p className="text-gray-300">
             <strong className="text-purple-300">Note:</strong> Looking for ACDS cryptography details or public keys?
             See the{' '}
-            <a
+            <TrackedLink
               href="https://discovery.ascii-chat.com"
+              label="Crypto - ACDS Docs"
               target="_blank"
               rel="noopener noreferrer"
               className="text-cyan-400 hover:text-cyan-300 transition-colors underline"
             >
               ACDS documentation
-            </a>
+            </TrackedLink>
             {' '}for discovery service crypto architecture.
           </p>
         </div>
@@ -319,25 +321,27 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4">
-            <a
+            <TrackedLink
               href="https://zfogg.github.io/ascii-chat/group__handshake.html"
+              label="Crypto - Handshake Protocol"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gray-900/50 border border-cyan-900/50 rounded-lg p-4 hover:border-cyan-500/50 transition-colors"
             >
               <h3 className="text-cyan-300 font-semibold mb-1">🔐 Handshake Protocol</h3>
               <p className="text-gray-400 text-sm">Detailed protocol documentation</p>
-            </a>
+            </TrackedLink>
 
-            <a
+            <TrackedLink
               href="https://libsodium.gitbook.io/doc/"
+              label="Crypto - libsodium Docs"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gray-900/50 border border-purple-900/50 rounded-lg p-4 hover:border-purple-500/50 transition-colors"
             >
               <h3 className="text-purple-300 font-semibold mb-1">📖 libsodium Docs</h3>
               <p className="text-gray-400 text-sm">Cryptography library reference</p>
-            </a>
+            </TrackedLink>
           </div>
         </section>
 

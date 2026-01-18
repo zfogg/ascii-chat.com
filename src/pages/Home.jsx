@@ -1,4 +1,5 @@
 import Footer from '../components/Footer'
+import TrackedLink from '../components/TrackedLink'
 
 export default function Home() {
   return (
@@ -61,21 +62,21 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
             <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-purple-300 mb-3">🔒 End-to-End Encryption</h3>
               <p className="text-gray-300">
-                Ed25519 authentication with X25519 key exchange. Your video and audio never leave the secure tunnel between peers.
+                Ed25519 authentication with X25519 key exchange. Your video and audio never leave the secure tunnel between peers. SSH and GPG key supported. GitHub and GitLab integrations.
               </p>
             </div>
 
             <div className="bg-gray-900/50 border border-teal-900/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-teal-300 mb-3">🎤 Voice Chat</h3>
               <p className="text-gray-300">
-                Real-time audio with Opus encoding. Talk while you see each other's ASCII faces. Multi-client audio mixing supported.
+                Real-time audio with Opus encoding. Talk while you see each other's ASCII faces. WebRTC AEC3 echo cancellation integration. Multi-client audio mixing supported.
               </p>
             </div>
 
             <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-pink-300 mb-3">🌍 Zero Config Discovery</h3>
               <p className="text-gray-300">
-                Share a memorable three-word string like <code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">happy-sunset-ocean</code>. ACDS handles NAT traversal automatically.
+                Share a memorable three-word string like <code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">happy-sunset-ocean</code> that users can connect with. Connection and NAT traversal transparently handled with UPnP and WebRTC support.
               </p>
             </div>
 
@@ -89,7 +90,7 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
             <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-purple-300 mb-3">🎨 Customizable Rendering</h3>
               <p className="text-gray-300">
-                Choose ASCII palettes, color modes (16/256/truecolor), and rendering styles. Half-block mode for higher detail.
+                Choose ASCII palettes, color modes (mono/16/256/truecolor), and rendering styles. Half-block mode for higher detail.
               </p>
             </div>
           </div>
@@ -108,14 +109,15 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
                 <p className="text-gray-300 mb-3">
                   Download pre-built static binaries for <strong className="text-cyan-400">macOS</strong>, <strong className="text-purple-400">Linux</strong>, and <strong className="text-teal-400">Windows</strong>:
                 </p>
-                <a
+                <TrackedLink
                   href="https://github.com/zfogg/ascii-chat/releases/latest"
+                  label="Home - Download Latest Release"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block bg-cyan-600 hover:bg-cyan-500 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
                 >
                   📦 Download Latest Release
-                </a>
+                </TrackedLink>
               </div>
             </div>
 
@@ -158,9 +160,9 @@ cmake --preset default && cmake --build build
           <div className="bg-purple-900/20 border border-purple-700/50 rounded-lg p-4 mb-6">
             <p className="text-gray-300 text-sm">
               💡 For complete documentation of all command-line flags and configuration file options, see the{' '}
-              <a href="/man" className="text-cyan-400 hover:text-cyan-300 transition-colors underline">
+              <TrackedLink to="/man" label="Home - Man Page Reference" className="text-cyan-400 hover:text-cyan-300 transition-colors underline">
                 man page
-              </a>
+              </TrackedLink>
               .
             </p>
           </div>
@@ -263,41 +265,45 @@ cmake --preset default && cmake --build build
           </h2>
 
           <div className="grid md:grid-cols-2 gap-4">
-            <a
-              href="/man"
+            <TrackedLink
+              to="/man"
+              label="Home - Docs Man Page"
               className="bg-gray-900/50 border border-cyan-900/50 rounded-lg p-4 hover:border-cyan-500/50 transition-colors"
             >
               <h3 className="text-cyan-300 font-semibold mb-1">📖 Man Page</h3>
               <p className="text-gray-400 text-sm">Complete command-line reference</p>
-            </a>
+            </TrackedLink>
 
-            <a
-              href="/crypto"
+            <TrackedLink
+              to="/crypto"
+              label="Home - Docs Cryptography"
               className="bg-gray-900/50 border border-purple-900/50 rounded-lg p-4 hover:border-purple-500/50 transition-colors"
             >
               <h3 className="text-purple-300 font-semibold mb-1">🔐 Cryptography</h3>
               <p className="text-gray-400 text-sm">Encryption, keys, and authentication</p>
-            </a>
+            </TrackedLink>
 
-            <a
+            <TrackedLink
               href="https://zfogg.github.io/ascii-chat/"
+              label="Home - Docs API"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gray-900/50 border border-teal-900/50 rounded-lg p-4 hover:border-teal-500/50 transition-colors"
             >
               <h3 className="text-teal-300 font-semibold mb-1">📘 API Documentation</h3>
               <p className="text-gray-400 text-sm">Full Doxygen reference for developers</p>
-            </a>
+            </TrackedLink>
 
-            <a
+            <TrackedLink
               href="https://discovery.ascii-chat.com"
+              label="Home - Docs ACDS"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gray-900/50 border border-pink-900/50 rounded-lg p-4 hover:border-pink-500/50 transition-colors"
             >
               <h3 className="text-pink-300 font-semibold mb-1">🔍 ACDS Server</h3>
               <p className="text-gray-400 text-sm">Discovery service public keys</p>
-            </a>
+            </TrackedLink>
           </div>
         </section>
 

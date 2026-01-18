@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import TrackedLink from './TrackedLink'
 
 export default function Navigation() {
   const location = useLocation()
@@ -9,15 +10,20 @@ export default function Navigation() {
     <nav className="border-b border-gray-800 bg-gray-950/50 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-5xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold">
+          <TrackedLink
+            to="/"
+            label="Nav - Logo"
+            className="text-2xl font-bold"
+          >
             <span className="text-cyan-400">ascii</span>
             <span className="text-purple-400">-</span>
             <span className="text-teal-400">chat</span>
-          </Link>
+          </TrackedLink>
 
           <div className="flex gap-6">
-            <Link
+            <TrackedLink
               to="/"
+              label="Nav - Home"
               className={`transition-colors ${
                 isActive('/')
                   ? 'text-cyan-400'
@@ -25,9 +31,10 @@ export default function Navigation() {
               }`}
             >
               Home
-            </Link>
-            <Link
+            </TrackedLink>
+            <TrackedLink
               to="/crypto"
+              label="Nav - Crypto"
               className={`transition-colors ${
                 isActive('/crypto')
                   ? 'text-purple-400'
@@ -35,9 +42,10 @@ export default function Navigation() {
               }`}
             >
               Crypto
-            </Link>
-            <Link
+            </TrackedLink>
+            <TrackedLink
               to="/man"
+              label="Nav - Man"
               className={`transition-colors ${
                 isActive('/man')
                   ? 'text-pink-400'
@@ -45,7 +53,7 @@ export default function Navigation() {
               }`}
             >
               Man
-            </Link>
+            </TrackedLink>
           </div>
         </div>
       </div>
