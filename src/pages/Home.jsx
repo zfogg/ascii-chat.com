@@ -108,7 +108,7 @@ cmake --preset default && cmake --build build
             <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-pink-300 mb-3">🌍 Zero Config Networking</h3>
               <p className="text-gray-300">
-                Share a memorable three-word string like <code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">happy-sunset-ocean</code> that users can connect with connection and NAT traversal transparently handled. Support for UPnP, WebRTC, and MDNS.
+                Share a memorable three-word string like <code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">happy-sunset-ocean</code> that users can connect with connection and NAT traversal transparently handled. Support for UPnP, WebRTC, and mDNS.
               </p>
             </div>
 
