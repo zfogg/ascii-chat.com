@@ -13,6 +13,10 @@ export default function Footer() {
         <a href="https://github.com/zfogg/ascii-chat/releases" className="text-teal-400 hover:text-teal-300 transition-colors">
           📦 Releases
         </a>
+        {' · '}
+        <a href="https://discovery.ascii-chat.com" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 transition-colors">
+          🔍 ACDS
+        </a>
       </p>
       <p className="text-sm">
         ascii-chat · Video chat in your terminal
