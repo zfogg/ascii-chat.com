@@ -265,6 +265,12 @@ cmake --preset default && cmake --build build
           <p className="text-sm">
             ascii-chat · Video chat in your terminal
           </p>
+          <p className="text-sm mt-2">
+            made with 💛 by{' '}
+            <a href="https://zfo.gg" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+              @zfogg
+            </a>
+          </p>
         </footer>
       </div>
     </div>
