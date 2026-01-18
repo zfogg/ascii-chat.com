@@ -43,6 +43,8 @@
     [<i>address</i>][:<i>port</i>] [<i>options</i>]</p>
 <p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <b>mirror</b>
     [<i>options</i>]</p>
+<p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <b>discovery-server</b>
+    [<i>address</i>] [<i>options</i>]</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
@@ -50,7 +52,7 @@
     converts webcam video to ASCII art in real-time. It enables video chat
     directly in your terminal, whether you're using a local console, a remote
     SSH session, or any terminal emulator.</p>
-<p class="Pp">The program operates in three modes:</p>
+<p class="Pp">The program operates in four modes:</p>
 <dl class="Bl-tag">
   <dt id="server"><a class="permalink" href="#server"><b>server</b></a></dt>
   <dd>Runs a video chat server that accepts connections from multiple clients,
@@ -64,6 +66,11 @@
   <dt id="mirror"><a class="permalink" href="#mirror"><b>mirror</b></a></dt>
   <dd>Displays your local webcam as ASCII art without any network connection.
       Perfect for testing webcam, palette settings, and terminal rendering.</dd>
+  <dt id="discovery-server"><a class="permalink" href="#discovery-server"><b>discovery-server</b></a></dt>
+  <dd>Runs an ACDS (ascii-chat Discovery Service) server for session management.
+      Allows clients and servers to discover each other using memorable session
+      strings instead of IP addresses. Handles NAT traversal via WebRTC when
+      direct TCP connections aren't possible.</dd>
 </dl>
 </section>
 <section class="Sh">
@@ -998,7 +1005,7 @@ ascii-chat client [::1]:8080</pre>
 <table class="foot">
   <tr>
     <td class="foot-date">December 2025</td>
-    <td class="foot-os">ascii-chat 0.6.12</td>
+    <td class="foot-os">ascii-chat 0.7.0-dev</td>
   </tr>
 </table>
 </body>
