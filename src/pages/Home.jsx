@@ -233,27 +233,39 @@ cmake --preset default && cmake --build build
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Stream video file as ASCII art</h3>
+              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Capture ASCII selfie to file</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Take a snapshot from your webcam and save to file
+`}</span>{`ascii-chat mirror --snapshot --color-mode truecolor > selfie.txt`}</code></pre>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-purple-300 mb-3">Stream video file as ASCII art</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Play MP4 video as ASCII (also works with MOV, AVI, MKV, WebM)
-`}</span>{`ascii-chat client --file video.mp4 --color-mode truecolor`}</code></pre>
+`}</span>{`ascii-chat mirror --file video.mp4 --color-mode truecolor`}</code></pre>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-teal-300 mb-3">Convert video to ASCII and preview</h3>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Convert video frame to ASCII and preview first 30 lines
+`}</span>{`ascii-chat mirror --file video.mp4 --snapshot | head -30`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Play animated GIF</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Loop an animated GIF continuously
-`}</span>{`ascii-chat client --file animation.gif --loop`}</code></pre>
+`}</span>{`ascii-chat mirror --file animation.gif --loop`}</code></pre>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-teal-300 mb-3">Convert image to ASCII</h3>
+              <h3 className="text-xl font-semibold text-cyan-300 mb-3">Convert image to ASCII</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Display JPEG or PNG image as ASCII art
-`}</span>{`ascii-chat client --file photo.jpg --snapshot`}</code></pre>
+`}</span>{`ascii-chat mirror --file photo.jpg --snapshot`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-pink-300 mb-3">Pipe video through stdin</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Stream from stdin (useful for chaining commands)
-`}</span>{`cat video.mp4 | ascii-chat client --file -`}</code></pre>
+`}</span>{`cat video.mp4 | ascii-chat mirror --file -`}</code></pre>
             </div>
           </div>
         </section>
