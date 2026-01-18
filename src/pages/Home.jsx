@@ -55,7 +55,7 @@ ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
             <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-cyan-300 mb-3">📺 Terminal Video</h3>
               <p className="text-gray-300">
-                Webcam video rendered as ASCII art in real-time. Works in any terminal—rxvt-unicode, iTerm, Kitty, even SSH sessions.
+                Webcam video rendered as ASCII art in real-time. Works in any terminal-rxvt-unicode, iTerm, Kitty, even SSH sessions.
               </p>
             </div>
 
@@ -151,6 +151,55 @@ cmake --preset default && cmake --build build
           </div>
         </section>
 
+        {/* Links */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-cyan-900/50 pb-2">
+            📚 Documentation
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <TrackedLink
+              to="/man"
+              label="Home - Docs Man Page"
+              className="bg-gray-900/50 border border-cyan-900/50 rounded-lg p-4 hover:border-cyan-500/50 transition-colors"
+            >
+              <h3 className="text-cyan-300 font-semibold mb-1">📖 Man Page</h3>
+              <p className="text-gray-400 text-sm">Complete command-line reference</p>
+            </TrackedLink>
+
+            <TrackedLink
+              to="/crypto"
+              label="Home - Docs Cryptography"
+              className="bg-gray-900/50 border border-purple-900/50 rounded-lg p-4 hover:border-purple-500/50 transition-colors"
+            >
+              <h3 className="text-purple-300 font-semibold mb-1">🔐 Cryptography</h3>
+              <p className="text-gray-400 text-sm">Encryption, keys, and authentication</p>
+            </TrackedLink>
+
+            <TrackedLink
+              href="https://zfogg.github.io/ascii-chat/"
+              label="Home - Docs API"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gray-900/50 border border-teal-900/50 rounded-lg p-4 hover:border-teal-500/50 transition-colors"
+            >
+              <h3 className="text-teal-300 font-semibold mb-1">📘 API Documentation</h3>
+              <p className="text-gray-400 text-sm">Full Doxygen reference for developers</p>
+            </TrackedLink>
+
+            <TrackedLink
+              href="https://discovery.ascii-chat.com"
+              label="Home - Docs ACDS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gray-900/50 border border-pink-900/50 rounded-lg p-4 hover:border-pink-500/50 transition-colors"
+            >
+              <h3 className="text-pink-300 font-semibold mb-1">🔍 Discovery Service</h3>
+              <p className="text-gray-400 text-sm">ACDS public keys and details</p>
+            </TrackedLink>
+          </div>
+        </section>
+
         {/* Examples */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-pink-400 mb-6 border-b border-pink-900/50 pb-2">
@@ -240,7 +289,7 @@ cmake --preset default && cmake --build build
 
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Stream video file as ASCII art</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Play MP4 video as ASCII (also works with MOV, AVI, MKV, WebM)
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Play MP4 video as ASCII (also works with MOV, AVI, MKV, WebM, GIF, ...)
 `}</span>{`ascii-chat mirror --file video.mp4 --color-mode truecolor`}</code></pre>
             </div>
 
@@ -270,52 +319,97 @@ cmake --preset default && cmake --build build
           </div>
         </section>
 
-        {/* Links */}
+        {/* Open Source */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-cyan-900/50 pb-2">
-            📚 Documentation
+            💝 Open Source
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-4">
-            <TrackedLink
-              to="/man"
-              label="Home - Docs Man Page"
-              className="bg-gray-900/50 border border-cyan-900/50 rounded-lg p-4 hover:border-cyan-500/50 transition-colors"
-            >
-              <h3 className="text-cyan-300 font-semibold mb-1">📖 Man Page</h3>
-              <p className="text-gray-400 text-sm">Complete command-line reference</p>
-            </TrackedLink>
+          <div className="space-y-6">
+            <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
+              <p className="text-gray-300 mb-4">
+                <strong className="text-cyan-400">ascii-chat</strong> and <strong className="text-purple-400">libasciichat</strong> are free and open source under the{' '}
+                <strong className="text-teal-400">MIT License</strong>.
+              </p>
+              <p className="text-gray-300">
+                Contributions welcome. Fork it and send pull requests.
+              </p>
+            </div>
 
-            <TrackedLink
-              to="/crypto"
-              label="Home - Docs Cryptography"
-              className="bg-gray-900/50 border border-purple-900/50 rounded-lg p-4 hover:border-purple-500/50 transition-colors"
-            >
-              <h3 className="text-purple-300 font-semibold mb-1">🔐 Cryptography</h3>
-              <p className="text-gray-400 text-sm">Encryption, keys, and authentication</p>
-            </TrackedLink>
+            <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
+              <h3 className="text-purple-300 font-semibold text-xl mb-4">Build with libasciichat</h3>
+              <p className="text-gray-300 mb-4">
+                <strong className="text-purple-400">libasciichat</strong> is the core library. It implements{' '}
+                <strong className="text-pink-400">ACIP</strong> (ASCII-Chat Internet Protocol) for encrypted peer-to-peer video and audio streaming.
+              </p>
 
-            <TrackedLink
-              href="https://zfogg.github.io/ascii-chat/"
-              label="Home - Docs API"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gray-900/50 border border-teal-900/50 rounded-lg p-4 hover:border-teal-500/50 transition-colors"
-            >
-              <h3 className="text-teal-300 font-semibold mb-1">📘 API Documentation</h3>
-              <p className="text-gray-400 text-sm">Full Doxygen reference for developers</p>
-            </TrackedLink>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 mb-4 ml-4">
+                <li><strong className="text-cyan-400">Video:</strong> Webcam, files, ASCII conversion, palettes, color modes</li>
+                <li><strong className="text-purple-400">Audio:</strong> Opus codec, WebRTC AEC3 echo cancellation</li>
+                <li><strong className="text-teal-400">Crypto:</strong> Ed25519, X25519, XSalsa20-Poly1305</li>
+                <li><strong className="text-pink-400">Network:</strong> TCP, NAT traversal, WebRTC ICE, ACDS</li>
+                <li><strong className="text-cyan-400">Protocol:</strong> Handshake, sessions, packets, multi-client</li>
+              </ul>
 
-            <TrackedLink
-              href="https://discovery.ascii-chat.com"
-              label="Home - Docs ACDS"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gray-900/50 border border-pink-900/50 rounded-lg p-4 hover:border-pink-500/50 transition-colors"
-            >
-              <h3 className="text-pink-300 font-semibold mb-1">🔍 ACDS Server</h3>
-              <p className="text-gray-400 text-sm">Discovery service public keys</p>
-            </TrackedLink>
+              <p className="text-gray-300 mb-4">
+                Ships with headers, CMake configs, and a pkg-config file.
+              </p>
+
+              <div className="bg-gray-950/50 border border-gray-800 rounded-lg p-4">
+                <h4 className="text-cyan-300 font-semibold mb-3">Installing libasciichat</h4>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-gray-400 text-sm mb-2">macOS (Homebrew):</p>
+                    <pre className="bg-gray-900 border border-gray-800 rounded p-3"><code className="text-teal-300">{`brew install ascii-chat  # includes libasciichat`}</code></pre>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm mb-2">Arch Linux (AUR):</p>
+                    <pre className="bg-gray-900 border border-gray-800 rounded p-3"><code className="text-teal-300">{`paru -S libasciichat
+# or for latest git version
+paru -S libasciichat-git`}</code></pre>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm mb-2">From GitHub releases:</p>
+                    <p className="text-gray-300 text-sm">Download and install a libasciichat package from{' '}
+                      <TrackedLink
+                        href="https://github.com/zfogg/ascii-chat/releases/latest"
+                        label="Home - libasciichat releases"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-cyan-400 hover:text-cyan-300 transition-colors underline"
+                      >
+                        GitHub releases
+                      </TrackedLink>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-900/50 border border-teal-900/30 rounded-lg p-6">
+              <h3 className="text-teal-300 font-semibold text-xl mb-4">Using libasciichat in Your Project</h3>
+
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-cyan-400 font-semibold mb-2">With pkg-config:</h4>
+                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-3 overflow-x-auto"><code className="text-teal-300">{`gcc myapp.c $(pkg-config --cflags --libs libasciichat) -o myapp`}</code></pre>
+                </div>
+
+                <div>
+                  <h4 className="text-purple-400 font-semibold mb-2">With CMake:</h4>
+                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-3 overflow-x-auto"><code className="text-teal-300">{`find_package(libasciichat REQUIRED)
+target_link_libraries(myapp libasciichat::libasciichat)`}</code></pre>
+                </div>
+
+                <div>
+                  <h4 className="text-pink-400 font-semibold mb-2">Include headers:</h4>
+                  <pre className="bg-gray-900 border border-gray-800 rounded-lg p-3 overflow-x-auto"><code className="text-teal-300">{`#include <asciichat/video/ascii.h>
+#include <asciichat/audio/audio.h>
+#include <asciichat/network/network.h>
+#include <asciichat/crypto/crypto.h>`}</code></pre>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

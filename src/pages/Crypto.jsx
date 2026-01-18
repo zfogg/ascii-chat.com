@@ -574,6 +574,17 @@ Connection refused. Remove the old key from known_hosts to continue.`}</code></p
 
           <div className="grid md:grid-cols-2 gap-4">
             <TrackedLink
+              href="https://discovery.ascii-chat.com"
+              label="Crypto - ACDS Server"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gray-900/50 border border-pink-900/50 rounded-lg p-4 hover:border-pink-500/50 transition-colors"
+            >
+              <h3 className="text-pink-300 font-semibold mb-1">🔍 Discovery Server</h3>
+              <p className="text-gray-400 text-sm">Public keys and discovery service details</p>
+            </TrackedLink>
+
+            <TrackedLink
               href="https://zfogg.github.io/ascii-chat/group__handshake.html"
               label="Crypto - Handshake Protocol"
               target="_blank"
