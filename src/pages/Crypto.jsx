@@ -33,6 +33,97 @@ export default function Crypto() {
           </p>
         </div>
 
+        {/* Philosophy */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-pink-400 mb-6 border-b border-pink-900/50 pb-2">
+            🎯 Design Philosophy
+          </h2>
+
+          <div className="space-y-6">
+            <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-6">
+              <h3 className="text-pink-300 font-semibold mb-3">The Core Problem: Trust Without Infrastructure</h3>
+              <p className="text-gray-300 mb-3">
+                HTTPS can rely on Certificate Authorities because there's a globally trusted PKI. ascii-chat has no such infrastructure for raw TCP connections. Yet users need both <strong className="text-cyan-300">privacy</strong> (against passive eavesdropping) and <strong className="text-purple-300">security</strong> (against active MITM attacks).
+              </p>
+              <p className="text-gray-300">
+                The solution: a <strong className="text-pink-300">progressive security ladder</strong> where users choose their trust level based on their threat model.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
+              <h3 className="text-purple-300 font-semibold mb-3">Five Levels of Security</h3>
+              <div className="space-y-3 text-gray-300">
+                <div className="bg-gray-950/50 border border-cyan-900/30 rounded p-3">
+                  <strong className="text-cyan-400">Level 1: Default Encrypted</strong><br/>
+                  Ephemeral keys, no verification. Protects against passive eavesdropping. Works out-of-the-box with zero configuration.
+                </div>
+                <div className="bg-gray-950/50 border border-purple-900/30 rounded p-3">
+                  <strong className="text-purple-400">Level 2: Password Authentication</strong><br/>
+                  Both sides prove password knowledge, <em>bound to the DH shared secret</em>. Prevents MITM attacks even without pre-shared keys.
+                </div>
+                <div className="bg-gray-950/50 border border-teal-900/30 rounded p-3">
+                  <strong className="text-teal-400">Level 3: SSH Key Pinning</strong><br/>
+                  Leverage existing SSH keys. Server signs ephemeral key; client verifies signature. Known hosts tracking (TOFU model).
+                </div>
+                <div className="bg-gray-950/50 border border-pink-900/30 rounded p-3">
+                  <strong className="text-pink-400">Level 4: Client Whitelisting</strong><br/>
+                  Server enforces authorized key list. Only pre-approved clients can connect. Supports GitHub/GitLab key fetching.
+                </div>
+                <div className="bg-gray-950/50 border border-cyan-900/30 rounded p-3">
+                  <strong className="text-cyan-400">Level 5: Defense in Depth</strong><br/>
+                  Stack multiple methods: password + SSH key + whitelist + ACDS verification for paranoid security.
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
+              <h3 className="text-cyan-300 font-semibold mb-3">The ACDS Trust Model: Bootstrapping Trust Over HTTPS</h3>
+              <p className="text-gray-300 mb-3">
+                ACDS (ASCII-Chat Discovery Service) solves the trust problem elegantly by leveraging the <strong className="text-cyan-400">existing HTTPS PKI</strong> to bootstrap trust for raw TCP connections:
+              </p>
+              <ol className="list-decimal list-inside space-y-2 text-gray-300">
+                <li>Client downloads ACDS public key from <TrackedLink href="https://discovery.ascii-chat.com/key.pub" label="Crypto - ACDS SSH Key" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 transition-colors underline">https://discovery.ascii-chat.com/key.pub</TrackedLink> (SSH) or <TrackedLink href="https://discovery.ascii-chat.com/key.gpg" label="Crypto - ACDS GPG Key" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 transition-colors underline">key.gpg</TrackedLink> (GPG), verified by system CA certificates via BearSSL</li>
+                <li>Client connects to <code className="text-purple-400 bg-gray-950 px-2 py-1 rounded">discovery-server.ascii-chat.com:27225</code> (raw TCP) and looks up session</li>
+                <li>ACDS returns the server's public key for that session</li>
+                <li>Client pins that server key and verifies during handshake</li>
+              </ol>
+              <p className="text-gray-300 mt-3">
+                Chain of trust: <span className="text-cyan-400">HTTPS CA</span> → <span className="text-purple-400">ACDS key</span> → <span className="text-teal-400">Session lookup</span> → <span className="text-pink-400">Server identity</span>
+              </p>
+              <p className="text-gray-300 mt-3">
+                ACDS is <strong className="text-pink-300">privacy-first</strong>: it only sees connection metadata (session strings, public keys, ICE candidates). Your video and audio flow peer-to-peer with end-to-end encryption—ACDS never touches your media.
+              </p>
+              <div className="bg-cyan-900/20 border border-cyan-700/50 rounded-lg p-4 mt-4">
+                <p className="text-gray-300 text-sm">
+                  <strong className="text-cyan-300">Note:</strong> For complete ACDS public key information and fingerprints, visit{' '}
+                  <TrackedLink href="https://discovery.ascii-chat.com" label="Crypto - ACDS Homepage" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors underline">
+                    discovery.ascii-chat.com
+                  </TrackedLink>
+                  .
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-gray-900/50 border border-teal-900/30 rounded-lg p-6">
+              <h3 className="text-teal-300 font-semibold mb-3">Why These Design Choices?</h3>
+              <ul className="space-y-3 text-gray-300">
+                <li><strong className="text-cyan-400">libsodium over OpenSSL:</strong> Smaller attack surface, better defaults, fixed key sizes simplify protocol design. No misconfiguration pitfalls.</li>
+                <li><strong className="text-purple-400">DH binding for password auth:</strong> <code className="text-teal-400 bg-gray-950 px-2 py-1 rounded">HMAC(password_key, nonce || shared_secret)</code> prevents MITM. Attacker can't replay authentication without knowing the DH shared secret.</li>
+                <li><strong className="text-teal-400">Separation of identity vs ephemeral keys:</strong> Ed25519 proves "who you are," X25519 provides "forward secrecy." Even if long-term key is compromised, past sessions remain secret.</li>
+                <li><strong className="text-pink-400">Session rekeying:</strong> Limits impact of key compromise. Automatic rotation after 1 hour or 1 million packets—whichever comes first.</li>
+                <li><strong className="text-cyan-400">Known hosts (TOFU):</strong> SSH-style trust model. First connection establishes trust; subsequent connections verify it hasn't changed. Key changes trigger MITM warnings.</li>
+              </ul>
+            </div>
+
+            <div className="bg-purple-900/20 border border-purple-700/50 rounded-lg p-6">
+              <h3 className="text-purple-300 font-semibold mb-3">💡 Key Insight</h3>
+              <p className="text-gray-300">
+                ascii-chat doesn't require a single trust model—it provides <strong>multiple independent verification mechanisms</strong> that can be mixed and matched. Use password-only for quick sessions. Use SSH keys for stronger identity. Use ACDS for zero-config convenience. Stack all three for maximum paranoia. The protocol supports graceful degradation: more verification methods = stronger security, but defaults work without any configuration.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Overview */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-cyan-400 mb-6 border-b border-cyan-900/50 pb-2">
@@ -100,6 +191,45 @@ export default function Crypto() {
               <p className="text-gray-300">
                 Each connection generates new ephemeral keys. Even if your long-term SSH/GPG key is compromised,
                 past sessions cannot be decrypted. Keys are never stored—only used for the duration of the connection.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-6">
+              <h3 className="text-pink-300 font-semibold mb-3">Session Rekeying</h3>
+              <p className="text-gray-300 mb-3">
+                Automatic key rotation limits exposure if session keys are compromised. Rekeys occur after <strong className="text-pink-400">1 hour</strong> or <strong className="text-pink-400">1 million packets</strong>, whichever comes first.
+              </p>
+              <p className="text-gray-300 text-sm">
+                The rekey protocol is transparent: both sides generate new ephemeral keys, perform a new DH exchange, and switch to new session keys without interrupting the connection. Old keys remain active until the new handshake completes successfully.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
+              <h3 className="text-cyan-300 font-semibold mb-3">Nonce Construction</h3>
+              <p className="text-gray-300 mb-2">
+                XSalsa20-Poly1305 uses 24-byte nonces constructed as <code className="text-purple-400 bg-gray-950 px-2 py-1 rounded">session_id || counter</code>:
+              </p>
+              <ul className="list-disc list-inside space-y-1 text-gray-300 text-sm">
+                <li>First 16 bytes: Random session ID (generated at connection start)</li>
+                <li>Remaining 8 bytes: Monotonic packet counter (increments per packet)</li>
+              </ul>
+              <p className="text-gray-300 mt-2 text-sm">
+                This prevents both within-session and cross-session replay attacks. Even if an attacker captures encrypted packets, they can't be replayed because the nonce is unique per packet and per session.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
+              <h3 className="text-purple-300 font-semibold mb-3">Constant-Time Operations</h3>
+              <p className="text-gray-300 mb-2">
+                All cryptographic comparisons use constant-time algorithms (via <code className="text-cyan-400 bg-gray-950 px-2 py-1 rounded">sodium_memcmp</code>) to prevent timing attacks:
+              </p>
+              <ul className="list-disc list-inside space-y-1 text-gray-300 text-sm">
+                <li>HMAC verification (password authentication)</li>
+                <li>MAC verification (packet authentication)</li>
+                <li>Key comparisons (identity verification)</li>
+              </ul>
+              <p className="text-gray-300 mt-2 text-sm">
+                Constant-time comparison ensures the time taken is independent of where the first difference occurs, preventing attackers from learning partial key/MAC values through timing side-channels.
               </p>
             </div>
           </div>
@@ -224,6 +354,137 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
           </div>
         </section>
 
+        {/* Known Hosts */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-teal-400 mb-6 border-b border-teal-900/50 pb-2">
+            📋 Known Hosts (TOFU)
+          </h2>
+
+          <p className="text-gray-300 mb-6">
+            ascii-chat uses an SSH-style <strong className="text-teal-300">Trust-On-First-Use (TOFU)</strong> model to track server identities. The first time you connect to a server, its public key is saved. Subsequent connections verify the key hasn't changed—protecting against MITM attacks.
+          </p>
+
+          <div className="space-y-6">
+            <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-6">
+              <h3 className="text-cyan-300 font-semibold mb-3">File Location</h3>
+              <p className="text-gray-300 mb-2">
+                Known server keys are stored in:
+              </p>
+              <div className="space-y-2">
+                <div>
+                  <p className="text-gray-400 text-sm mb-1">Unix/Linux/macOS:</p>
+                  <pre className="bg-gray-950 border border-gray-800 rounded p-3"><code className="text-teal-300">~/.config/ascii-chat/known_hosts</code></pre>
+                  <p className="text-gray-400 text-xs mt-1">
+                    (or <code className="text-purple-400 bg-gray-950 px-1 py-0.5 rounded">$XDG_CONFIG_HOME/ascii-chat/known_hosts</code> if XDG_CONFIG_HOME is set)
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm mb-1">Windows:</p>
+                  <pre className="bg-gray-950 border border-gray-800 rounded p-3"><code className="text-teal-300">%APPDATA%\ascii-chat\known_hosts</code></pre>
+                </div>
+              </div>
+              <p className="text-gray-300 text-sm mt-3">
+                This file is created automatically on first connection. It's readable and editable as plain text.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 border border-purple-900/30 rounded-lg p-6">
+              <h3 className="text-purple-300 font-semibold mb-3">File Format</h3>
+              <p className="text-gray-300 mb-3">
+                Each line represents one known server:
+              </p>
+              <pre className="bg-gray-950 border border-gray-800 rounded p-3 overflow-x-auto"><code className="text-teal-300">{`<IP:port> x25519 <hex_public_key> [optional comment]`}</code></pre>
+              <p className="text-gray-300 mb-3 mt-3">
+                Example entries:
+              </p>
+              <pre className="bg-gray-950 border border-gray-800 rounded p-3 overflow-x-auto text-sm"><code className="text-teal-300">{`192.168.1.100:27015 x25519 a1b2c3d4... server-laptop
+10.0.0.5:27015 x25519 5e6f7890... production-server
+[2001:db8::1]:27015 x25519 12345678... ipv6-server`}</code></pre>
+              <p className="text-gray-300 text-sm mt-3">
+                <strong className="text-purple-400">Note:</strong> IPv6 addresses use bracket notation <code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">[address]:port</code> to distinguish the colons in the address from the port separator.
+              </p>
+            </div>
+
+            <div className="bg-gray-900/50 border border-teal-900/30 rounded-lg p-6">
+              <h3 className="text-teal-300 font-semibold mb-3">How It Works</h3>
+              <ol className="list-decimal list-inside space-y-2 text-gray-300">
+                <li><strong className="text-cyan-400">First Connection:</strong> Server's key is saved to known_hosts automatically. Connection proceeds.</li>
+                <li><strong className="text-purple-400">Subsequent Connections:</strong> Client checks if the server's key matches the saved key.</li>
+                <li><strong className="text-teal-400">Key Matches:</strong> Connection proceeds silently.</li>
+                <li><strong className="text-pink-400">Key Mismatch:</strong> Connection is rejected with a MITM warning. User must take action.</li>
+              </ol>
+            </div>
+
+            <div className="bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-6">
+              <h3 className="text-yellow-300 font-semibold mb-3">⚠️ When Keys Change (MITM Warning)</h3>
+              <p className="text-gray-300 mb-3">
+                If a server's key changes, you'll see a warning like:
+              </p>
+              <pre className="bg-gray-950 border border-red-800 rounded p-3 text-sm overflow-x-auto"><code className="text-red-300">{`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!    @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+
+The server's key has changed:
+  Expected: a1b2c3d4...
+  Received: 9f8e7d6c...
+
+Connection refused. Remove the old key from known_hosts to continue.`}</code></pre>
+            </div>
+
+            <div className="bg-gray-900/50 border border-pink-900/30 rounded-lg p-6">
+              <h3 className="text-pink-300 font-semibold mb-3">🔧 What to Do When Keys Change</h3>
+              <p className="text-gray-300 mb-4">
+                Key changes happen for legitimate reasons (server reinstalled, key rotated) and malicious reasons (MITM attack). <strong className="text-pink-400">Always verify before proceeding.</strong>
+              </p>
+
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-cyan-400 font-semibold mb-2">Step 1: Verify the Key Change is Legitimate</h4>
+                  <ul className="list-disc list-inside space-y-1 text-gray-300 text-sm ml-4">
+                    <li>Contact the server administrator through a different channel (phone, Signal, etc.)</li>
+                    <li>Ask them to confirm they changed keys or reinstalled the server</li>
+                    <li>Verify the new key fingerprint matches what they provide</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="text-purple-400 font-semibold mb-2">Step 2: Remove the Old Entry</h4>
+                  <p className="text-gray-300 mb-2 text-sm">
+                    Open <code className="text-teal-400 bg-gray-950 px-2 py-1 rounded">~/.config/ascii-chat/known_hosts</code> in a text editor and delete the line for that IP:port combination:
+                  </p>
+                  <pre className="bg-gray-950 border border-gray-800 rounded p-3 text-sm"><code className="text-teal-300">{`# Before (remove this line):
+192.168.1.100:27015 x25519 a1b2c3d4... old-key
+
+# After (line deleted):`}</code></pre>
+                  <p className="text-gray-300 text-sm mt-2">
+                    Alternatively, delete the entire file to remove all known hosts: <code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">rm ~/.config/ascii-chat/known_hosts</code>
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-teal-400 font-semibold mb-2">Step 3: Reconnect</h4>
+                  <p className="text-gray-300 text-sm">
+                    Connect again. The new key will be saved automatically (TOFU model).
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-cyan-900/20 border border-cyan-700/50 rounded-lg p-6">
+              <h3 className="text-cyan-300 font-semibold mb-3">💡 Pro Tips</h3>
+              <ul className="space-y-2 text-gray-300 text-sm">
+                <li><strong className="text-cyan-400">Backup known_hosts:</strong> Keep a backup if you frequently connect to many servers. Losing this file means re-establishing trust on first connection.</li>
+                <li><strong className="text-purple-400">Manual verification:</strong> Use <code className="text-teal-400 bg-gray-950 px-2 py-1 rounded">--server-key</code> flag to bypass known_hosts and explicitly verify a server's key.</li>
+                <li><strong className="text-teal-400">ACDS sessions:</strong> ACDS lookups provide fresh key verification per session, so known_hosts is less critical when using ACDS.</li>
+                <li><strong className="text-pink-400">IP-based tracking:</strong> Known hosts are tracked by IP:port combination, not hostname. DNS changes won't trigger warnings.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
         {/* Key Whitelisting */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-purple-400 mb-6 border-b border-purple-900/50 pb-2">
@@ -312,6 +573,12 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
 
 `}<span className="text-gray-500">{`# Client must also disable encryption
 `}</span>{`ascii-chat client 127.0.0.1 --no-encrypt`}</code></pre>
+
+          <div className="bg-cyan-900/20 border border-cyan-700/50 rounded-lg p-4 mt-6">
+            <p className="text-gray-300 text-sm">
+              <strong className="text-cyan-300">Note:</strong> Both client and server must use <code className="text-pink-400 bg-gray-950 px-2 py-1 rounded">--no-encrypt</code> for unencrypted mode to work. If only one side disables encryption, the connection will fail during the handshake.
+            </p>
+          </div>
         </section>
 
         {/* Resources */}

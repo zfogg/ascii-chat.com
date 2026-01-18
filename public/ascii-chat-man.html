@@ -38,13 +38,13 @@
 <p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <i>mode</i>
     [<i>mode-options</i>]</p>
 <p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <b>server</b>
-    [<i>address</i>] [<i>options</i>]</p>
+    [<i>address</i>][:<i>port</i>] [<i>options</i>]</p>
 <p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <b>client</b>
     [<i>address</i>][:<i>port</i>] [<i>options</i>]</p>
 <p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <b>mirror</b>
     [<i>options</i>]</p>
 <p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <b>discovery-server</b>
-    [<i>address</i>] [<i>options</i>]</p>
+    [<i>address</i>][:<i>port</i>] [<i>options</i>]</p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
@@ -462,8 +462,8 @@ ascii-chat client example.com --port 8080  # ERROR: cannot use both</pre>
       Default: <b>0</b></dd>
   <dt id="f"><a class="permalink" href="#f"><b>-f</b>,
     <b>--webcam-flip</b></a></dt>
-  <dd>Toggle horizontal flipping of webcam image. Default: flipped (mirror
-    mode)</dd>
+  <dd>Toggle horizontal flipping of webcam image. Default: flipped (like looking
+      in a mirror)</dd>
   <dt id="test"><a class="permalink" href="#test"><b>--test-pattern</b></a></dt>
   <dd>Use a test pattern instead of real webcam input. Useful for testing when
       you don't have a physical webcam connected to the computer.</dd>
@@ -489,18 +489,19 @@ ascii-chat client example.com --port 8080  # ERROR: cannot use both</pre>
 </dl>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Snapshot_Mode_(Client_Only)"><a class="permalink" href="#Snapshot_Mode_(Client_Only)">Snapshot
-  Mode (Client Only)</a></h2>
+<h2 class="Ss" id="Snapshot_Mode"><a class="permalink" href="#Snapshot_Mode">Snapshot
+  Mode</a></h2>
 <dl class="Bl-tag">
   <dt id="S"><a class="permalink" href="#S"><b>-S</b>,
     <b>--snapshot</b></a></dt>
-  <dd>Connect to a server and print at least one frame, then exit. Some webcams
-      &quot;warm up&quot; and need time, so there is --snapshot-delay to control
-      how long after the camera starts before a frame is sampled. In your
-      terimanl you can pipe the stdout of <i>ascii-chat client --snapshot</i> a
-      file to take a photo. --snapshot is useful for testing, scripting, ai
-      agent like Claude and Cursor, and CI/CD pipelines. It's also very useful
-      when combined with --mirror.</dd>
+  <dd>Connect to a server (or use mirror mode locally) and print at least one
+      frame, then exit. Some webcams &quot;warm up&quot; and need time, so there
+      is --snapshot-delay to control how long after the camera starts before a
+      frame is sampled. In your terminal you can pipe the stdout of
+      <i>ascii-chat client --snapshot</i> or <i>ascii-chat mirror --snapshot</i>
+      to a file to take a photo. --snapshot is useful for testing, scripting, ai
+      agents like Claude and Cursor, and CI/CD pipelines. Works with both client
+      and mirror modes.</dd>
 </dl>
 <p class="Pp">Connection behavior in snapshot mode:</p>
 <div class="Bd-indent">
@@ -519,40 +520,11 @@ ascii-chat client example.com --port 8080  # ERROR: cannot use both</pre>
 </dl>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Mirror_Mode_(Client_Only)"><a class="permalink" href="#Mirror_Mode_(Client_Only)">Mirror
-  Mode (Client Only)</a></h2>
-<dl class="Bl-tag">
-  <dt id="mirror~2"><a class="permalink" href="#mirror~2"><b>--mirror</b></a></dt>
-  <dd>View your webcam as ASCII art directly in the terminal without connecting
-      to a server. This is a local-only mode that captures from your webcam (or
-      media file with <b>--file</b>), converts the video to ASCII art in
-      real-time, and displays it in your terminal.</dd>
-</dl>
-<p class="Pp">Mirror mode is great for:</p>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>Testing your webcam</b>: See how your camera looks as ASCII art before
-      joining a call</li>
-  <li><b>Playing with the ASCII renderer</b>: Experiment with different
-      palettes, color modes, and render modes without needing to run a
-    server</li>
-  <li><b>Taking ASCII selfies</b>: Combine with <b>--snapshot</b> to capture a
-      single frame</li>
-  <li><b>Playing media files as ASCII</b>: Use <b>--file</b> to stream videos or
-      images as ASCII art</li>
-</ul>
-</div>
-<p class="Pp">Press Ctrl-C to exit mirror mode.</p>
-<p class="Pp">Mirror mode works with all media file options (<b>--file</b>,
-    <b>--loop</b>) and webcam options. Note: Mirror mode is incompatible with
-    audio (<b>--audio</b>).</p>
-</section>
-<section class="Ss">
 <h2 class="Ss" id="Piping_and_Redirecting_(Mirror_+_Snapshot)"><a class="permalink" href="#Piping_and_Redirecting_(Mirror_+_Snapshot)">Piping
   and Redirecting (Mirror + Snapshot)</a></h2>
-<p class="Pp">When you combine <b>--mirror</b> with <b>--snapshot</b>, the
-    output is optimized for piping to other commands or redirecting to files.
-    When stdout is redirected (not a terminal), ascii-chat automatically:</p>
+<p class="Pp">When you use <b>mirror</b> mode with <b>--snapshot</b>, the output
+    is optimized for piping to other commands or redirecting to files. When
+    stdout is redirected (not a terminal), ascii-chat automatically:</p>
 <div class="Bd-indent">
 <ul class="Bl-bullet">
   <li>Outputs only the final frame (after <b>--snapshot-delay</b> has
@@ -837,32 +809,32 @@ ascii-chat client [::1]:8080</pre>
 <section class="Ss">
 <h2 class="Ss" id="View_webcam_locally_in_mirror_mode"><a class="permalink" href="#View_webcam_locally_in_mirror_mode">View
   webcam locally in mirror mode</a></h2>
-<pre>ascii-chat client --mirror --color-mode truecolor</pre>
+<pre>ascii-chat mirror --color-mode truecolor</pre>
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Capture_local_webcam_snapshot_(no_server)"><a class="permalink" href="#Capture_local_webcam_snapshot_(no_server)">Capture
   local webcam snapshot (no server)</a></h2>
-<pre>ascii-chat client --mirror --snapshot --snapshot-delay 1.0</pre>
+<pre>ascii-chat mirror --snapshot --snapshot-delay 1.0</pre>
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Save_ASCII_selfie_to_a_file"><a class="permalink" href="#Save_ASCII_selfie_to_a_file">Save
   ASCII selfie to a file</a></h2>
-<pre>ascii-chat client --mirror --snapshot --snapshot-delay 2 &gt; selfie.txt</pre>
+<pre>ascii-chat mirror --snapshot --snapshot-delay 2 &gt; selfie.txt</pre>
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Save_ASCII_selfie_with_no_ANSI_codes_(plain_text)"><a class="permalink" href="#Save_ASCII_selfie_with_no_ANSI_codes_(plain_text)">Save
   ASCII selfie with no ANSI codes (plain text)</a></h2>
-<pre>ascii-chat client --mirror --snapshot --strip-ansi &gt; selfie.txt</pre>
+<pre>ascii-chat mirror --snapshot --strip-ansi &gt; selfie.txt</pre>
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Pipe_ASCII_art_to_another_command"><a class="permalink" href="#Pipe_ASCII_art_to_another_command">Pipe
   ASCII art to another command</a></h2>
-<pre>ascii-chat client --mirror --snapshot | head -10</pre>
+<pre>ascii-chat mirror --snapshot | head -10</pre>
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Instant_capture_(no_delay)"><a class="permalink" href="#Instant_capture_(no_delay)">Instant
   capture (no delay)</a></h2>
-<pre>ascii-chat client --mirror --snapshot --snapshot-delay 0 &gt; instant.txt</pre>
+<pre>ascii-chat mirror --snapshot --snapshot-delay 0 &gt; instant.txt</pre>
 </section>
 <section class="Ss">
 <h2 class="Ss" id="Test_without_webcam_using_test_pattern"><a class="permalink" href="#Test_without_webcam_using_test_pattern">Test
@@ -1185,11 +1157,11 @@ ascii-chat client [::1]:8080</pre>
       letterboxing. Use <b>--stretch</b> to fill the entire terminal (may
       distort the image).</li>
   <li><b>Piping Output</b>: When piping or redirecting stdout in snapshot mode
-      (<b>client --mirror --snapshot &gt; file</b>), ascii-chat automatically
-      detects that stdout is not a terminal and outputs clean ASCII without
-      cursor movement or RLE compression codes. Only the final frame is output.
-      Use <b>--color-mode mono</b> for completely plain ASCII with no escape
-      codes at all.</li>
+      (<b>mirror --snapshot &gt; file</b>), ascii-chat automatically detects
+      that stdout is not a terminal and outputs clean ASCII without cursor
+      movement or RLE compression codes. Only the final frame is output. Use
+      <b>--color-mode mono</b> for completely plain ASCII with no escape codes
+      at all.</li>
   <li><b>Encrypted Keys</b>: Encrypted private keys (SSH/GPG) work well with
       either ssh-agent/gpg-agent or the $ASCII_CHAT_KEY_PASSWORD environment
       variable. The passphrase prompt only works in interactive terminals.</li>
@@ -1221,7 +1193,7 @@ ascii-chat client [::1]:8080</pre>
 <table class="foot">
   <tr>
     <td class="foot-date">December 2025</td>
-    <td class="foot-os">ascii-chat 0.7.0-dev</td>
+    <td class="foot-os">ascii-chat dev</td>
   </tr>
 </table>
 </body>
