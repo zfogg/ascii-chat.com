@@ -57,30 +57,24 @@ export default function Crypto() {
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-cyan-300 mb-3">Server with SSH key</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"># Server authenticates with its key
-ascii-chat server --key ~/.ssh/id_ed25519 --acds</code>
-              </pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`# Server authenticates with its key
+ascii-chat server --key ~/.ssh/id_ed25519`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Client connects with their key</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"># Client authenticates with their key
-ascii-chat client happy-sunset-ocean --key ~/.ssh/id_ed25519</code>
-              </pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`# Client authenticates with their key
+ascii-chat happy-sunset-ocean --key ~/.ssh/id_ed25519`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-pink-300 mb-3">Encrypted SSH keys</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Prompts for passphrase or uses ssh-agent</span>
-ascii-chat server --key ~/.ssh/id_ed25519_encrypted
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Prompts for passphrase or uses ssh-agent
+`}</span>{`ascii-chat server --key ~/.ssh/id_ed25519_encrypted
 
-<span className="text-gray-500"># Or set passphrase via environment variable</span>
-export ASCII_CHAT_KEY_PASSWORD="my-passphrase"
-ascii-chat server --key ~/.ssh/id_ed25519_encrypted</code>
-              </pre>
+`}<span className="text-gray-500">{`# Or set passphrase via environment variable
+`}</span>{`export ASCII_CHAT_KEY_PASSWORD="my-passphrase"
+ascii-chat server --key ~/.ssh/id_ed25519_encrypted`}</code></pre>
             </div>
           </div>
         </section>
@@ -98,13 +92,11 @@ ascii-chat server --key ~/.ssh/id_ed25519_encrypted</code>
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-cyan-300 mb-3">Using GPG key ID</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Server with GPG key (short/long/full fingerprint)</span>
-ascii-chat server --key gpg:7FE90A79F2E80ED3
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server with GPG key (short/long/full fingerprint)
+`}</span>{`ascii-chat server --key gpg:7FE90A79F2E80ED3
 
-<span className="text-gray-500"># Client connects with their GPG key</span>
-ascii-chat client happy-sunset-ocean --key gpg:897607FA43DC66F612710AF97FE90A79F2E80ED3</code>
-              </pre>
+`}<span className="text-gray-500">{`# Client connects with their GPG key
+`}</span>{`ascii-chat happy-sunset-ocean --key gpg:897607FA43DC66F612710AF97FE90A79F2E80ED3`}</code></pre>
             </div>
           </div>
         </section>
@@ -122,24 +114,20 @@ ascii-chat client happy-sunset-ocean --key gpg:897607FA43DC66F612710AF97FE90A79F
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Password-only</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Server sets password</span>
-ascii-chat server --password "correct-horse-battery-staple"
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server sets password
+`}</span>{`ascii-chat server --password "correct-horse-battery-staple"
 
-<span className="text-gray-500"># Client must know the password</span>
-ascii-chat client 192.168.1.100 --password "correct-horse-battery-staple"</code>
-              </pre>
+`}<span className="text-gray-500">{`# Client must know the password
+`}</span>{`ascii-chat client 192.168.1.100 --password "correct-horse-battery-staple"`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-cyan-300 mb-3">Key + Password (maximum security)</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Both SSH key and password required</span>
-ascii-chat server --key ~/.ssh/id_ed25519 --password "extra-secret"
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Both SSH key and password required
+`}</span>{`ascii-chat server --key ~/.ssh/id_ed25519 --password "extra-secret"
 
-<span className="text-gray-500"># Client needs both to connect</span>
-ascii-chat client happy-sunset-ocean --key ~/.ssh/id_ed25519 --password "extra-secret"</code>
-              </pre>
+`}<span className="text-gray-500">{`# Client needs both to connect
+`}</span>{`ascii-chat happy-sunset-ocean --key ~/.ssh/id_ed25519 --password "extra-secret"`}</code></pre>
             </div>
           </div>
         </section>
@@ -159,7 +147,7 @@ ascii-chat client happy-sunset-ocean --key ~/.ssh/id_ed25519 --password "extra-s
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Verify with local public key file</h3>
               <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
                 <code className="text-teal-300"><span className="text-gray-500"># Client verifies server identity</span>
-ascii-chat client happy-sunset-ocean --server-key ~/.ssh/server1.pub</code>
+ascii-chat happy-sunset-ocean --server-key ~/.ssh/server1.pub</code>
               </pre>
             </div>
 

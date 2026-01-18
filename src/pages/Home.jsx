@@ -28,20 +28,16 @@ export default function Home() {
           <div className="space-y-8">
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Start a server</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"># Register with ACDS and get a session string
-ascii-chat server --acds
-<span className="text-gray-500"># Session: happy-sunset-ocean</span></code>
-              </pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`# Register with ACDS and get a session string
+ascii-chat server`}<span className="text-gray-500">{`
+# Session: happy-sunset-ocean`}</span></code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Join a session</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"># Connect using the session string
-ascii-chat client happy-sunset-ocean
-<span className="text-gray-500"># That's it! No configuration needed.</span></code>
-              </pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`# Connect using the session string
+ascii-chat happy-sunset-ocean`}<span className="text-gray-500">{`
+# That's it! No configuration needed.`}</span></code></pre>
             </div>
           </div>
         </section>
@@ -106,28 +102,22 @@ ascii-chat client happy-sunset-ocean
           <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold text-cyan-300 mb-3">macOS (Homebrew)</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300">brew tap zfogg/ascii-chat
-brew install ascii-chat</code>
-              </pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`brew tap zfogg/ascii-chat
+brew install ascii-chat`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Arch Linux (AUR)</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300">paru -S ascii-chat</code>
-              </pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`paru -S ascii-chat`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-pink-300 mb-3">Build from source</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300">git clone https://github.com/zfogg/ascii-chat.git
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300">{`git clone https://github.com/zfogg/ascii-chat.git
 cd ascii-chat
 ./scripts/install-deps.sh
 cmake --preset default && cmake --build build
-./build/bin/ascii-chat</code>
-              </pre>
+./build/bin/ascii-chat`}</code></pre>
             </div>
           </div>
         </section>
@@ -141,44 +131,36 @@ cmake --preset default && cmake --build build
           <div className="space-y-8">
             <div>
               <h3 className="text-xl font-semibold text-cyan-300 mb-3">Local connection (no ACDS)</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Server binds to localhost</span>
-ascii-chat server
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server binds to localhost
+`}</span>{`ascii-chat server
 
-<span className="text-gray-500"># Client connects to localhost</span>
-ascii-chat client</code>
-              </pre>
+`}<span className="text-gray-500">{`# Client connects to localhost
+`}</span>{`ascii-chat client`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-purple-300 mb-3">Internet session with ACDS</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Server registers with official ACDS</span>
-ascii-chat server --acds
-<span className="text-gray-500"># Session: happy-sunset-ocean</span>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server registers with official ACDS
+`}</span>{`ascii-chat server --acds
+`}<span className="text-gray-500">{`# Session: happy-sunset-ocean
 
-<span className="text-gray-500"># Client looks up session and connects automatically</span>
-ascii-chat client happy-sunset-ocean</code>
-              </pre>
+`}</span><span className="text-gray-500">{`# Client looks up session and connects automatically
+`}</span>{`ascii-chat client happy-sunset-ocean`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-teal-300 mb-3">Encrypted session with SSH keys</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># Server with Ed25519 key</span>
-ascii-chat server --key ~/.ssh/id_ed25519 --acds
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# Server with Ed25519 key
+`}</span>{`ascii-chat server --key ~/.ssh/id_ed25519 --acds
 
-<span className="text-gray-500"># Client authenticates with their key</span>
-ascii-chat client happy-sunset-ocean --key ~/.ssh/id_ed25519</code>
-              </pre>
+`}<span className="text-gray-500">{`# Client authenticates with their key
+`}</span>{`ascii-chat client happy-sunset-ocean --key ~/.ssh/id_ed25519`}</code></pre>
             </div>
 
             <div>
               <h3 className="text-xl font-semibold text-pink-300 mb-3">Mirror mode (test webcam locally)</h3>
-              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto">
-                <code className="text-teal-300"><span className="text-gray-500"># View your webcam as ASCII without connecting anywhere</span>
-ascii-chat mirror --palette blocks --color-mode truecolor</code>
-              </pre>
+              <pre className="bg-gray-900 border border-gray-800 rounded-lg p-4 overflow-x-auto"><code className="text-teal-300"><span className="text-gray-500">{`# View your webcam as ASCII without connecting anywhere
+`}</span>{`ascii-chat mirror --palette blocks --color-mode truecolor`}</code></pre>
             </div>
           </div>
         </section>
