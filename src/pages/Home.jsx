@@ -113,9 +113,9 @@ cmake --preset default && cmake --build build
             </div>
 
             <div className="bg-gray-900/50 border border-cyan-900/30 rounded-lg p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-semibold text-cyan-300 mb-3">👥 Multi-Client</h3>
+              <h3 className="text-lg sm:text-xl font-semibold text-cyan-300 mb-3">👥 3+ Person Conference Calls</h3>
               <p className="text-gray-300">
-                3+ people can join the same session. Video grid layout automatically adjusts, like Zoom or Google Hangouts but in your terminal.
+                3+ people can join the same session. Video grid layout automatically adjusts. Like Zoom or Google Hangouts, but in your terminal.
               </p>
             </div>
 
