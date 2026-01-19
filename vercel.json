@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/crypto",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/man",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/env",
+      "destination": "/index.html"
+    }
+  ]
+}
