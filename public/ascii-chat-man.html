@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html>
-<!-- This is an automatically generated file.  Do not edit.
-   ascii-chat - terminal video chat with ASCII art
-   Manual page for ascii-chat(1)
-   -->
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,33 +14,29 @@
     code.Nm, .Fl, .Cm, .Ic, code.In, .Fd, .Fn, .Cd { font-weight: bold;
       font-family: inherit; }
   </style>
-  <title>ASCII-CHAT(1)</title>
+  <title>ascii-chat(1)</title>
 </head>
 <body>
 <table class="head">
   <tr>
-    <td class="head-ltitle">ASCII-CHAT(1)</td>
+    <td class="head-ltitle">ascii-chat(1)</td>
     <td class="head-vol">User Commands</td>
-    <td class="head-rtitle">ASCII-CHAT(1)</td>
+    <td class="head-rtitle">ascii-chat(1)</td>
   </tr>
 </table>
 <div class="manual-text">
 <section class="Sh">
 <h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
-<p class="Pp">ascii-chat - Video chat in your terminal</p>
+<p class="Pp"><b>ascii-chat</b> - Video chat in your terminal</p>
+<p class="Pp"></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
-<p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <i>mode</i>
-    [<i>mode-options</i>]</p>
-<p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <b>server</b>
-    [<i>address</i>][:<i>port</i>] [<i>options</i>]</p>
-<p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <b>client</b>
-    [<i>address</i>][:<i>port</i>] [<i>options</i>]</p>
-<p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <b>mirror</b>
-    [<i>options</i>]</p>
-<p class="Pp"><b>ascii-chat</b> [<i>binary-options</i>] <b>discovery-server</b>
-    [<i>address</i>][:<i>port</i>] [<i>options</i>]</p>
+<p class="Pp"><b>ascii-chat</b> [<i>options</i>] [<b>server</b> | <b>client</b>
+    | <b>mirror</b> | <b>discovery-service</b>] [<i>mode-options</i>]</p>
+<p class="Pp"><b>ascii-chat</b> [<i>options</i>]
+  <i>&lt;session-string&gt;</i></p>
+<p class="Pp"></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
@@ -70,843 +62,362 @@
   <dd>Runs an ACDS (ascii-chat Discovery Service) server for session management.
       Allows clients and servers to discover each other using memorable session
       strings instead of IP addresses. Handles NAT traversal via WebRTC when
-      direct TCP connections aren't possible.</dd>
+      direct TCP connections aren't possible.
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="USAGE"><a class="permalink" href="#USAGE">USAGE</a></h1>
+<dl class="Bl-tag">
+  <dt><b>ascii-chat [options...]</b></dt>
+  <dd>Start a new session (share the session string)</dd>
+  <dt><b>ascii-chat &lt;session-string&gt; [options...]</b></dt>
+  <dd>Join an existing session</dd>
+  <dt><b>ascii-chat [options...]</b></dt>
+  <dd>Run in a specific mode</dd>
+  <dt><b>ascii-chat server [bind-address] [bind-address]
+    [mode-options...]</b></dt>
+  <dd>Start server (can specify 0-2 bind addresses for IPv4/IPv6)</dd>
+  <dt><b>ascii-chat client [address] [mode-options...]</b></dt>
+  <dd>Connect to server (defaults to localhost:27224)</dd>
+  <dt><b>ascii-chat mirror [mode-options...]</b></dt>
+  <dd>View local webcam or media file as ASCII art</dd>
+  <dt><b>ascii-chat discovery-service [bind-address] [bind-address]
+    [mode-options...]</b></dt>
+  <dd>Start discovery service (can specify 0-2 bind addresses for IPv4/IPv6)
+    <p class="Pp"></p>
+  </dd>
+</dl>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+<dl class="Bl-tag">
+  <dt id="ascii-chat"><a class="permalink" href="#ascii-chat"><b>ascii-chat</b></a></dt>
+  <dd>Start new session (share the session string)</dd>
+  <dt><b>ascii-chat swift-river-mountain</b></dt>
+  <dd>Join session with session string</dd>
+  <dt id="ascii-chat~2"><a class="permalink" href="#ascii-chat~2"><b>ascii-chat</b></a></dt>
+  <dd>Run as dedicated server</dd>
+  <dt><b>ascii-chat example.com</b></dt>
+  <dd>Connect to specific server</dd>
+  <dt id="ascii-chat~3"><a class="permalink" href="#ascii-chat~3"><b>ascii-chat</b></a></dt>
+  <dd>Preview local webcam as ASCII</dd>
+  <dt><b>ascii-chat server</b></dt>
+  <dd>Start on localhost (127.0.0.1 and ::1)</dd>
+  <dt><b>ascii-chat server 0.0.0.0</b></dt>
+  <dd>Start on all IPv4 interfaces</dd>
+  <dt><b>ascii-chat server 0.0.0.0 ::</b></dt>
+  <dd>Start on all IPv4 and IPv6 interfaces (dual-stack)</dd>
+  <dt><b>ascii-chat server --port 8080</b></dt>
+  <dd>Start on custom port</dd>
+  <dt><b>ascii-chat server --key ~/.ssh/id_ed25519 --discovery</b></dt>
+  <dd>Start with identity key and discovery registration</dd>
+  <dt><b>ascii-chat client</b></dt>
+  <dd>Connect to localhost</dd>
+  <dt><b>ascii-chat client example.com</b></dt>
+  <dd>Connect to remote server</dd>
+  <dt><b>ascii-chat client example.com:8080</b></dt>
+  <dd>Connect to remote server on custom port</dd>
+  <dt><b>ascii-chat client --url
+    'https://www.youtube.com/watch?v=tQSbms5MDvY'</b></dt>
+  <dd>Stream from YouTube URL</dd>
+  <dt><b>ascii-chat client -f video.mp4</b></dt>
+  <dd>Stream from local video file</dd>
+  <dt><b>ascii-chat client --color-mode mono --render-mode half-block --width
+    120</b></dt>
+  <dd>Connect with custom display options</dd>
+  <dt><b>ascii-chat client --palette-chars '@%#*+=-:. '</b></dt>
+  <dd>Use custom ASCII palette characters</dd>
+  <dt><b>ascii-chat client --snapshot</b></dt>
+  <dd>Capture single frame and exit</dd>
+  <dt><b>ascii-chat mirror</b></dt>
+  <dd>View local webcam</dd>
+  <dt><b>ascii-chat mirror --color-mode mono</b></dt>
+  <dd>View webcam in black and white</dd>
+  <dt><b>ascii-chat mirror --url
+    'https://www.youtube.com/watch?v=tQSbms5MDvY'</b></dt>
+  <dd>Stream from YouTube URL</dd>
+  <dt><b>ascii-chat mirror -f video.mp4</b></dt>
+  <dd>Stream from local video file (supports mp4, mkv, webm, mov, etc)</dd>
+  <dt><b>ascii-chat mirror -f '-'</b></dt>
+  <dd>Stream media from stdin (cat file.gif | ascii-chat mirror -f '-')</dd>
+  <dt><b>ascii-chat mirror --palette-chars '@%#*+=-:. '</b></dt>
+  <dd>View with custom ASCII palette characters</dd>
+  <dt><b>ascii-chat mirror --snapshot</b></dt>
+  <dd>Capture single frame and exit</dd>
+  <dt><b>ascii-chat discovery-service</b></dt>
+  <dd>Start on localhost</dd>
+  <dt><b>ascii-chat discovery-service 0.0.0.0</b></dt>
+  <dd>Start on all IPv4 interfaces</dd>
+  <dt><b>ascii-chat discovery-service --port 5000</b></dt>
+  <dd>Start on custom port</dd>
+  <dt><b>ascii-chat discovery-service --require-server-identity
+    --require-client-identity</b></dt>
+  <dd>Enforce identity verification for all parties
+    <p class="Pp"></p>
+  </dd>
 </dl>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="OPTIONS"><a class="permalink" href="#OPTIONS">OPTIONS</a></h1>
 <section class="Ss">
-<h2 class="Ss" id="Binary-Level_Options"><a class="permalink" href="#Binary-Level_Options">Binary-Level
-  Options</a></h2>
-<p class="Pp">These options apply to all modes and must be specified
-    <b>before</b> the mode argument.</p>
+<h2 class="Ss" id="GENERAL"><a class="permalink" href="#GENERAL">GENERAL</a></h2>
 <dl class="Bl-tag">
   <dt id="help"><a class="permalink" href="#help"><b>--help</b></a></dt>
-  <dd>Print usage information and exit.</dd>
+  <dd>Show this help (default: false)</dd>
   <dt id="version"><a class="permalink" href="#version"><b>--version</b></a></dt>
-  <dd>Print version information and exit.</dd>
-  <dt id="config"><a class="permalink" href="#config"><b>--config</b>=<i>PATH</i></a></dt>
-  <dd>Load configuration from TOML file at PATH.</dd>
-  <dt><b>--config-create</b>[=<i>PATH</i>]</dt>
-  <dd>Create a default configuration file and exit. If PATH is not specified,
-      uses the default location. If the file exists, prompts for confirmation to
-      overwrite. Supports piped input for scripting (e.g., echo &quot;y&quot; |
-      ascii-chat --config-create).</dd>
-  <dt id="V"><a class="permalink" href="#V"><b>-V</b>, <b>--verbose</b></a></dt>
-  <dd>Increase output verbosity. Can be specified multiple times for increased
-      detail:</dd>
+  <dd>Show version information (default: false)</dd>
 </dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>-V</b>: More detailed output</li>
-  <li><b>-VV</b>: Even more detail</li>
-  <li><b>-VVV</b>: Maximum verbosity</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt id="L"><a class="permalink" href="#L"><b>-L</b>,
-    <b>--log-file</b>=<i>PATH</i></a></dt>
-  <dd>Write log output to the specified file. The default log files are
-      client.log, server.log, and mirror.log in your current working directory,
-      based on the mode.</dd>
-  <dt id="log"><a class="permalink" href="#log"><b>--log-level</b>=<i>LEVEL</i></a></dt>
-  <dd>Set logging verbosity level: dev, debug, info, warn, error, fatal.</dd>
-</dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>Default</b>: debug (Debug/Dev builds), info (Release/RelWithDebInfo
-      builds)</li>
-  <li><b>Precedence</b>: LOG_LEVEL environment variable &gt; --log-level &gt;
-      build type default</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt id="q"><a class="permalink" href="#q"><b>-q</b>, <b>--quiet</b></a></dt>
-  <dd>Disable console logging (log to file only). Only errors and critical
-      warnings are displayed on the console. Logs continue to be written to the
-      log file if --log-file is specified.</dd>
-</dl>
-<p class="Pp"><b>Example:</b></p>
-<div class="Bd-indent">
-<pre>ascii-chat -V --log-level debug --log-file /tmp/debug.log client
-ascii-chat --config ~/my-config.toml server</pre>
-</div>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Network_Options"><a class="permalink" href="#Network_Options">Network
-  Options</a></h2>
+<h2 class="Ss" id="CONFIGURATION"><a class="permalink" href="#CONFIGURATION">CONFIGURATION</a></h2>
 <dl class="Bl-tag">
-  <dt id="p"><a class="permalink" href="#p"><b>-p</b>,
-    <b>--port</b>=<i>PORT</i></a></dt>
-  <dd>Server port number. Valid range: 1-65535. Default: <b>27224</b>
-      (&quot;ASCII&quot; on a phone dial pad).</dd>
+  <dt id="config"><a class="permalink" href="#config"><b>--config
+    <i>STR</i></b></a></dt>
+  <dd>Load configuration from FILE (default: )</dd>
+  <dt id="config-create"><a class="permalink" href="#config-create"><b>--config-create</b></a></dt>
+  <dd>Create default configuration file and exit</dd>
 </dl>
-<p class="Pp"><b>Important:</b></p>
-<div class="Bd-indent">For client mode, you cannot use both <b>--port</b> and a
-  port in the positional address argument (e.g., <b>host:port</b>). If both are
-  provided, the program will exit with an error.</div>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Server_Address_(Positional_Arguments)"><a class="permalink" href="#Server_Address_(Positional_Arguments)">Server
-  Address (Positional Arguments)</a></h2>
-<p class="Pp">The server accepts 0-2 positional arguments for bind
-  addresses.</p>
-<p class="Pp"><b>Argument Count:</b></p>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>0 arguments</b>: Bind to both 127.0.0.1 and ::1 (dual-stack
-    defaults)</li>
-  <li><b>1 argument</b>: Bind only to this address (IPv4 OR IPv6)</li>
-  <li><b>2 arguments</b>: Bind to both (must be one IPv4 AND one IPv6)</li>
-</ul>
-</div>
-<p class="Pp"><b>Disabling IPv4 or IPv6:</b></p>
-<div class="Bd-indent">To run IPv4-only or IPv6-only, provide a single address
-  argument:
-<ul class="Bl-bullet">
-  <li><b>IPv4 only</b>: ascii-chat server 0.0.0.0</li>
-  <li><b>IPv6 only</b>: ascii-chat server ::</li>
-</ul>
-</div>
-<p class="Pp"><b>Order Independence:</b></p>
-<div class="Bd-indent">When providing two addresses, the order doesn't matter.
-  The server automatically detects which is IPv4 and which is IPv6.</div>
-<p class="Pp"><b>Examples:</b></p>
-<div class="Bd-indent">
-<pre>ascii-chat server                  # Dual-stack: 127.0.0.1 + ::1
-ascii-chat server 0.0.0.0          # IPv4 only: all interfaces
-ascii-chat server ::               # IPv6 only: all interfaces
-ascii-chat server 0.0.0.0 ::       # Dual-stack: all interfaces
-ascii-chat server :: 0.0.0.0       # Same (order independent)
-ascii-chat server 127.0.0.1 ::1    # Dual-stack: localhost
-ascii-chat server --port 8080      # Dual-stack on port 8080</pre>
-</div>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Network_Options_(Server_Only)"><a class="permalink" href="#Network_Options_(Server_Only)">Network
-  Options (Server Only)</a></h2>
+<h2 class="Ss" id="LOGGING"><a class="permalink" href="#LOGGING">LOGGING</a></h2>
 <dl class="Bl-tag">
+  <dt id="L,"><a class="permalink" href="#L,"><b>-L, --log-file
+    <i>STR</i></b></a></dt>
+  <dd>Redirect logs to FILE (default: ) Env: <b>ASCII_CHAT_LOG_FILE</b></dd>
+  <dt id="log-level"><a class="permalink" href="#log-level"><b>--log-level
+    <i>VAL</i></b></a></dt>
+  <dd>Set log level: dev, debug, info, warn, error, fatal (default: )</dd>
+  <dt id="V,"><a class="permalink" href="#V,"><b>-V, --verbose
+    <i>VAL</i></b></a></dt>
+  <dd>Increase log verbosity (stackable: -VV, -VVV, or --verbose) (default:
+    )</dd>
+  <dt id="q,"><a class="permalink" href="#q,"><b>-q, --quiet</b></a></dt>
+  <dd>Disable console logging (log to file only) (default: false)</dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="NETWORK"><a class="permalink" href="#NETWORK">NETWORK</a></h2>
+<dl class="Bl-tag">
+  <dt id="prefer-webrtc"><a class="permalink" href="#prefer-webrtc"><b>--prefer-webrtc</b></a></dt>
+  <dd>Try WebRTC before Direct TCP (useful when Direct TCP fails) (default:
+      false)</dd>
+  <dt id="no-webrtc"><a class="permalink" href="#no-webrtc"><b>--no-webrtc</b></a></dt>
+  <dd>Disable WebRTC, use Direct TCP only (default: false)</dd>
+  <dt id="webrtc-skip-stun"><a class="permalink" href="#webrtc-skip-stun"><b>--webrtc-skip-stun</b></a></dt>
+  <dd>Skip WebRTC+STUN stage, go straight to TURN relay (default: false)</dd>
+  <dt id="webrtc-disable-turn"><a class="permalink" href="#webrtc-disable-turn"><b>--webrtc-disable-turn</b></a></dt>
+  <dd>Disable WebRTC+TURN relay, use STUN only (default: false)</dd>
+  <dt id="p,"><a class="permalink" href="#p,"><b>-p, --port
+    <i>STR</i></b></a></dt>
+  <dd>Server port (default: 27224) Env: <b>ASCII_CHAT_PORT</b></dd>
+  <dt id="max-clients"><a class="permalink" href="#max-clients"><b>--max-clients
+    <i>NUM</i></b></a></dt>
+  <dd>Maximum concurrent clients (default: 9) Env:
+    <b>ASCII_CHAT_MAX_CLIENTS</b></dd>
+  <dt id="no-audio-mixer"><a class="permalink" href="#no-audio-mixer"><b>--no-audio-mixer</b></a></dt>
+  <dd>Disable audio mixer (debug) (default: false)</dd>
+  <dt id="discovery"><a class="permalink" href="#discovery"><b>--discovery</b></a></dt>
+  <dd>Enable discovery service registration (requires --key or --password or
+      --discovery-expose-ip) (default: false)</dd>
+  <dt><b>--discovery-server <i>STR</i></b></dt>
+  <dd>Discovery service address (default: discovery-service.ascii-chat.com)</dd>
+  <dt id="discovery-port"><a class="permalink" href="#discovery-port"><b>--discovery-port
+    <i>NUM</i></b></a></dt>
+  <dd>Discovery service port (default: 27225)</dd>
   <dt id="upnp"><a class="permalink" href="#upnp"><b>--upnp</b></a></dt>
-  <dd>Enable UPnP/NAT-PMP for automatic router port mapping. When enabled, the
-      server attempts to configure your router to forward the listening port,
-      allowing direct TCP connections from the internet. This works for
-      approximately 70% of home routers.</dd>
-</dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>UPnP</b>: Universal Plug and Play (most consumer routers)</li>
-  <li><b>NAT-PMP</b>: NAT Port Mapping Protocol (Apple routers, Time
-    Capsule)</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>If port mapping fails, clients can still connect via WebRTC fallback.
-      Default: <b>disabled</b> (opt-in for security)</dd>
-</dl>
-<dl class="Bl-tag">
-  <dt id="acds"><a class="permalink" href="#acds"><b>--acds</b></a></dt>
-  <dd>Enable ACDS (ASCII Chat Discovery Service) session registration. When
-      enabled, the server registers with an ACDS discovery server and receives a
-      memorable three-word session string (e.g., happy-sunset-ocean) that
-      clients can use to connect instead of IP addresses.</dd>
-</dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li>Requires authentication: <b>--key</b>, <b>--password</b>, or
-      <b>--acds-expose-ip</b></li>
-  <li>Handles NAT traversal automatically via WebRTC when direct TCP fails</li>
-  <li>Default ACDS server: discovery-server.ascii-chat.com:27225</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>Default: <b>disabled</b></dd>
-</dl>
-<dl class="Bl-tag">
-  <dt><b>--acds-server</b>=<i>ADDRESS</i></dt>
-  <dd>ACDS discovery server address to register with. Default:
-      <b>discovery-server.ascii-chat.com</b></dd>
-  <dt><b>--acds-port</b>=<i>PORT</i></dt>
-  <dd>ACDS discovery server port. Default: <b>27225</b></dd>
-  <dt><b>--acds-key</b>=<i>KEY</i></dt>
-  <dd>ACDS server public key for trust verification. Prevents man-in-the-middle
-      attacks by verifying the ACDS server's identity. Accepts:</dd>
-</dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li>Path to SSH Ed25519 public key file</li>
-  <li>HTTPS URL to fetch key from</li>
-  <li>GitHub: github:username</li>
-  <li>GitLab: gitlab:username</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt><b>--acds-expose-ip</b></dt>
-  <dd>Explicitly allow public IP disclosure in ACDS sessions. When enabled,
-      allows ACDS registration without authentication keys. Default:
-      <b>disabled</b> (opt-in for privacy)</dd>
-  <dt id="webrtc"><a class="permalink" href="#webrtc"><b>--webrtc</b></a></dt>
-  <dd>Use WebRTC peer-to-peer mode instead of direct TCP. Useful when both
-      server and client are behind NAT without port forwarding. Default:
-      <b>direct TCP</b></dd>
-  <dt id="no"><a class="permalink" href="#no"><b>--no-mdns-advertise</b></a></dt>
-  <dd>Disable mDNS service advertisement on the local network. When disabled,
-      clients using <b>--scan</b> won't discover this server. Default:
-      <b>enabled</b> (advertise via mDNS)</dd>
-  <dt id="max"><a class="permalink" href="#max"><b>--max-clients</b>=<i>N</i></a></dt>
-  <dd>Maximum number of concurrent client connections allowed. Valid range:
-      1-32. Default: <b>10</b>
-    <br/>
-    Higher values require more server resources (CPU, memory, bandwidth).
-      Clients attempting to connect when the limit is reached will be
-    rejected.</dd>
+  <dd>Enable UPnP/NAT-PMP for automatic router port mapping (direct TCP for
+      ~70%% of home users) (default: false) Env: <b>ASCII_CHAT_UPNP</b></dd>
+  <dt id="no-mdns-advertise"><a class="permalink" href="#no-mdns-advertise"><b>--no-mdns-advertise</b></a></dt>
+  <dd>Disable mDNS service advertisement on local network (LAN discovery won't
+      find this server) (default: false)</dd>
+  <dt id="stun-servers"><a class="permalink" href="#stun-servers"><b>--stun-servers
+    <i>STR</i></b></a></dt>
+  <dd>Comma-separated STUN server URLs (debug/test only - ACDS provides in
+      production) (default: ) Env: <b>ASCII_CHAT_STUN_SERVERS</b></dd>
+  <dt id="turn-servers"><a class="permalink" href="#turn-servers"><b>--turn-servers
+    <i>STR</i></b></a></dt>
+  <dd>Comma-separated TURN server URLs (debug/test only - ACDS provides in
+      production) (default: ) Env: <b>ASCII_CHAT_TURN_SERVERS</b></dd>
+  <dt id="turn-username"><a class="permalink" href="#turn-username"><b>--turn-username
+    <i>STR</i></b></a></dt>
+  <dd>TURN authentication username (debug/test only - ACDS provides in
+      production) (default: ) Env: <b>ASCII_CHAT_TURN_USERNAME</b></dd>
+  <dt id="turn-credential"><a class="permalink" href="#turn-credential"><b>--turn-credential
+    <i>STR</i></b></a></dt>
+  <dd>TURN authentication credential (debug/test only - ACDS provides in
+      production) (default: ) Env: <b>ASCII_CHAT_TURN_CREDENTIAL</b></dd>
 </dl>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Server_Audio_Options"><a class="permalink" href="#Server_Audio_Options">Server
-  Audio Options</a></h2>
+<h2 class="Ss" id="PERFORMANCE"><a class="permalink" href="#PERFORMANCE">PERFORMANCE</a></h2>
 <dl class="Bl-tag">
-  <dt id="no~2"><a class="permalink" href="#no~2"><b>--no-audio-mixer</b></a></dt>
-  <dd>Disable audio mixer, send silence instead of mixing client audio streams.
-      Useful for debugging audio pipeline issues without hearing mixed output.
-      Server-only option (client audio is still received and recorded).</dd>
+  <dt id="compression-level"><a class="permalink" href="#compression-level"><b>--compression-level
+    <i>NUM</i></b></a></dt>
+  <dd>zstd compression level (1-9) (default: 3) Env:
+      <b>ASCII_CHAT_COMPRESSION_LEVEL</b></dd>
+  <dt id="no-compress"><a class="permalink" href="#no-compress"><b>--no-compress</b></a></dt>
+  <dd>Disable compression (default: false) Env:
+    <b>ASCII_CHAT_NO_COMPRESS</b></dd>
 </dl>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Network_Performance_Options"><a class="permalink" href="#Network_Performance_Options">Network
-  Performance Options</a></h2>
+<h2 class="Ss" id="SECURITY"><a class="permalink" href="#SECURITY">SECURITY</a></h2>
 <dl class="Bl-tag">
-  <dt id="compression"><a class="permalink" href="#compression"><b>--compression-level</b>=<i>N</i></a></dt>
-  <dd>zstd compression level for video frames. Valid range: 1-9. Default:
-      <b>1</b> (fastest, best for real-time)</dd>
-</dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>Level 1</b>: Fastest compression, lowest ratio (best for real-time
-      streaming)</li>
-  <li><b>Level 3</b>: Balanced speed/ratio</li>
-  <li><b>Level 9</b>: Slower compression, best ratio (for limited
-    bandwidth)</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>Levels above 5 may cause frame drops on slower machines. Both client and
-      server must use compatible compression settings.</dd>
-</dl>
-<dl class="Bl-tag">
-  <dt id="no~3"><a class="permalink" href="#no~3"><b>--no-compress</b></a></dt>
-  <dd>Disable video frame compression entirely. Useful for debugging, local
-      testing, or when CPU usage is more critical than bandwidth. Significantly
-      increases network traffic. When enabled, --compression-level is ignored.
-      Available for both client and server.</dd>
-  <dt id="encode"><a class="permalink" href="#encode"><b>--encode-audio</b></a></dt>
-  <dd>Force enable Opus audio encoding for compression and bandwidth savings.
-      When used with --no-compress, still enables audio encoding.</dd>
-  <dt id="no~4"><a class="permalink" href="#no~4"><b>--no-encode-audio</b></a></dt>
-  <dd>Disable Opus audio encoding, send raw audio samples instead. Increases
-      bandwidth but slightly reduces CPU usage.</dd>
+  <dt id="E,"><a class="permalink" href="#E,"><b>-E, --encrypt</b></a></dt>
+  <dd>Enable encryption (default: true)</dd>
+  <dt id="K,"><a class="permalink" href="#K,"><b>-K, --key
+    <i>STR</i></b></a></dt>
+  <dd>SSH/GPG key file path (default: ) Env: <b>ASCII_CHAT_KEY</b></dd>
+  <dt id="password"><a class="permalink" href="#password"><b>--password
+    <i>STR</i></b></a></dt>
+  <dd>Shared password for authentication (default: ) Env:
+      <b>ASCII_CHAT_PASSWORD</b></dd>
+  <dt id="no-encrypt"><a class="permalink" href="#no-encrypt"><b>--no-encrypt</b></a></dt>
+  <dd>Disable encryption (default: false)</dd>
+  <dt id="client-keys"><a class="permalink" href="#client-keys"><b>--client-keys
+    <i>STR</i></b></a></dt>
+  <dd>Allowed client keys whitelist (default: )</dd>
+  <dt id="discovery-expose-ip"><a class="permalink" href="#discovery-expose-ip"><b>--discovery-expose-ip</b></a></dt>
+  <dd>Explicitly allow public IP disclosure in discovery sessions (opt-in only)
+      (default: false)</dd>
+  <dt id="discovery-service-key"><a class="permalink" href="#discovery-service-key"><b>--discovery-service-key
+    <i>STR</i></b></a></dt>
+  <dd>Discovery service public key for verification (SSH/GPG file, HTTPS URL, or
+      github:user/gitlab:user) (default: )</dd>
 </dl>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Client_Address_(Positional_Argument)"><a class="permalink" href="#Client_Address_(Positional_Argument)">Client
-  Address (Positional Argument)</a></h2>
-<p class="Pp">The client accepts an optional positional argument for the server
-    address. This can be a hostname, IPv4 address, or IPv6 address, optionally
-    followed by a port number.</p>
-<p class="Pp"><b>Supported Formats:</b></p>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>(none)</b>: Connect to localhost:27224</li>
-  <li><b>hostname</b>: Connect to hostname:27224</li>
-  <li><b>hostname:port</b>: Connect to hostname:port</li>
-  <li><b>192.168.1.1</b>: Connect to IPv4 address with default port</li>
-  <li><b>192.168.1.1:8080</b>: Connect to IPv4 address with custom port</li>
-  <li><b>::1</b>: Connect to IPv6 address with default port</li>
-  <li><b>[::1]:8080</b>: Connect to IPv6 address with custom port (brackets
-      required with port)</li>
-</ul>
-</div>
-<p class="Pp"><b>Important:</b></p>
-<div class="Bd-indent">You cannot use both a port in the positional argument
-  (e.g., <b>host:port</b>) and the <b>--port</b> flag. If both are provided, the
-  program will exit with an error. Use one or the other, not both.</div>
-<p class="Pp">Hostnames are resolved via DNS lookup during startup.</p>
-<p class="Pp"><b>Examples:</b></p>
-<div class="Bd-indent">
-<pre>ascii-chat client                       # Connect to localhost:27224
-ascii-chat client example.com           # Connect to example.com:27224
-ascii-chat client example.com:8080      # Connect to example.com:8080
-ascii-chat client --port 8080           # Connect to localhost:8080
-ascii-chat client example.com --port 8080  # ERROR: cannot use both</pre>
-</div>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Network_Options_(Client_Only)"><a class="permalink" href="#Network_Options_(Client_Only)">Network
-  Options (Client Only)</a></h2>
+<h2 class="Ss" id="TERMINAL"><a class="permalink" href="#TERMINAL">TERMINAL</a></h2>
 <dl class="Bl-tag">
-  <dt id="reconnect"><a class="permalink" href="#reconnect"><b>--reconnect</b>=<i>VALUE</i></a></dt>
-  <dd>Automatic reconnection behavior after connection loss. Valid values:
-      <b>off</b>, <b>auto</b>, or a number (1-999). Default: <b>auto</b>
-      (unlimited)</dd>
-</dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>off</b> (or 0): Exit immediately on connection failure</li>
-  <li><b>1-999</b>: Retry up to N times before giving up</li>
-  <li><b>auto</b> (or -1): Retry indefinitely until successful</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>Each retry attempt waits 2 seconds before connecting again. Snapshot mode
-      always disables reconnection regardless of this setting.</dd>
-</dl>
-<dl class="Bl-tag">
-  <dt id="scan"><a class="permalink" href="#scan"><b>--scan</b></a></dt>
-  <dd>Scan for ASCII-Chat servers on the local network using mDNS service
-      discovery. Displays available servers and allows you to select one to
-      connect to. Servers must have mDNS advertisement enabled (default).</dd>
-  <dt><b>--acds-server</b>=<i>ADDRESS</i></dt>
-  <dd>ACDS discovery server address to query. Default:
-      <b>discovery-server.ascii-chat.com</b></dd>
-  <dt><b>--acds-port</b>=<i>PORT</i></dt>
-  <dd>ACDS discovery server port. Default: <b>27225</b></dd>
-  <dt><b>--acds-key</b>=<i>KEY</i></dt>
-  <dd>ACDS server public key for trust verification. Accepts:</dd>
-</dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li>Path to SSH Ed25519 public key file</li>
-  <li>HTTPS URL to fetch key from</li>
-  <li>GitHub: github:username</li>
-  <li>GitLab: gitlab:username</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt id="webrtc~2"><a class="permalink" href="#webrtc~2"><b>--webrtc</b></a></dt>
-  <dd>Use WebRTC peer-to-peer mode instead of direct TCP. Default: <b>direct
-      TCP</b></dd>
-  <dt id="prefer"><a class="permalink" href="#prefer"><b>--prefer-webrtc</b></a></dt>
-  <dd>Try WebRTC connection before attempting direct TCP. Useful when direct TCP
-      connections are known to fail due to NAT. Default: try direct TCP
-    first</dd>
-  <dt id="no~5"><a class="permalink" href="#no~5"><b>--no-webrtc</b></a></dt>
-  <dd>Disable WebRTC entirely, use only direct TCP connections. Connection will
-      fail if direct TCP is not possible.</dd>
-  <dt><b>--webrtc-skip-stun</b></dt>
-  <dd>Skip the WebRTC+STUN connection attempt and go straight to TURN relay.
-      Faster connection when STUN is known to fail, but uses more relay
-      bandwidth.</dd>
-  <dt><b>--webrtc-disable-turn</b></dt>
-  <dd>Disable WebRTC+TURN relay connections, use only STUN. Connection will fail
-      if STUN hole punching doesn't work.</dd>
-  <dt><b>--acds-insecure</b></dt>
-  <dd>Skip server key verification when connecting through ACDS. Makes you
-      vulnerable to man-in-the-middle attacks. Requires explicit opt-in for
-      security awareness. Default: <b>server key verification enabled</b></dd>
+  <dt id="x,"><a class="permalink" href="#x,"><b>-x, --width
+    <i>NUM</i></b></a></dt>
+  <dd>Terminal width in characters (default: 110) Env:
+    <b>ASCII_CHAT_WIDTH</b></dd>
+  <dt id="y,"><a class="permalink" href="#y,"><b>-y, --height
+    <i>NUM</i></b></a></dt>
+  <dd>Terminal height in characters (default: 70) Env:
+    <b>ASCII_CHAT_HEIGHT</b></dd>
 </dl>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Terminal_Dimensions_(Client_Only)"><a class="permalink" href="#Terminal_Dimensions_(Client_Only)">Terminal
-  Dimensions (Client Only)</a></h2>
+<h2 class="Ss" id="WEBCAM"><a class="permalink" href="#WEBCAM">WEBCAM</a></h2>
 <dl class="Bl-tag">
-  <dt id="x"><a class="permalink" href="#x"><b>-x</b>,
-    <b>--width</b>=<i>COLS</i></a></dt>
-  <dd>Set terminal width in characters. Disables auto-detection for width.
-      Default: auto-detect from terminal size, fallback to <b>110</b></dd>
-  <dt id="y"><a class="permalink" href="#y"><b>-y</b>,
-    <b>--height</b>=<i>ROWS</i></a></dt>
-  <dd>Set terminal height in characters. Disables auto-detection for height.
-      Default: auto-detect from terminal size, fallback to <b>70</b></dd>
+  <dt id="c,"><a class="permalink" href="#c,"><b>-c, --webcam-index
+    <i>NUM</i></b></a></dt>
+  <dd>Webcam device index (default: 0) Env: <b>ASCII_CHAT_WEBCAM_INDEX</b></dd>
+  <dt id="g,"><a class="permalink" href="#g,"><b>-g, --webcam-flip</b></a></dt>
+  <dd>Flip webcam horizontally (default: true)</dd>
+  <dt id="test-pattern"><a class="permalink" href="#test-pattern"><b>--test-pattern</b></a></dt>
+  <dd>Use test pattern instead of webcam (default: false) Env:
+      <b>WEBCAM_DISABLED</b></dd>
 </dl>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Display_Options_(Client_Only)"><a class="permalink" href="#Display_Options_(Client_Only)">Display
-  Options (Client Only)</a></h2>
+<h2 class="Ss" id="DISPLAY"><a class="permalink" href="#DISPLAY">DISPLAY</a></h2>
 <dl class="Bl-tag">
-  <dt id="color"><a class="permalink" href="#color"><b>--color-mode</b>=<i>MODE</i></a></dt>
-  <dd>Terminal color mode: auto, mono, 16, 256, truecolor. Default: <b>auto</b>
-      (detect terminal capabilities)</dd>
-  <dt id="M"><a class="permalink" href="#M"><b>-M</b>,
-    <b>--render-mode</b>=<i>MODE</i></a></dt>
-  <dd>Rendering mode: foreground (text colored), background (terminal background
-      colored, text color default), half-block (Unicode half-blocks for 2x
-      vertical resolution). Default: <b>foreground</b></dd>
+  <dt id="color-mode"><a class="permalink" href="#color-mode"><b>--color-mode
+    <i>VAL</i></b></a></dt>
+  <dd>Terminal color level (auto, none, 16, 256, truecolor) (default: ) Env:
+      <b>ASCII_CHAT_COLOR_MODE</b></dd>
+  <dt id="M,"><a class="permalink" href="#M,"><b>-M, --render-mode
+    <i>VAL</i></b></a></dt>
+  <dd>Render mode (foreground, background, half-block) (default: ) Env:
+      <b>ASCII_CHAT_RENDER_MODE</b></dd>
+  <dt id="P,"><a class="permalink" href="#P,"><b>-P, --palette
+    <i>VAL</i></b></a></dt>
+  <dd>ASCII palette type (standard, blocks, digital, minimal, cool, custom)
+      (default: ) Env: <b>ASCII_CHAT_PALETTE</b></dd>
+  <dt id="C,"><a class="permalink" href="#C,"><b>-C, --palette-chars
+    <i>VAL</i></b></a></dt>
+  <dd>Custom palette characters (implies --palette=custom) (default: )</dd>
+  <dt id="show-capabilities"><a class="permalink" href="#show-capabilities"><b>--show-capabilities</b></a></dt>
+  <dd>Show terminal capabilities and exit (default: false)</dd>
   <dt id="utf8"><a class="permalink" href="#utf8"><b>--utf8</b></a></dt>
-  <dd>Force enable UTF-8 support for Unicode palette characters. Required for
-      half-block render mode.</dd>
-  <dt id="s"><a class="permalink" href="#s"><b>-s</b>, <b>--stretch</b></a></dt>
-  <dd>Allow image stretching without preserving aspect ratio. Default: preserve
-      aspect ratio (may have letterboxing).</dd>
-  <dt id="P"><a class="permalink" href="#P"><b>-P</b>,
-    <b>--palette</b>=<i>PALETTE</i></a></dt>
-  <dd>ASCII character palette: standard, blocks, digital, minimal, cool, custom.
-      Default: <b>standard</b></dd>
-  <dt id="C"><a class="permalink" href="#C"><b>-C</b>,
-    <b>--palette-chars</b>=<i>CHARS</i></a></dt>
-  <dd>Custom palette characters (implies --palette=custom). Characters should be
-      ordered from darkest to brightest. Example: &quot; .:-=+*#%@&quot;</dd>
-  <dt id="show"><a class="permalink" href="#show"><b>--show-capabilities</b></a></dt>
-  <dd>Print detected terminal capabilities and exit.</dd>
+  <dd>Force UTF-8 support (default: false)</dd>
+  <dt id="s,"><a class="permalink" href="#s,"><b>-s, --stretch</b></a></dt>
+  <dd>Allow aspect ratio distortion (default: false)</dd>
+  <dt id="strip-ansi"><a class="permalink" href="#strip-ansi"><b>--strip-ansi</b></a></dt>
+  <dd>Strip ANSI escape sequences (default: false)</dd>
+  <dt id="fps"><a class="permalink" href="#fps"><b>--fps <i>NUM</i></b></a></dt>
+  <dd>Target framerate (1-144, default: 60) (default: 0) Env:
+      <b>ASCII_CHAT_FPS</b></dd>
 </dl>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Webcam_Options_(Client_Only)"><a class="permalink" href="#Webcam_Options_(Client_Only)">Webcam
-  Options (Client Only)</a></h2>
+<h2 class="Ss" id="SNAPSHOT"><a class="permalink" href="#SNAPSHOT">SNAPSHOT</a></h2>
 <dl class="Bl-tag">
-  <dt id="c"><a class="permalink" href="#c"><b>-c</b>,
-    <b>--webcam-index</b>=<i>INDEX</i></a></dt>
-  <dd>Webcam device index (0-based). Index 0 is the first available device.
-      Default: <b>0</b></dd>
-  <dt id="f"><a class="permalink" href="#f"><b>-f</b>,
-    <b>--webcam-flip</b></a></dt>
-  <dd>Toggle horizontal flipping of webcam image. Default: flipped (like looking
-      in a mirror)</dd>
-  <dt id="test"><a class="permalink" href="#test"><b>--test-pattern</b></a></dt>
-  <dd>Use a test pattern instead of real webcam input. Useful for testing when
-      you don't have a physical webcam connected to the computer.</dd>
-  <dt id="list"><a class="permalink" href="#list"><b>--list-webcams</b></a></dt>
-  <dd>List all available webcam devices and exit. Shows device index and name
-      for each detected camera.</dd>
-  <dt id="fps"><a class="permalink" href="#fps"><b>--fps</b>=<i>FPS</i></a></dt>
-  <dd>Desired frame rate (1-144). Default: <b>60</b></dd>
+  <dt id="S,"><a class="permalink" href="#S,"><b>-S, --snapshot</b></a></dt>
+  <dd>Snapshot mode (one frame and exit) (default: false) Env:
+      <b>ASCII_CHAT_SNAPSHOT</b></dd>
+  <dt id="D,"><a class="permalink" href="#D,"><b>-D, --snapshot-delay
+    <i>NUM</i></b></a></dt>
+  <dd>Snapshot delay in seconds (default: 3.00) Env:
+      <b>ASCII_CHAT_SNAPSHOT_DELAY</b></dd>
 </dl>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Media_File_Options_(Client_Only)"><a class="permalink" href="#Media_File_Options_(Client_Only)">Media
-  File Options (Client Only)</a></h2>
+<h2 class="Ss" id="MEDIA"><a class="permalink" href="#MEDIA">MEDIA</a></h2>
 <dl class="Bl-tag">
-  <dt id="f~2"><a class="permalink" href="#f~2"><b>-f</b>,
-    <b>--file</b>=<i>FILE</i></a></dt>
-  <dd>Stream from a media file instead of webcam. Accepts video files, image
-      files, or stdin (use - for stdin). Supports common formats: MP4, MOV, AVI,
-      PNG, JPEG, etc.</dd>
-  <dt id="l"><a class="permalink" href="#l"><b>-l</b>, <b>--loop</b></a></dt>
-  <dd>Loop media file playback continuously. Only works with regular files, not
-      stdin streams.</dd>
+  <dt id="f,"><a class="permalink" href="#f,"><b>-f, --file
+    <i>STR</i></b></a></dt>
+  <dd>Stream from media file or stdin (use '-' for stdin) (default: )</dd>
+  <dt id="u,"><a class="permalink" href="#u,"><b>-u, --url
+    <i>STR</i></b></a></dt>
+  <dd>Stream from network URL (HTTP/HTTPS/YouTube/RTSP) - takes priority over
+      --file (default: )</dd>
+  <dt id="l,"><a class="permalink" href="#l,"><b>-l, --loop</b></a></dt>
+  <dd>Loop media file playback (not supported for network URLs) (default:
+    false)</dd>
+  <dt id="s,~2"><a class="permalink" href="#s,~2"><b>-s, --seek
+    <i>VAL</i></b></a></dt>
+  <dd>Seek to timestamp before playback (format: seconds, MM:SS, or HH:MM:SS.ms)
+      (default: )</dd>
+  <dt id="cookies-from-browser"><a class="permalink" href="#cookies-from-browser"><b>--cookies-from-browser
+    <i>VAL</i></b></a></dt>
+  <dd>Browser for reading cookies from (chrome, firefox, edge, safari, brave,
+      opera, vivaldi, whale). Use without argument to default to chrome.</dd>
+  <dt id="no-cookies-from-browser"><a class="permalink" href="#no-cookies-from-browser"><b>--no-cookies-from-browser</b></a></dt>
+  <dd>Explicitly disable reading cookies from browser (default: false)</dd>
 </dl>
 </section>
 <section class="Ss">
-<h2 class="Ss" id="Snapshot_Mode"><a class="permalink" href="#Snapshot_Mode">Snapshot
-  Mode</a></h2>
+<h2 class="Ss" id="AUDIO"><a class="permalink" href="#AUDIO">AUDIO</a></h2>
 <dl class="Bl-tag">
-  <dt id="S"><a class="permalink" href="#S"><b>-S</b>,
-    <b>--snapshot</b></a></dt>
-  <dd>Connect to a server (or use mirror mode locally) and print at least one
-      frame, then exit. Some webcams &quot;warm up&quot; and need time, so there
-      is --snapshot-delay to control how long after the camera starts before a
-      frame is sampled. In your terminal you can pipe the stdout of
-      <i>ascii-chat client --snapshot</i> or <i>ascii-chat mirror --snapshot</i>
-      to a file to take a photo. --snapshot is useful for testing, scripting, ai
-      agents like Claude and Cursor, and CI/CD pipelines. Works with both client
-      and mirror modes.</dd>
-</dl>
-<p class="Pp">Connection behavior in snapshot mode:</p>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>No retries</b>: If the connection fails, exits immediately with error
-      code 1 instead of retrying. Ideal for scripting and CI/CD pipelines.</li>
-  <li><b>No reconnection</b>: If the connection is lost during capture, exits
-      with an error instead of attempting to reconnect.</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt id="D"><a class="permalink" href="#D"><b>-D</b>,
-    <b>--snapshot-delay</b>=<i>SECONDS</i></a></dt>
-  <dd>Delay in seconds before capturing snapshot (for frame warmup). Default:
-      <b>3.0</b></dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Piping_and_Redirecting_(Mirror_+_Snapshot)"><a class="permalink" href="#Piping_and_Redirecting_(Mirror_+_Snapshot)">Piping
-  and Redirecting (Mirror + Snapshot)</a></h2>
-<p class="Pp">When you use <b>mirror</b> mode with <b>--snapshot</b>, the output
-    is optimized for piping to other commands or redirecting to files. When
-    stdout is redirected (not a terminal), ascii-chat automatically:</p>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li>Outputs only the final frame (after <b>--snapshot-delay</b> has
-    elapsed)</li>
-  <li>Disables ANSI cursor movement and RLE compression codes</li>
-  <li>Adds a trailing newline after the frame</li>
-</ul>
-</div>
-<p class="Pp">This makes the output clean and suitable for saving to files or
-    processing with other tools. Color escape codes (<b>[0m</b> resets) may
-    still appear at line endings; use <b>--strip-ansi</b> with <b>--color-mode
-    mono</b> for completely plain ASCII output.</p>
-<dl class="Bl-tag">
-  <dt id="strip"><a class="permalink" href="#strip"><b>--strip-ansi</b></a></dt>
-  <dd>Remove ALL ANSI escape sequences from the output, producing completely
-      plain ASCII text with no color codes, cursor movement, or any other escape
-      sequences. This is more aggressive than <b>--color-mode mono</b> which
-      only disables color generation but may still include reset codes.</dd>
-</dl>
-<p class="Pp">Useful when piping to commands that don't understand ANSI codes,
-    or when saving to plain text files.</p>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Audio_Options_(Client_Only)"><a class="permalink" href="#Audio_Options_(Client_Only)">Audio
-  Options (Client Only)</a></h2>
-<dl class="Bl-tag">
-  <dt id="A"><a class="permalink" href="#A"><b>-A</b>, <b>--audio</b></a></dt>
-  <dd>Enable audio capture and streaming.</dd>
-  <dt id="microphone"><a class="permalink" href="#microphone"><b>--microphone-index</b>=<i>INDEX</i></a></dt>
-  <dd>Microphone (audio input) device index. Use <b>-1</b> for system default.
-      Default: <b>-1</b></dd>
-  <dt id="speakers"><a class="permalink" href="#speakers"><b>--speakers-index</b>=<i>INDEX</i></a></dt>
-  <dd>Speakers (audio output) device index. Use <b>-1</b> for system default.
-      Default: <b>-1</b></dd>
-  <dt id="microphone~2"><a class="permalink" href="#microphone~2"><b>--microphone-sensitivity</b>=<i>VALUE</i></a></dt>
-  <dd>Microphone volume multiplier, range <b>0.0</b> (muted) to <b>1.0</b>
-      (original volume). Default: <b>1.0</b> (no change)</dd>
-  <dt id="speakers~2"><a class="permalink" href="#speakers~2"><b>--speakers-volume</b>=<i>VALUE</i></a></dt>
-  <dd>Speaker volume multiplier, range <b>0.0</b> (muted) to <b>1.0</b>
-      (original volume). Default: <b>1.0</b> (no change)</dd>
-  <dt id="list~2"><a class="permalink" href="#list~2"><b>--list-microphones</b></a></dt>
-  <dd>List all available audio input devices (microphones) and exit. Shows
-      device index, name, and capabilities.</dd>
-  <dt id="list~3"><a class="permalink" href="#list~3"><b>--list-speakers</b></a></dt>
-  <dd>List all available audio output devices (speakers) and exit. Shows device
-      index, name, and capabilities.</dd>
-  <dt id="audio"><a class="permalink" href="#audio"><b>--audio-analysis</b></a></dt>
-  <dd>Enable audio analysis for debugging audio quality and levels. Shows
-      detailed analysis of captured and received audio.</dd>
-  <dt id="no~6"><a class="permalink" href="#no~6"><b>--no-audio-playback</b></a></dt>
-  <dd>Disable speaker playback while keeping received audio recording. Useful
-      for debugging audio pipeline issues without hearing playback.</dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Encryption_Options"><a class="permalink" href="#Encryption_Options">Encryption
-  Options</a></h2>
-<dl class="Bl-tag">
-  <dt id="E"><a class="permalink" href="#E"><b>-E</b>, <b>--encrypt</b></a></dt>
-  <dd>Enable packet encryption. Default: <b>enabled</b></dd>
-  <dt id="K"><a class="permalink" href="#K"><b>-K</b>,
-    <b>--key</b>=<i>KEY</i></a></dt>
-  <dd>Key for authentication. Accepts:</dd>
-</dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li>File path: /path/to/key (SSH Ed25519 private key)</li>
-  <li>GitHub: github:username</li>
-  <li>GitLab: gitlab:username</li>
-  <li>GPG: gpg:KEYID (8, 16, or 40-character key ID or fingerprint)</li>
-  <li>Auto-detect: ssh (uses ~/.ssh/id_ed25519)</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>GPG keys require the <b>gpg</b> binary in PATH and use gpg-agent for
-      signing.</dd>
-  <dt></dt>
-  <dd>Implies --encrypt.</dd>
-</dl>
-<dl class="Bl-tag">
-  <dt id="password"><a class="permalink" href="#password"><b>--password</b>[=<i>PASSWORD</i>]</a></dt>
-  <dd>Password for connection encryption. If PASSWORD is not provided, prompts
-      interactively. Both client and server must use the same password. Implies
-      --encrypt.</dd>
-</dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>Length</b>: 8-256 characters (inclusive)</li>
-  <li><b>Characters</b>: Any UTF-8 characters are supported. Cannot contain null
-      bytes.</li>
-  <li><b>Key Derivation</b>: Uses Argon2id (memory-hard, ~64MB RAM, ~0.1s)</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt id="F"><a class="permalink" href="#F"><b>-F</b>,
-    <b>--keyfile</b>=<i>FILE</i></a></dt>
-  <dd>Read encryption key from FILE. Implies --encrypt.</dd>
-  <dt id="no~7"><a class="permalink" href="#no~7"><b>--no-encrypt</b></a></dt>
-  <dd>Explicitly disable encryption, even if keys are available.</dd>
-  <dt><b>--server-key</b>=<i>KEY</i></dt>
-  <dd>(Client only) Expected server public key for identity verification.
-      Prevents man-in-the-middle attacks. Accepts:</dd>
-</dl>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li>Path to .pub file (SSH Ed25519 public key)</li>
-  <li>GitHub: github:username</li>
-  <li>GitLab: gitlab:username</li>
-  <li>GPG: gpg:KEYID (8, 16, or 40-character key ID or fingerprint)</li>
-</ul>
-</div>
-<dl class="Bl-tag">
-  <dt><b>--client-keys</b>=<i>FILE</i></dt>
-  <dd>(Server only) File containing allowed client public keys for
-      authentication. Uses SSH <i>authorized_keys</i> format: one key per line,
-      each line formatted as ssh-ed25519 AAAAC3... [comment]. Also accepts
-      <i>known_hosts</i> format. Only Ed25519 keys are parsed; RSA/ECDSA keys in
-      the file are ignored.</dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Discovery_Server_Options"><a class="permalink" href="#Discovery_Server_Options">Discovery
-  Server Options</a></h2>
-<p class="Pp">The following options apply to <b>discovery-server</b> mode
-  only.</p>
-<dl class="Bl-tag">
-  <dt id="p~2"><a class="permalink" href="#p~2"><b>-p</b>,
-    <b>--port</b>=<i>PORT</i></a></dt>
-  <dd>ACDS server port to listen on. Default: <b>27225</b></dd>
-  <dt id="k"><a class="permalink" href="#k"><b>-k</b>,
-    <b>--key</b>=<i>PATH</i></a></dt>
-  <dd>Path to ACDS identity key file (Ed25519 private key). This is the server's
-      long-term identity key used for signing session data. Default:
-      <b>~/.ascii-chat/acds_identity</b></dd>
-  <dt id="d"><a class="permalink" href="#d"><b>-d</b>,
-    <b>--database</b>=<i>PATH</i></a></dt>
-  <dd>Path to ACDS database file (SQLite). Stores active sessions and their
-      connection information. Default: <b>~/.ascii-chat/acds.db</b></dd>
-  <dt id="S~2"><a class="permalink" href="#S~2"><b>-S</b>,
-    <b>--require-server-identity</b></a></dt>
-  <dd>Require servers to provide signed Ed25519 identity when creating sessions.
-      Prevents anonymous session creation.</dd>
-  <dt id="C~2"><a class="permalink" href="#C~2"><b>-C</b>,
-    <b>--require-client-identity</b></a></dt>
-  <dd>Require clients to provide signed Ed25519 identity when joining sessions.
-      Prevents anonymous session joining.</dd>
-  <dt id="V~2"><a class="permalink" href="#V~2"><b>-V</b>,
-    <b>--require-server-verify</b></a></dt>
-  <dd>ACDS policy: require servers to verify client identity during handshake.
-      Forces all servers using this ACDS to authenticate clients.</dd>
-  <dt id="c~2"><a class="permalink" href="#c~2"><b>-c</b>,
-    <b>--require-client-verify</b></a></dt>
-  <dd>ACDS policy: require clients to verify server identity during handshake.
-      Forces all clients using this ACDS to authenticate servers.</dd>
-  <dt id="stun"><a class="permalink" href="#stun"><b>--stun-servers</b>=<i>URLs</i></a></dt>
-  <dd>Comma-separated list of STUN server URLs for WebRTC NAT traversal.
-      Default: stun:stun.ascii-chat.com:3478,stun:stun.l.google.com:19302</dd>
-  <dt id="turn"><a class="permalink" href="#turn"><b>--turn-servers</b>=<i>URLs</i></a></dt>
-  <dd>Comma-separated list of TURN server URLs for WebRTC relay. Default:
-      turn:turn.ascii-chat.com:3478</dd>
-  <dt id="turn~2"><a class="permalink" href="#turn~2"><b>--turn-username</b>=<i>USERNAME</i></a></dt>
-  <dd>Username for TURN server authentication. Default: <b>ascii</b></dd>
-  <dt id="turn~3"><a class="permalink" href="#turn~3"><b>--turn-credential</b>=<i>CREDENTIAL</i></a></dt>
-  <dd>Credential/password for TURN server authentication.</dd>
-  <dt id="turn~4"><a class="permalink" href="#turn~4"><b>--turn-secret</b>=<i>SECRET</i></a></dt>
-  <dd>Shared secret for dynamic TURN credential generation using HMAC-SHA1.
-      Allows the ACDS to generate time-limited TURN credentials.</dd>
-  <dt id="upnp~2"><a class="permalink" href="#upnp~2"><b>--upnp</b></a></dt>
-  <dd>Enable UPnP/NAT-PMP for automatic router port mapping. Allows the
-      discovery server to be accessible from the internet without manual port
-      forwarding.</dd>
-</dl>
-</section>
-</section>
-<section class="Sh">
-<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-<section class="Ss">
-<h2 class="Ss" id="Configuration_Management"><a class="permalink" href="#Configuration_Management">Configuration
-  Management</a></h2>
-<dl class="Bl-tag">
-  <dt id="Create"><a class="permalink" href="#Create"><b>Create default config
-    file</b></a></dt>
-  <dd>
-    <pre>ascii-chat --config-create</pre>
-  </dd>
-  <dt id="Create~2"><a class="permalink" href="#Create~2"><b>Create config at
-    custom location</b></a></dt>
-  <dd>
-    <pre>ascii-chat --config-create ~/.my-config.toml</pre>
-  </dd>
-  <dt id="Overwrite"><a class="permalink" href="#Overwrite"><b>Overwrite
-    existing config (scripted)</b></a></dt>
-  <dd>
-    <pre>echo &quot;y&quot; | ascii-chat --config-create
-yes | ascii-chat --config-create /tmp/server.toml</pre>
-  </dd>
-  <dt id="Use"><a class="permalink" href="#Use"><b>Use config file with
-    server</b></a></dt>
-  <dd>
-    <pre>ascii-chat --config ~/.ascii-chat/server.toml server</pre>
-  </dd>
-  <dt id="Use~2"><a class="permalink" href="#Use~2"><b>Use config file with
-    client</b></a></dt>
-  <dd>
-    <pre>ascii-chat --config ~/.ascii-chat/client.toml client example.com</pre>
+  <dt id="A,"><a class="permalink" href="#A,"><b>-A, --audio</b></a></dt>
+  <dd>Enable audio streaming (default: false) Env: <b>ASCII_CHAT_AUDIO</b></dd>
+  <dt id="microphone-index"><a class="permalink" href="#microphone-index"><b>--microphone-index
+    <i>NUM</i></b></a></dt>
+  <dd>Microphone device index (-1=default) (default: -1) Env:
+      <b>ASCII_CHAT_MICROPHONE_INDEX</b></dd>
+  <dt id="speakers-index"><a class="permalink" href="#speakers-index"><b>--speakers-index
+    <i>NUM</i></b></a></dt>
+  <dd>Speakers device index (-1=default) (default: -1) Env:
+      <b>ASCII_CHAT_SPEAKERS_INDEX</b></dd>
+  <dt id="microphone-sensitivity"><a class="permalink" href="#microphone-sensitivity"><b>--microphone-sensitivity
+    <i>NUM</i></b></a></dt>
+  <dd>Microphone volume multiplier (0.0-1.0) (default: 1.00) Env:
+      <b>ASCII_CHAT_MICROPHONE_SENSITIVITY</b></dd>
+  <dt id="speakers-volume"><a class="permalink" href="#speakers-volume"><b>--speakers-volume
+    <i>NUM</i></b></a></dt>
+  <dd>Speaker volume multiplier (0.0-1.0) (default: 1.00) Env:
+      <b>ASCII_CHAT_SPEAKERS_VOLUME</b></dd>
+  <dt id="audio-analysis"><a class="permalink" href="#audio-analysis"><b>--audio-analysis</b></a></dt>
+  <dd>Enable audio analysis (debug) (default: false) Env:
+      <b>ASCII_CHAT_AUDIO_ANALYSIS</b></dd>
+  <dt id="no-audio-playback"><a class="permalink" href="#no-audio-playback"><b>--no-audio-playback</b></a></dt>
+  <dd>Disable speaker playback (debug) (default: false) Env:
+      <b>ASCII_CHAT_NO_AUDIO_PLAYBACK</b></dd>
+  <dt id="encode-audio"><a class="permalink" href="#encode-audio"><b>--encode-audio</b></a></dt>
+  <dd>Enable Opus audio encoding (default: true) Env:
+      <b>ASCII_CHAT_ENCODE_AUDIO</b></dd>
+  <dt id="no-encode-audio"><a class="permalink" href="#no-encode-audio"><b>--no-encode-audio</b></a></dt>
+  <dd>Disable Opus audio encoding (default: false) Env:
+      <b>ASCII_CHAT_NO_ENCODE_AUDIO</b>
+    <p class="Pp"></p>
   </dd>
 </dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Basic_Usage"><a class="permalink" href="#Basic_Usage">Basic
-  Usage</a></h2>
-<dl class="Bl-tag">
-  <dt id="Start"><a class="permalink" href="#Start"><b>Start a basic
-    server</b></a></dt>
-  <dd>
-    <pre>ascii-chat server</pre>
-  </dd>
-  <dt id="Connect"><a class="permalink" href="#Connect"><b>Connect to a local
-    server</b></a></dt>
-  <dd>
-    <pre>ascii-chat client</pre>
-  </dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Connect_to_a_remote_server_with_truecolor"><a class="permalink" href="#Connect_to_a_remote_server_with_truecolor">Connect
-  to a remote server with truecolor</a></h2>
-<pre>ascii-chat client example.com --color-mode truecolor</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Connect_to_a_server_with_custom_port"><a class="permalink" href="#Connect_to_a_server_with_custom_port">Connect
-  to a server with custom port</a></h2>
-<pre>ascii-chat client example.com:8080</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Connect_via_IPv6_address"><a class="permalink" href="#Connect_via_IPv6_address">Connect
-  via IPv6 address</a></h2>
-<pre>ascii-chat client ::1
-ascii-chat client [::1]:8080</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Server_with_custom_client_limit"><a class="permalink" href="#Server_with_custom_client_limit">Server
-  with custom client limit</a></h2>
-<pre>ascii-chat server --max-clients 20</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Server_with_higher_compression_for_bandwidth_savings"><a class="permalink" href="#Server_with_higher_compression_for_bandwidth_savings">Server
-  with higher compression for bandwidth savings</a></h2>
-<pre>ascii-chat server --compression-level 5</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Server_without_compression_(for_local_testing)"><a class="permalink" href="#Server_without_compression_(for_local_testing)">Server
-  without compression (for local testing)</a></h2>
-<pre>ascii-chat server --no-compress</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Client_with_automatic_reconnection"><a class="permalink" href="#Client_with_automatic_reconnection">Client
-  with automatic reconnection</a></h2>
-<pre>ascii-chat client example.com --reconnect auto</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Client_with_limited_reconnection_attempts"><a class="permalink" href="#Client_with_limited_reconnection_attempts">Client
-  with limited reconnection attempts</a></h2>
-<pre>ascii-chat client example.com --reconnect 5</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Server_with_encryption_using_SSH_key"><a class="permalink" href="#Server_with_encryption_using_SSH_key">Server
-  with encryption using SSH key</a></h2>
-<pre>ascii-chat server --key ~/.ssh/id_ed25519</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Client_with_server_verification"><a class="permalink" href="#Client_with_server_verification">Client
-  with server verification</a></h2>
-<pre>ascii-chat client example.com --server-key ~/.ssh/server.pub</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Capture_a_single_ASCII_snapshot"><a class="permalink" href="#Capture_a_single_ASCII_snapshot">Capture
-  a single ASCII snapshot</a></h2>
-<pre>ascii-chat client --snapshot --color-mode truecolor</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="View_webcam_locally_in_mirror_mode"><a class="permalink" href="#View_webcam_locally_in_mirror_mode">View
-  webcam locally in mirror mode</a></h2>
-<pre>ascii-chat mirror --color-mode truecolor</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Capture_local_webcam_snapshot_(no_server)"><a class="permalink" href="#Capture_local_webcam_snapshot_(no_server)">Capture
-  local webcam snapshot (no server)</a></h2>
-<pre>ascii-chat mirror --snapshot --snapshot-delay 1.0</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Save_ASCII_selfie_to_a_file"><a class="permalink" href="#Save_ASCII_selfie_to_a_file">Save
-  ASCII selfie to a file</a></h2>
-<pre>ascii-chat mirror --snapshot --snapshot-delay 2 &gt; selfie.txt</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Save_ASCII_selfie_with_no_ANSI_codes_(plain_text)"><a class="permalink" href="#Save_ASCII_selfie_with_no_ANSI_codes_(plain_text)">Save
-  ASCII selfie with no ANSI codes (plain text)</a></h2>
-<pre>ascii-chat mirror --snapshot --strip-ansi &gt; selfie.txt</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Pipe_ASCII_art_to_another_command"><a class="permalink" href="#Pipe_ASCII_art_to_another_command">Pipe
-  ASCII art to another command</a></h2>
-<pre>ascii-chat mirror --snapshot | head -10</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Instant_capture_(no_delay)"><a class="permalink" href="#Instant_capture_(no_delay)">Instant
-  capture (no delay)</a></h2>
-<pre>ascii-chat mirror --snapshot --snapshot-delay 0 &gt; instant.txt</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Test_without_webcam_using_test_pattern"><a class="permalink" href="#Test_without_webcam_using_test_pattern">Test
-  without webcam using test pattern</a></h2>
-<pre>ascii-chat client --test-pattern --color-mode truecolor</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Use_half-block_rendering_for_higher_resolution"><a class="permalink" href="#Use_half-block_rendering_for_higher_resolution">Use
-  half-block rendering for higher resolution</a></h2>
-<pre>ascii-chat client --render-mode half-block --utf8</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Use_GitHub_key_for_authentication"><a class="permalink" href="#Use_GitHub_key_for_authentication">Use
-  GitHub key for authentication</a></h2>
-<pre>ascii-chat client example.com --key github:username</pre>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Stream_video_file_as_ASCII_art"><a class="permalink" href="#Stream_video_file_as_ASCII_art">Stream
-  video file as ASCII art</a></h2>
-<pre>ascii-chat mirror --file video.mp4 --color-mode truecolor</pre>
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>Plays an MP4 video file as ASCII art. Works with any video format
-      supported by FFmpeg (MP4, MOV, AVI, MKV, WebM).</dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Play_animated_GIF_as_ASCII"><a class="permalink" href="#Play_animated_GIF_as_ASCII">Play
-  animated GIF as ASCII</a></h2>
-<pre>ascii-chat mirror --file animation.gif --loop</pre>
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>Loops an animated GIF continuously. Great for testing or creating looping
-      ASCII animations.</dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Display_image_as_ASCII"><a class="permalink" href="#Display_image_as_ASCII">Display
-  image as ASCII</a></h2>
-<pre>ascii-chat mirror --file photo.jpg --snapshot</pre>
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>Converts a JPEG or PNG image to ASCII art. Useful for one-off ASCII
-      conversions of photos.</dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Stream_audio_visualized_as_ASCII"><a class="permalink" href="#Stream_audio_visualized_as_ASCII">Stream
-  audio visualized as ASCII</a></h2>
-<pre>ascii-chat mirror --file song.mp3 --test-pattern</pre>
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>Plays audio from an MP3 file. Use with <b>--test-pattern</b> to show a
-      visual pattern while audio plays. Note: Pure audio files don't have video
-      frames, so combine with test pattern or another visual source.</dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Pipe_video_through_stdin"><a class="permalink" href="#Pipe_video_through_stdin">Pipe
-  video through stdin</a></h2>
-<pre>cat video.mp4 | ascii-chat mirror --file -</pre>
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>Streams video from stdin. Use - as the filename to read from standard
-      input. Useful for chaining with other commands or streaming from network
-      sources.</dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="Use_Unicode_block_characters_for_higher_contrast"><a class="permalink" href="#Use_Unicode_block_characters_for_higher_contrast">Use
-  Unicode block characters for higher contrast</a></h2>
-<pre>ascii-chat client --palette blocks --utf8</pre>
 </section>
 </section>
 <section class="Sh">
@@ -941,6 +452,7 @@ ascii-chat client [::1]:8080</pre>
 </dl>
 <p class="Pp">Use <b>--utf8</b> to force UTF-8 support when using Unicode
     palettes.</p>
+<p class="Pp"></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="RENDER_MODES"><a class="permalink" href="#RENDER_MODES">RENDER
@@ -956,37 +468,27 @@ ascii-chat client [::1]:8080</pre>
   <dt id="half"><a class="permalink" href="#half"><b>half-block</b></a></dt>
   <dd>Uses Unicode half-block characters (&#x2580;, &#x2584;) to achieve 2x
       vertical resolution. Each character cell displays two pixels (top and
-      bottom halves). Requires UTF-8 support (<b>--utf8</b>).</dd>
+      bottom halves). Requires UTF-8 support (<b>--utf8</b>).
+    <p class="Pp"></p>
+  </dd>
 </dl>
 </section>
 <section class="Sh">
-<h1 class="Sh" id="CONFIGURATION"><a class="permalink" href="#CONFIGURATION">CONFIGURATION</a></h1>
+<h1 class="Sh" id="CONFIGURATION~2"><a class="permalink" href="#CONFIGURATION~2">CONFIGURATION</a></h1>
 <p class="Pp">Configuration can be stored in a TOML file at the default location
     (see FILES section) or specified via <b>--config</b>.</p>
 <p class="Pp"><b>Configuration Priority:</b></p>
 <div class="Bd-indent">Command-line arguments override config file values.
   Config file values override default values.</div>
-<p class="Pp"><b>Configuration Sections:</b></p>
-<div class="Bd-indent">
-<ul class="Bl-bullet">
-  <li><b>[network]</b>: port</li>
-  <li><b>[server]</b>: bind_ipv4, bind_ipv6</li>
-  <li><b>[client]</b>: address (default server to connect to), width, height,
-      webcam_index, webcam_flip, color_mode, render_mode, fps, stretch, quiet,
-      snapshot_mode, snapshot_delay, test_pattern, show_capabilities,
-    force_utf8</li>
-  <li><b>[audio]</b>: enabled, microphone_index, speakers_index,
-      microphone_sensitivity, speakers_volume</li>
-  <li><b>[palette]</b>: type, chars</li>
-  <li><b>[crypto]</b>: encrypt_enabled, key, password, keyfile, no_encrypt,
-      server_key (client), client_keys (server)</li>
-  <li><b>[logging]</b>: log_file</li>
-</ul>
-</div>
+<p class="Pp">To see a sample configuration file with all available options,
+    run:
+  <br/>
+  <b>ascii-chat --config-create /tmp/ascii-chat.toml</b></p>
 <p class="Pp"><b>Security Warning:</b> While passwords can be stored in the
     config file, this is discouraged. Use <b>--password</b> interactively or
     environment variables instead. Secure your config file permissions if it
     contains sensitive data.</p>
+<p class="Pp"></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="LIMITS"><a class="permalink" href="#LIMITS">LIMITS</a></h1>
@@ -1001,7 +503,9 @@ ascii-chat client [::1]:8080</pre>
   <dd>Clients are arranged in an automatically-sized grid (e.g., 2x2, 3x3). The
       grid size adjusts based on the number of connected clients.</dd>
   <dt id="Frame"><a class="permalink" href="#Frame"><b>Frame Rate</b></a></dt>
-  <dd>Default 60 FPS. Configurable from 1-144 FPS.</dd>
+  <dd>Default 60 FPS. Configurable from 1-144 FPS.
+    <p class="Pp"></p>
+  </dd>
 </dl>
 </section>
 <section class="Sh">
@@ -1017,20 +521,76 @@ ascii-chat client [::1]:8080</pre>
   <dd>Set logging verbosity level. Accepts either numeric (0-5) or string
       values:
     <br/>
-    0/DEV, 1/DEBUG, 2/INFO, 3/WARN, 4/ERROR, 5/FATAL.
-    <br/>
-    Takes precedence over <b>--log-level</b> command-line argument and build
-      type defaults.</dd>
-  <dt id="TERM"><a class="permalink" href="#TERM"><b>TERM</b></a></dt>
-  <dd>Terminal type, used for auto-detecting color capabilities.</dd>
-  <dt id="COLORTERM"><a class="permalink" href="#COLORTERM"><b>COLORTERM</b></a></dt>
-  <dd>Color terminal indicator. Set to &quot;truecolor&quot; or
-      &quot;24bit&quot; for truecolor support.</dd>
+    0/DEV, 1/DEBUG, 2/INFO, 3/WARN, 4/ERROR, 5/FATAL.</dd>
+  <dt id="ASCII_CHAT_LOG_FILE"><a class="permalink" href="#ASCII_CHAT_LOG_FILE"><b>ASCII_CHAT_LOG_FILE</b></a></dt>
+  <dd>Redirect logs to FILE</dd>
+  <dt id="ASCII_CHAT_PORT"><a class="permalink" href="#ASCII_CHAT_PORT"><b>ASCII_CHAT_PORT</b></a></dt>
+  <dd>Server port</dd>
+  <dt id="ASCII_CHAT_MAX_CLIENTS"><a class="permalink" href="#ASCII_CHAT_MAX_CLIENTS"><b>ASCII_CHAT_MAX_CLIENTS</b></a></dt>
+  <dd>Maximum concurrent clients</dd>
+  <dt id="ASCII_CHAT_COMPRESSION_LEVEL"><a class="permalink" href="#ASCII_CHAT_COMPRESSION_LEVEL"><b>ASCII_CHAT_COMPRESSION_LEVEL</b></a></dt>
+  <dd>zstd compression level (1-9)</dd>
+  <dt id="ASCII_CHAT_NO_COMPRESS"><a class="permalink" href="#ASCII_CHAT_NO_COMPRESS"><b>ASCII_CHAT_NO_COMPRESS</b></a></dt>
+  <dd>Disable compression</dd>
+  <dt id="ASCII_CHAT_KEY"><a class="permalink" href="#ASCII_CHAT_KEY"><b>ASCII_CHAT_KEY</b></a></dt>
+  <dd>SSH/GPG key file path</dd>
+  <dt id="ASCII_CHAT_PASSWORD"><a class="permalink" href="#ASCII_CHAT_PASSWORD"><b>ASCII_CHAT_PASSWORD</b></a></dt>
+  <dd>Shared password for authentication</dd>
+  <dt id="ASCII_CHAT_UPNP"><a class="permalink" href="#ASCII_CHAT_UPNP"><b>ASCII_CHAT_UPNP</b></a></dt>
+  <dd>Enable UPnP/NAT-PMP for automatic router port mapping (direct TCP for
+      ~70%% of home users)</dd>
+  <dt id="ASCII_CHAT_WIDTH"><a class="permalink" href="#ASCII_CHAT_WIDTH"><b>ASCII_CHAT_WIDTH</b></a></dt>
+  <dd>Terminal width in characters</dd>
+  <dt id="ASCII_CHAT_HEIGHT"><a class="permalink" href="#ASCII_CHAT_HEIGHT"><b>ASCII_CHAT_HEIGHT</b></a></dt>
+  <dd>Terminal height in characters</dd>
+  <dt id="ASCII_CHAT_WEBCAM_INDEX"><a class="permalink" href="#ASCII_CHAT_WEBCAM_INDEX"><b>ASCII_CHAT_WEBCAM_INDEX</b></a></dt>
+  <dd>Webcam device index</dd>
   <dt id="WEBCAM_DISABLED"><a class="permalink" href="#WEBCAM_DISABLED"><b>WEBCAM_DISABLED</b></a></dt>
-  <dd>Automatically enables test pattern mode when set to &quot;1&quot;,
-      &quot;true&quot;, &quot;yes&quot;, or &quot;on&quot;. Useful for CI/CD
-      pipelines and testing environments without a physical webcam. Equivalent
-      to passing <b>--test-pattern</b>.</dd>
+  <dd>Use test pattern instead of webcam</dd>
+  <dt id="ASCII_CHAT_COLOR_MODE"><a class="permalink" href="#ASCII_CHAT_COLOR_MODE"><b>ASCII_CHAT_COLOR_MODE</b></a></dt>
+  <dd>Terminal color level (auto, none, 16, 256, truecolor)</dd>
+  <dt id="ASCII_CHAT_RENDER_MODE"><a class="permalink" href="#ASCII_CHAT_RENDER_MODE"><b>ASCII_CHAT_RENDER_MODE</b></a></dt>
+  <dd>Render mode (foreground, background, half-block)</dd>
+  <dt id="ASCII_CHAT_PALETTE"><a class="permalink" href="#ASCII_CHAT_PALETTE"><b>ASCII_CHAT_PALETTE</b></a></dt>
+  <dd>ASCII palette type (standard, blocks, digital, minimal, cool, custom)</dd>
+  <dt id="ASCII_CHAT_FPS"><a class="permalink" href="#ASCII_CHAT_FPS"><b>ASCII_CHAT_FPS</b></a></dt>
+  <dd>Target framerate (1-144, default: 60)</dd>
+  <dt id="ASCII_CHAT_SNAPSHOT"><a class="permalink" href="#ASCII_CHAT_SNAPSHOT"><b>ASCII_CHAT_SNAPSHOT</b></a></dt>
+  <dd>Snapshot mode (one frame and exit)</dd>
+  <dt id="ASCII_CHAT_SNAPSHOT_DELAY"><a class="permalink" href="#ASCII_CHAT_SNAPSHOT_DELAY"><b>ASCII_CHAT_SNAPSHOT_DELAY</b></a></dt>
+  <dd>Snapshot delay in seconds</dd>
+  <dt id="ASCII_CHAT_AUDIO"><a class="permalink" href="#ASCII_CHAT_AUDIO"><b>ASCII_CHAT_AUDIO</b></a></dt>
+  <dd>Enable audio streaming</dd>
+  <dt id="ASCII_CHAT_MICROPHONE_INDEX"><a class="permalink" href="#ASCII_CHAT_MICROPHONE_INDEX"><b>ASCII_CHAT_MICROPHONE_INDEX</b></a></dt>
+  <dd>Microphone device index (-1=default)</dd>
+  <dt id="ASCII_CHAT_SPEAKERS_INDEX"><a class="permalink" href="#ASCII_CHAT_SPEAKERS_INDEX"><b>ASCII_CHAT_SPEAKERS_INDEX</b></a></dt>
+  <dd>Speakers device index (-1=default)</dd>
+  <dt id="ASCII_CHAT_MICROPHONE_SENSITIVITY"><a class="permalink" href="#ASCII_CHAT_MICROPHONE_SENSITIVITY"><b>ASCII_CHAT_MICROPHONE_SENSITIVITY</b></a></dt>
+  <dd>Microphone volume multiplier (0.0-1.0)</dd>
+  <dt id="ASCII_CHAT_SPEAKERS_VOLUME"><a class="permalink" href="#ASCII_CHAT_SPEAKERS_VOLUME"><b>ASCII_CHAT_SPEAKERS_VOLUME</b></a></dt>
+  <dd>Speaker volume multiplier (0.0-1.0)</dd>
+  <dt id="ASCII_CHAT_AUDIO_ANALYSIS"><a class="permalink" href="#ASCII_CHAT_AUDIO_ANALYSIS"><b>ASCII_CHAT_AUDIO_ANALYSIS</b></a></dt>
+  <dd>Enable audio analysis (debug)</dd>
+  <dt id="ASCII_CHAT_NO_AUDIO_PLAYBACK"><a class="permalink" href="#ASCII_CHAT_NO_AUDIO_PLAYBACK"><b>ASCII_CHAT_NO_AUDIO_PLAYBACK</b></a></dt>
+  <dd>Disable speaker playback (debug)</dd>
+  <dt id="ASCII_CHAT_ENCODE_AUDIO"><a class="permalink" href="#ASCII_CHAT_ENCODE_AUDIO"><b>ASCII_CHAT_ENCODE_AUDIO</b></a></dt>
+  <dd>Enable Opus audio encoding</dd>
+  <dt id="ASCII_CHAT_NO_ENCODE_AUDIO"><a class="permalink" href="#ASCII_CHAT_NO_ENCODE_AUDIO"><b>ASCII_CHAT_NO_ENCODE_AUDIO</b></a></dt>
+  <dd>Disable Opus audio encoding</dd>
+  <dt id="ASCII_CHAT_STUN_SERVERS"><a class="permalink" href="#ASCII_CHAT_STUN_SERVERS"><b>ASCII_CHAT_STUN_SERVERS</b></a></dt>
+  <dd>Comma-separated STUN server URLs (debug/test only - ACDS provides in
+      production)</dd>
+  <dt id="ASCII_CHAT_TURN_SERVERS"><a class="permalink" href="#ASCII_CHAT_TURN_SERVERS"><b>ASCII_CHAT_TURN_SERVERS</b></a></dt>
+  <dd>Comma-separated TURN server URLs (debug/test only - ACDS provides in
+      production)</dd>
+  <dt id="ASCII_CHAT_TURN_USERNAME"><a class="permalink" href="#ASCII_CHAT_TURN_USERNAME"><b>ASCII_CHAT_TURN_USERNAME</b></a></dt>
+  <dd>TURN authentication username (debug/test only - ACDS provides in
+      production)</dd>
+  <dt id="ASCII_CHAT_TURN_CREDENTIAL"><a class="permalink" href="#ASCII_CHAT_TURN_CREDENTIAL"><b>ASCII_CHAT_TURN_CREDENTIAL</b></a></dt>
+  <dd>TURN authentication credential (debug/test only - ACDS provides in
+      production)
+    <p class="Pp"></p>
+  </dd>
 </dl>
 </section>
 <section class="Sh">
@@ -1058,7 +618,9 @@ ascii-chat client [::1]:8080</pre>
       or shared configurations.</dd>
   <dt><i>/usr/local/etc/ascii-chat/config.toml</i></dt>
   <dd>Alternative system-wide configuration file (BSD-style path). Used for
-      locally-installed configurations.</dd>
+      locally-installed configurations.
+    <p class="Pp"></p>
+  </dd>
 </dl>
 </section>
 <section class="Sh">
@@ -1088,11 +650,13 @@ ascii-chat client [::1]:8080</pre>
   <dt><b>80-90</b></dt>
   <dd>Runtime errors (thread, buffer, display, invalid state/param).</dd>
   <dt><b>100-104</b></dt>
-  <dd>Signal and compression errors.</dd>
+  <dd>Signal and compression errors.
+    <p class="Pp"></p>
+  </dd>
 </dl>
 </section>
 <section class="Sh">
-<h1 class="Sh" id="SECURITY"><a class="permalink" href="#SECURITY">SECURITY</a></h1>
+<h1 class="Sh" id="SECURITY~2"><a class="permalink" href="#SECURITY~2">SECURITY</a></h1>
 <p class="Pp"><b>ascii-chat</b> supports end-to-end encryption using modern
     cryptographic algorithms:</p>
 <ul class="Bl-bullet">
@@ -1115,6 +679,7 @@ ascii-chat client [::1]:8080</pre>
 <p class="Pp">If a server's key changes (possible MITM attack), the connection
     is rejected with a warning. To connect anyway, remove the server entry from
     <i>known_hosts</i> and reconnect.</p>
+<p class="Pp"></p>
 </section>
 </section>
 <section class="Sh">
@@ -1164,16 +729,20 @@ ascii-chat client [::1]:8080</pre>
       at all.</li>
   <li><b>Encrypted Keys</b>: Encrypted private keys (SSH/GPG) work well with
       either ssh-agent/gpg-agent or the $ASCII_CHAT_KEY_PASSWORD environment
-      variable. The passphrase prompt only works in interactive terminals.</li>
+      variable. The passphrase prompt only works in interactive terminals.
+    <p class="Pp"></p>
+  </li>
 </ul>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="BUGS"><a class="permalink" href="#BUGS">BUGS</a></h1>
 <p class="Pp">Report bugs at: https://github.com/zfogg/ascii-chat/issues</p>
+<p class="Pp"></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="AUTHOR"><a class="permalink" href="#AUTHOR">AUTHOR</a></h1>
 <p class="Pp">Zachary Fogg &lt;me@zfo.gg&gt;</p>
+<p class="Pp"></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="SEE_ALSO"><a class="permalink" href="#SEE_ALSO">SEE
@@ -1194,8 +763,8 @@ ascii-chat client [::1]:8080</pre>
 </div>
 <table class="foot">
   <tr>
-    <td class="foot-date">December 2025</td>
-    <td class="foot-os">ascii-chat 0.7.1</td>
+    <td class="foot-date">January 2026</td>
+    <td class="foot-os">ascii-chat</td>
   </tr>
 </table>
 </body>
