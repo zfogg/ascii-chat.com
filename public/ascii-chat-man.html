@@ -74,7 +74,7 @@
   <dd>Start a new session (share the session string)</dd>
   <dt><b>ascii-chat &lt;session-string&gt; [options...]</b></dt>
   <dd>Join an existing session</dd>
-  <dt><b>ascii-chat [options...]</b></dt>
+  <dt><b>ascii-chat &lt;mode&gt; [options...]</b></dt>
   <dd>Run in a specific mode</dd>
   <dt><b>ascii-chat server [bind-address] [bind-address]
     [mode-options...]</b></dt>
@@ -85,7 +85,10 @@
   <dd>View local webcam or media file as ASCII art</dd>
   <dt><b>ascii-chat discovery-service [bind-address] [bind-address]
     [mode-options...]</b></dt>
-  <dd>Start discovery service (can specify 0-2 bind addresses for IPv4/IPv6)
+  <dd>Start discovery service (can specify 0-2 bind addresses for
+    IPv4/IPv6)</dd>
+  <dt><b>ascii-chat discovery &lt;session-string&gt; [mode-options...]</b></dt>
+  <dd>Join a discovery session (use session string from initiator)
     <p class="Pp"></p>
   </dd>
 </dl>
@@ -95,14 +98,27 @@
 <dl class="Bl-tag">
   <dt id="ascii-chat"><a class="permalink" href="#ascii-chat"><b>ascii-chat</b></a></dt>
   <dd>Start new session (share the session string)</dd>
-  <dt><b>ascii-chat swift-river-mountain</b></dt>
+  <dt><b>ascii-chat bright-star-river</b></dt>
   <dd>Join session with session string</dd>
-  <dt id="ascii-chat~2"><a class="permalink" href="#ascii-chat~2"><b>ascii-chat</b></a></dt>
+  <dt><b>ascii-chat calm-river-cloud</b></dt>
+  <dd>Join a session using the session string</dd>
+  <dt><b>ascii-chat happy-cloud-garden --color</b></dt>
+  <dd>Join session with color support</dd>
+  <dt><b>ascii-chat sweet-garden-haven --discovery-server
+    discovery.example.com</b></dt>
+  <dd>Join session via custom discovery server</dd>
+  <dt><b>ascii-chat vibrant-ocean-light -f video.mp4</b></dt>
+  <dd>Join session and stream from local video file</dd>
+  <dt><b>ascii-chat bright-star-dream --url
+    'https://www.youtube.com/watch?v=tQSbms5MDvY'</b></dt>
+  <dd>Join session and stream from YouTube video</dd>
+  <dt><b>ascii-chat dream-path-moon -f '-'</b></dt>
+  <dd>Join session and stream media from stdin (cat file.mov | ascii-chat ... -f
+      '-')</dd>
+  <dt><b>ascii-chat lucky-light-ocean --palette-chars '@%#*+=-:. '</b></dt>
+  <dd>Join session with custom ASCII palette characters</dd>
+  <dt><b>ascii-chat server</b></dt>
   <dd>Run as dedicated server</dd>
-  <dt><b>ascii-chat example.com</b></dt>
-  <dd>Connect to specific server</dd>
-  <dt id="ascii-chat~3"><a class="permalink" href="#ascii-chat~3"><b>ascii-chat</b></a></dt>
-  <dd>Preview local webcam as ASCII</dd>
   <dt><b>ascii-chat server</b></dt>
   <dd>Start on localhost (127.0.0.1 and ::1)</dd>
   <dt><b>ascii-chat server 0.0.0.0</b></dt>
@@ -113,6 +129,8 @@
   <dd>Start on custom port</dd>
   <dt><b>ascii-chat server --key ~/.ssh/id_ed25519 --discovery</b></dt>
   <dd>Start with identity key and discovery registration</dd>
+  <dt><b>ascii-chat client example.com</b></dt>
+  <dd>Connect to specific server</dd>
   <dt><b>ascii-chat client</b></dt>
   <dd>Connect to localhost</dd>
   <dt><b>ascii-chat client example.com</b></dt>
@@ -131,6 +149,8 @@
   <dd>Use custom ASCII palette characters</dd>
   <dt><b>ascii-chat client --snapshot</b></dt>
   <dd>Capture single frame and exit</dd>
+  <dt><b>ascii-chat mirror</b></dt>
+  <dd>Preview local webcam as ASCII</dd>
   <dt><b>ascii-chat mirror</b></dt>
   <dd>View local webcam</dd>
   <dt><b>ascii-chat mirror --color-mode mono</b></dt>
@@ -162,25 +182,6 @@
 <section class="Sh">
 <h1 class="Sh" id="OPTIONS"><a class="permalink" href="#OPTIONS">OPTIONS</a></h1>
 <section class="Ss">
-<h2 class="Ss" id="GENERAL"><a class="permalink" href="#GENERAL">GENERAL</a></h2>
-<dl class="Bl-tag">
-  <dt id="help"><a class="permalink" href="#help"><b>--help</b></a></dt>
-  <dd>Show this help (default: false)</dd>
-  <dt id="version"><a class="permalink" href="#version"><b>--version</b></a></dt>
-  <dd>Show version information (default: false)</dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="CONFIGURATION"><a class="permalink" href="#CONFIGURATION">CONFIGURATION</a></h2>
-<dl class="Bl-tag">
-  <dt id="config"><a class="permalink" href="#config"><b>--config
-    <i>STR</i></b></a></dt>
-  <dd>Load configuration from FILE (default: )</dd>
-  <dt id="config-create"><a class="permalink" href="#config-create"><b>--config-create</b></a></dt>
-  <dd>Create default configuration file and exit</dd>
-</dl>
-</section>
-<section class="Ss">
 <h2 class="Ss" id="LOGGING"><a class="permalink" href="#LOGGING">LOGGING</a></h2>
 <dl class="Bl-tag">
   <dt id="L,"><a class="permalink" href="#L,"><b>-L, --log-file
@@ -188,104 +189,15 @@
   <dd>Redirect logs to FILE (default: ) Env: <b>ASCII_CHAT_LOG_FILE</b></dd>
   <dt id="log-level"><a class="permalink" href="#log-level"><b>--log-level
     <i>VAL</i></b></a></dt>
-  <dd>Set log level: dev, debug, info, warn, error, fatal (default: )</dd>
+  <dd>Set log level: dev, debug, info, warn, error, fatal (default: ) Env:
+      <b>ASCII_CHAT_LOG_LEVEL</b></dd>
   <dt id="V,"><a class="permalink" href="#V,"><b>-V, --verbose
     <i>VAL</i></b></a></dt>
-  <dd>Increase log verbosity (stackable: -VV, -VVV, or --verbose) (default:
-    )</dd>
+  <dd>Increase log verbosity (stackable: -VV, -VVV, or --verbose) Env:
+      <b>ASCII_CHAT_VERBOSE</b></dd>
   <dt id="q,"><a class="permalink" href="#q,"><b>-q, --quiet</b></a></dt>
-  <dd>Disable console logging (log to file only) (default: false)</dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="NETWORK"><a class="permalink" href="#NETWORK">NETWORK</a></h2>
-<dl class="Bl-tag">
-  <dt id="prefer-webrtc"><a class="permalink" href="#prefer-webrtc"><b>--prefer-webrtc</b></a></dt>
-  <dd>Try WebRTC before Direct TCP (useful when Direct TCP fails) (default:
-      false)</dd>
-  <dt id="no-webrtc"><a class="permalink" href="#no-webrtc"><b>--no-webrtc</b></a></dt>
-  <dd>Disable WebRTC, use Direct TCP only (default: false)</dd>
-  <dt id="webrtc-skip-stun"><a class="permalink" href="#webrtc-skip-stun"><b>--webrtc-skip-stun</b></a></dt>
-  <dd>Skip WebRTC+STUN stage, go straight to TURN relay (default: false)</dd>
-  <dt id="webrtc-disable-turn"><a class="permalink" href="#webrtc-disable-turn"><b>--webrtc-disable-turn</b></a></dt>
-  <dd>Disable WebRTC+TURN relay, use STUN only (default: false)</dd>
-  <dt id="p,"><a class="permalink" href="#p,"><b>-p, --port
-    <i>STR</i></b></a></dt>
-  <dd>Server port (default: 27224) Env: <b>ASCII_CHAT_PORT</b></dd>
-  <dt id="max-clients"><a class="permalink" href="#max-clients"><b>--max-clients
-    <i>NUM</i></b></a></dt>
-  <dd>Maximum concurrent clients (default: 9) Env:
-    <b>ASCII_CHAT_MAX_CLIENTS</b></dd>
-  <dt id="no-audio-mixer"><a class="permalink" href="#no-audio-mixer"><b>--no-audio-mixer</b></a></dt>
-  <dd>Disable audio mixer (debug) (default: false)</dd>
-  <dt id="discovery"><a class="permalink" href="#discovery"><b>--discovery</b></a></dt>
-  <dd>Enable discovery service registration (requires --key or --password or
-      --discovery-expose-ip) (default: false)</dd>
-  <dt><b>--discovery-server <i>STR</i></b></dt>
-  <dd>Discovery service address (default: discovery-service.ascii-chat.com)</dd>
-  <dt id="discovery-port"><a class="permalink" href="#discovery-port"><b>--discovery-port
-    <i>NUM</i></b></a></dt>
-  <dd>Discovery service port (default: 27225)</dd>
-  <dt id="upnp"><a class="permalink" href="#upnp"><b>--upnp</b></a></dt>
-  <dd>Enable UPnP/NAT-PMP for automatic router port mapping (direct TCP for
-      ~70%% of home users) (default: false) Env: <b>ASCII_CHAT_UPNP</b></dd>
-  <dt id="no-mdns-advertise"><a class="permalink" href="#no-mdns-advertise"><b>--no-mdns-advertise</b></a></dt>
-  <dd>Disable mDNS service advertisement on local network (LAN discovery won't
-      find this server) (default: false)</dd>
-  <dt id="stun-servers"><a class="permalink" href="#stun-servers"><b>--stun-servers
-    <i>STR</i></b></a></dt>
-  <dd>Comma-separated STUN server URLs (debug/test only - ACDS provides in
-      production) (default: ) Env: <b>ASCII_CHAT_STUN_SERVERS</b></dd>
-  <dt id="turn-servers"><a class="permalink" href="#turn-servers"><b>--turn-servers
-    <i>STR</i></b></a></dt>
-  <dd>Comma-separated TURN server URLs (debug/test only - ACDS provides in
-      production) (default: ) Env: <b>ASCII_CHAT_TURN_SERVERS</b></dd>
-  <dt id="turn-username"><a class="permalink" href="#turn-username"><b>--turn-username
-    <i>STR</i></b></a></dt>
-  <dd>TURN authentication username (debug/test only - ACDS provides in
-      production) (default: ) Env: <b>ASCII_CHAT_TURN_USERNAME</b></dd>
-  <dt id="turn-credential"><a class="permalink" href="#turn-credential"><b>--turn-credential
-    <i>STR</i></b></a></dt>
-  <dd>TURN authentication credential (debug/test only - ACDS provides in
-      production) (default: ) Env: <b>ASCII_CHAT_TURN_CREDENTIAL</b></dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="PERFORMANCE"><a class="permalink" href="#PERFORMANCE">PERFORMANCE</a></h2>
-<dl class="Bl-tag">
-  <dt id="compression-level"><a class="permalink" href="#compression-level"><b>--compression-level
-    <i>NUM</i></b></a></dt>
-  <dd>zstd compression level (1-9) (default: 3) Env:
-      <b>ASCII_CHAT_COMPRESSION_LEVEL</b></dd>
-  <dt id="no-compress"><a class="permalink" href="#no-compress"><b>--no-compress</b></a></dt>
-  <dd>Disable compression (default: false) Env:
-    <b>ASCII_CHAT_NO_COMPRESS</b></dd>
-</dl>
-</section>
-<section class="Ss">
-<h2 class="Ss" id="SECURITY"><a class="permalink" href="#SECURITY">SECURITY</a></h2>
-<dl class="Bl-tag">
-  <dt id="E,"><a class="permalink" href="#E,"><b>-E, --encrypt</b></a></dt>
-  <dd>Enable encryption (default: true)</dd>
-  <dt id="K,"><a class="permalink" href="#K,"><b>-K, --key
-    <i>STR</i></b></a></dt>
-  <dd>SSH/GPG key file path (default: ) Env: <b>ASCII_CHAT_KEY</b></dd>
-  <dt id="password"><a class="permalink" href="#password"><b>--password
-    <i>STR</i></b></a></dt>
-  <dd>Shared password for authentication (default: ) Env:
-      <b>ASCII_CHAT_PASSWORD</b></dd>
-  <dt id="no-encrypt"><a class="permalink" href="#no-encrypt"><b>--no-encrypt</b></a></dt>
-  <dd>Disable encryption (default: false)</dd>
-  <dt id="client-keys"><a class="permalink" href="#client-keys"><b>--client-keys
-    <i>STR</i></b></a></dt>
-  <dd>Allowed client keys whitelist (default: )</dd>
-  <dt id="discovery-expose-ip"><a class="permalink" href="#discovery-expose-ip"><b>--discovery-expose-ip</b></a></dt>
-  <dd>Explicitly allow public IP disclosure in discovery sessions (opt-in only)
-      (default: false)</dd>
-  <dt id="discovery-service-key"><a class="permalink" href="#discovery-service-key"><b>--discovery-service-key
-    <i>STR</i></b></a></dt>
-  <dd>Discovery service public key for verification (SSH/GPG file, HTTPS URL, or
-      github:user/gitlab:user) (default: )</dd>
+  <dd>Disable console logging (log to file only) (default: false) Env:
+      <b>ASCII_CHAT_QUIET</b></dd>
 </dl>
 </section>
 <section class="Ss">
@@ -308,7 +220,8 @@
     <i>NUM</i></b></a></dt>
   <dd>Webcam device index (default: 0) Env: <b>ASCII_CHAT_WEBCAM_INDEX</b></dd>
   <dt id="g,"><a class="permalink" href="#g,"><b>-g, --webcam-flip</b></a></dt>
-  <dd>Flip webcam horizontally (default: true)</dd>
+  <dd>Flip webcam horizontally (default: true) Env:
+      <b>ASCII_CHAT_WEBCAM_FLIP</b></dd>
   <dt id="test-pattern"><a class="permalink" href="#test-pattern"><b>--test-pattern</b></a></dt>
   <dd>Use test pattern instead of webcam (default: false) Env:
       <b>WEBCAM_DISABLED</b></dd>
@@ -331,17 +244,21 @@
       (default: ) Env: <b>ASCII_CHAT_PALETTE</b></dd>
   <dt id="C,"><a class="permalink" href="#C,"><b>-C, --palette-chars
     <i>VAL</i></b></a></dt>
-  <dd>Custom palette characters (implies --palette=custom) (default: )</dd>
+  <dd>Custom palette characters (implies --palette=custom) (default: ) Env:
+      <b>ASCII_CHAT_PALETTE_CHARS</b></dd>
   <dt id="show-capabilities"><a class="permalink" href="#show-capabilities"><b>--show-capabilities</b></a></dt>
-  <dd>Show terminal capabilities and exit (default: false)</dd>
+  <dd>Show terminal capabilities and exit (default: false) Env:
+      <b>ASCII_CHAT_SHOW_CAPABILITIES</b></dd>
   <dt id="utf8"><a class="permalink" href="#utf8"><b>--utf8</b></a></dt>
-  <dd>Force UTF-8 support (default: false)</dd>
+  <dd>Force UTF-8 support (default: false) Env: <b>ASCII_CHAT_UTF8</b></dd>
   <dt id="s,"><a class="permalink" href="#s,"><b>-s, --stretch</b></a></dt>
-  <dd>Allow aspect ratio distortion (default: false)</dd>
+  <dd>Allow aspect ratio distortion (default: false) Env:
+      <b>ASCII_CHAT_STRETCH</b></dd>
   <dt id="strip-ansi"><a class="permalink" href="#strip-ansi"><b>--strip-ansi</b></a></dt>
-  <dd>Strip ANSI escape sequences (default: false)</dd>
+  <dd>Strip ANSI escape sequences (default: false) Env:
+      <b>ASCII_CHAT_STRIP_ANSI</b></dd>
   <dt id="fps"><a class="permalink" href="#fps"><b>--fps <i>NUM</i></b></a></dt>
-  <dd>Target framerate (1-144, default: 60) (default: 0) Env:
+  <dd>Target framerate (1-144, 0=use default) (default: 0) Env:
       <b>ASCII_CHAT_FPS</b></dd>
 </dl>
 </section>
@@ -353,8 +270,127 @@
       <b>ASCII_CHAT_SNAPSHOT</b></dd>
   <dt id="D,"><a class="permalink" href="#D,"><b>-D, --snapshot-delay
     <i>NUM</i></b></a></dt>
-  <dd>Snapshot delay in seconds (default: 3.00) Env:
+  <dd>Snapshot delay in seconds (default: 4.00) Env:
       <b>ASCII_CHAT_SNAPSHOT_DELAY</b></dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="PERFORMANCE"><a class="permalink" href="#PERFORMANCE">PERFORMANCE</a></h2>
+<dl class="Bl-tag">
+  <dt id="compression-level"><a class="permalink" href="#compression-level"><b>--compression-level
+    <i>NUM</i></b></a></dt>
+  <dd>zstd compression level (1-9) (default: 3) Env:
+      <b>ASCII_CHAT_COMPRESSION_LEVEL</b></dd>
+  <dt id="no-compress"><a class="permalink" href="#no-compress"><b>--no-compress</b></a></dt>
+  <dd>Disable compression (default: false) Env:
+    <b>ASCII_CHAT_NO_COMPRESS</b></dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="SECURITY"><a class="permalink" href="#SECURITY">SECURITY</a></h2>
+<dl class="Bl-tag">
+  <dt id="E,"><a class="permalink" href="#E,"><b>-E, --encrypt</b></a></dt>
+  <dd>Enable encryption (default: true) Env: <b>ASCII_CHAT_ENCRYPT</b></dd>
+  <dt id="K,"><a class="permalink" href="#K,"><b>-K, --key
+    <i>STR</i></b></a></dt>
+  <dd>SSH/GPG key file path (default: ) Env: <b>ASCII_CHAT_KEY</b></dd>
+  <dt id="password"><a class="permalink" href="#password"><b>--password
+    <i>STR</i></b></a></dt>
+  <dd>Shared password for authentication (default: ) Env:
+      <b>ASCII_CHAT_PASSWORD</b></dd>
+  <dt id="no-encrypt"><a class="permalink" href="#no-encrypt"><b>--no-encrypt</b></a></dt>
+  <dd>Disable encryption (default: false) Env: <b>ASCII_CHAT_NO_ENCRYPT</b></dd>
+  <dt id="server-key"><a class="permalink" href="#server-key"><b>--server-key
+    <i>STR</i></b></a></dt>
+  <dd>Expected server public key (client) (default: ) Env:
+      <b>ASCII_CHAT_SERVER_KEY</b></dd>
+  <dt id="client-keys"><a class="permalink" href="#client-keys"><b>--client-keys
+    <i>STR</i></b></a></dt>
+  <dd>Allowed client keys (server) (default: ) Env:
+      <b>ASCII_CHAT_CLIENT_KEYS</b></dd>
+  <dt id="discovery-insecure"><a class="permalink" href="#discovery-insecure"><b>--discovery-insecure</b></a></dt>
+  <dd>Skip server key verification (MITM-vulnerable, requires explicit opt-in)
+      (default: false) Env: <b>ASCII_CHAT_DISCOVERY_INSECURE</b></dd>
+  <dt id="discovery-server-key"><a class="permalink" href="#discovery-server-key"><b>--discovery-server-key
+    <i>STR</i></b></a></dt>
+  <dd>Discovery server public key for verification (SSH/GPG key or HTTPS URL)
+      (default: ) Env: <b>ASCII_CHAT_DISCOVERY_SERVER_KEY</b></dd>
+  <dt id="require-server-identity"><a class="permalink" href="#require-server-identity"><b>--require-server-identity</b></a></dt>
+  <dd>ACDS: require servers to provide signed Ed25519 identity (default: false)
+      Env: <b>ASCII_CHAT_REQUIRE_SERVER_IDENTITY</b></dd>
+  <dt id="require-client-identity"><a class="permalink" href="#require-client-identity"><b>--require-client-identity</b></a></dt>
+  <dd>ACDS: require clients to provide signed Ed25519 identity (default: false)
+      Env: <b>ASCII_CHAT_REQUIRE_CLIENT_IDENTITY</b></dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="NETWORK"><a class="permalink" href="#NETWORK">NETWORK</a></h2>
+<dl class="Bl-tag">
+  <dt id="p,"><a class="permalink" href="#p,"><b>-p, --port
+    <i>STR</i></b></a></dt>
+  <dd>Server port (default: 27224) Env: <b>ASCII_CHAT_PORT</b></dd>
+  <dt id="max-clients"><a class="permalink" href="#max-clients"><b>--max-clients
+    <i>NUM</i></b></a></dt>
+  <dd>Maximum concurrent clients (server only) (default: 9) Env:
+      <b>ASCII_CHAT_MAX_CLIENTS</b></dd>
+  <dt id="reconnect-attempts"><a class="permalink" href="#reconnect-attempts"><b>--reconnect-attempts
+    <i>NUM</i></b></a></dt>
+  <dd>Number of reconnection attempts (-1=infinite, 0=none) (default: -1) Env:
+      <b>ASCII_CHAT_RECONNECT_ATTEMPTS</b></dd>
+  <dt id="port-forwarding"><a class="permalink" href="#port-forwarding"><b>--port-forwarding</b></a></dt>
+  <dd>Enable UPnP/NAT-PMP port mapping for direct TCP (default: false) Env:
+      <b>ASCII_CHAT_PORT_FORWARDING</b></dd>
+  <dt id="scan"><a class="permalink" href="#scan"><b>--scan</b></a></dt>
+  <dd>Scan for servers on local network via mDNS (default: false) Env:
+      <b>ASCII_CHAT_SCAN</b></dd>
+  <dt id="webrtc"><a class="permalink" href="#webrtc"><b>--webrtc</b></a></dt>
+  <dd>Use WebRTC P2P mode (default: Direct TCP) (default: false) Env:
+      <b>ASCII_CHAT_WEBRTC</b></dd>
+  <dt id="no-webrtc"><a class="permalink" href="#no-webrtc"><b>--no-webrtc</b></a></dt>
+  <dd>Disable WebRTC, use Direct TCP only (default: false) Env:
+      <b>ASCII_CHAT_NO_WEBRTC</b></dd>
+  <dt id="prefer-webrtc"><a class="permalink" href="#prefer-webrtc"><b>--prefer-webrtc</b></a></dt>
+  <dd>Try WebRTC before direct TCP (default: false) Env:
+      <b>ASCII_CHAT_PREFER_WEBRTC</b></dd>
+  <dt id="webrtc-skip-stun"><a class="permalink" href="#webrtc-skip-stun"><b>--webrtc-skip-stun</b></a></dt>
+  <dd>Skip WebRTC+STUN stage, go straight to TURN relay (default: false) Env:
+      <b>ASCII_CHAT_WEBRTC_SKIP_STUN</b></dd>
+  <dt id="webrtc-disable-turn"><a class="permalink" href="#webrtc-disable-turn"><b>--webrtc-disable-turn</b></a></dt>
+  <dd>Disable WebRTC+TURN relay, use STUN only (default: false) Env:
+      <b>ASCII_CHAT_WEBRTC_DISABLE_TURN</b></dd>
+  <dt id="stun-servers"><a class="permalink" href="#stun-servers"><b>--stun-servers
+    <i>STR</i></b></a></dt>
+  <dd>Comma-separated list of STUN server URLs (default:
+      stun:stun.ascii-chat.com:3478,stun:stun.l.google.com:19302) Env:
+      <b>ASCII_CHAT_STUN_SERVERS</b></dd>
+  <dt id="turn-servers"><a class="permalink" href="#turn-servers"><b>--turn-servers
+    <i>STR</i></b></a></dt>
+  <dd>Comma-separated list of TURN server URLs (default:
+      turn:turn.ascii-chat.com:3478) Env: <b>ASCII_CHAT_TURN_SERVERS</b></dd>
+  <dt id="turn-username"><a class="permalink" href="#turn-username"><b>--turn-username
+    <i>STR</i></b></a></dt>
+  <dd>Username for TURN authentication (default: ascii) Env:
+      <b>ASCII_CHAT_TURN_USERNAME</b></dd>
+  <dt id="turn-credential"><a class="permalink" href="#turn-credential"><b>--turn-credential
+    <i>STR</i></b></a></dt>
+  <dd>Credential/password for TURN authentication (default:
+      0aa9917b4dad1b01631e87a32b875e09) Env:
+    <b>ASCII_CHAT_TURN_CREDENTIAL</b></dd>
+  <dt id="turn-secret"><a class="permalink" href="#turn-secret"><b>--turn-secret
+    <i>STR</i></b></a></dt>
+  <dd>Shared secret for dynamic TURN credential generation (HMAC-SHA1) (default:
+      ) Env: <b>ASCII_CHAT_TURN_SECRET</b></dd>
+  <dt><b>--discovery-server <i>STR</i></b></dt>
+  <dd>Discovery service address (for ACDS registration) (default:
+      discovery-service.ascii-chat.com) Env:
+    <b>ASCII_CHAT_DISCOVERY_SERVER</b></dd>
+  <dt id="discovery-port"><a class="permalink" href="#discovery-port"><b>--discovery-port
+    <i>NUM</i></b></a></dt>
+  <dd>Discovery service port (default: 27225) Env:
+      <b>ASCII_CHAT_DISCOVERY_PORT</b></dd>
+  <dt id="discovery-expose-ip"><a class="permalink" href="#discovery-expose-ip"><b>--discovery-expose-ip</b></a></dt>
+  <dd>Allow public IP disclosure in discovery sessions (requires confirmation)
+      (default: false) Env: <b>ASCII_CHAT_DISCOVERY_EXPOSE_IP</b></dd>
 </dl>
 </section>
 <section class="Ss">
@@ -362,24 +398,28 @@
 <dl class="Bl-tag">
   <dt id="f,"><a class="permalink" href="#f,"><b>-f, --file
     <i>STR</i></b></a></dt>
-  <dd>Stream from media file or stdin (use '-' for stdin) (default: )</dd>
+  <dd>Stream from media file or stdin (use '-' for stdin) (default: ) Env:
+      <b>ASCII_CHAT_FILE</b></dd>
   <dt id="u,"><a class="permalink" href="#u,"><b>-u, --url
     <i>STR</i></b></a></dt>
-  <dd>Stream from network URL (HTTP/HTTPS/YouTube/RTSP) - takes priority over
-      --file (default: )</dd>
+  <dd>Stream from network URL (HTTP/HTTPS/YouTube/RTSP) (default: ) Env:
+      <b>ASCII_CHAT_URL</b></dd>
   <dt id="l,"><a class="permalink" href="#l,"><b>-l, --loop</b></a></dt>
-  <dd>Loop media file playback (not supported for network URLs) (default:
-    false)</dd>
+  <dd>Loop media file playback (not supported for --url) (default: false) Env:
+      <b>ASCII_CHAT_LOOP</b></dd>
   <dt id="s,~2"><a class="permalink" href="#s,~2"><b>-s, --seek
     <i>VAL</i></b></a></dt>
   <dd>Seek to timestamp before playback (format: seconds, MM:SS, or HH:MM:SS.ms)
-      (default: )</dd>
+      (default: ) Env: <b>ASCII_CHAT_SEEK</b></dd>
   <dt id="cookies-from-browser"><a class="permalink" href="#cookies-from-browser"><b>--cookies-from-browser
     <i>VAL</i></b></a></dt>
-  <dd>Browser for reading cookies from (chrome, firefox, edge, safari, brave,
-      opera, vivaldi, whale). Use without argument to default to chrome.</dd>
+  <dd>yt-dlp option (man yt-dlp). Browser for reading cookies from (chrome,
+      firefox, edge, safari, brave, opera, vivaldi, whale). Use without argument
+      to default to chrome. Env: <b>ASCII_CHAT_COOKIES_FROM_BROWSER</b></dd>
   <dt id="no-cookies-from-browser"><a class="permalink" href="#no-cookies-from-browser"><b>--no-cookies-from-browser</b></a></dt>
-  <dd>Explicitly disable reading cookies from browser (default: false)</dd>
+  <dd>yt-dlp option (man yt-dlp). Explicitly disable reading cookies from
+      browser (default: false) Env:
+    <b>ASCII_CHAT_NO_COOKIES_FROM_BROWSER</b></dd>
 </dl>
 </section>
 <section class="Ss">
@@ -389,12 +429,12 @@
   <dd>Enable audio streaming (default: false) Env: <b>ASCII_CHAT_AUDIO</b></dd>
   <dt id="microphone-index"><a class="permalink" href="#microphone-index"><b>--microphone-index
     <i>NUM</i></b></a></dt>
-  <dd>Microphone device index (-1=default) (default: -1) Env:
+  <dd>Microphone device index (default: -1) Env:
       <b>ASCII_CHAT_MICROPHONE_INDEX</b></dd>
   <dt id="speakers-index"><a class="permalink" href="#speakers-index"><b>--speakers-index
     <i>NUM</i></b></a></dt>
-  <dd>Speakers device index (-1=default) (default: -1) Env:
-      <b>ASCII_CHAT_SPEAKERS_INDEX</b></dd>
+  <dd>Speakers device index (default: -1) Env:
+    <b>ASCII_CHAT_SPEAKERS_INDEX</b></dd>
   <dt id="microphone-sensitivity"><a class="permalink" href="#microphone-sensitivity"><b>--microphone-sensitivity
     <i>NUM</i></b></a></dt>
   <dd>Microphone volume multiplier (0.0-1.0) (default: 1.00) Env:
@@ -407,14 +447,23 @@
   <dd>Enable audio analysis (debug) (default: false) Env:
       <b>ASCII_CHAT_AUDIO_ANALYSIS</b></dd>
   <dt id="no-audio-playback"><a class="permalink" href="#no-audio-playback"><b>--no-audio-playback</b></a></dt>
-  <dd>Disable speaker playback (debug) (default: false) Env:
+  <dd>Disable speaker playback (default: false) Env:
       <b>ASCII_CHAT_NO_AUDIO_PLAYBACK</b></dd>
   <dt id="encode-audio"><a class="permalink" href="#encode-audio"><b>--encode-audio</b></a></dt>
   <dd>Enable Opus audio encoding (default: true) Env:
       <b>ASCII_CHAT_ENCODE_AUDIO</b></dd>
   <dt id="no-encode-audio"><a class="permalink" href="#no-encode-audio"><b>--no-encode-audio</b></a></dt>
   <dd>Disable Opus audio encoding (default: false) Env:
-      <b>ASCII_CHAT_NO_ENCODE_AUDIO</b>
+      <b>ASCII_CHAT_NO_ENCODE_AUDIO</b></dd>
+</dl>
+</section>
+<section class="Ss">
+<h2 class="Ss" id="DATABASE"><a class="permalink" href="#DATABASE">DATABASE</a></h2>
+<dl class="Bl-tag">
+  <dt id="database"><a class="permalink" href="#database"><b>--database
+    <i>STR</i></b></a></dt>
+  <dd>Path to SQLite database for discovery service (default: ) Env:
+      <b>ASCII_CHAT_DATABASE</b>
     <p class="Pp"></p>
   </dd>
 </dl>
@@ -474,7 +523,7 @@
 </dl>
 </section>
 <section class="Sh">
-<h1 class="Sh" id="CONFIGURATION~2"><a class="permalink" href="#CONFIGURATION~2">CONFIGURATION</a></h1>
+<h1 class="Sh" id="CONFIGURATION"><a class="permalink" href="#CONFIGURATION">CONFIGURATION</a></h1>
 <p class="Pp">Configuration can be stored in a TOML file at the default location
     (see FILES section) or specified via <b>--config</b>.</p>
 <p class="Pp"><b>Configuration Priority:</b></p>
@@ -524,27 +573,20 @@
     0/DEV, 1/DEBUG, 2/INFO, 3/WARN, 4/ERROR, 5/FATAL.</dd>
   <dt id="ASCII_CHAT_LOG_FILE"><a class="permalink" href="#ASCII_CHAT_LOG_FILE"><b>ASCII_CHAT_LOG_FILE</b></a></dt>
   <dd>Redirect logs to FILE</dd>
-  <dt id="ASCII_CHAT_PORT"><a class="permalink" href="#ASCII_CHAT_PORT"><b>ASCII_CHAT_PORT</b></a></dt>
-  <dd>Server port</dd>
-  <dt id="ASCII_CHAT_MAX_CLIENTS"><a class="permalink" href="#ASCII_CHAT_MAX_CLIENTS"><b>ASCII_CHAT_MAX_CLIENTS</b></a></dt>
-  <dd>Maximum concurrent clients</dd>
-  <dt id="ASCII_CHAT_COMPRESSION_LEVEL"><a class="permalink" href="#ASCII_CHAT_COMPRESSION_LEVEL"><b>ASCII_CHAT_COMPRESSION_LEVEL</b></a></dt>
-  <dd>zstd compression level (1-9)</dd>
-  <dt id="ASCII_CHAT_NO_COMPRESS"><a class="permalink" href="#ASCII_CHAT_NO_COMPRESS"><b>ASCII_CHAT_NO_COMPRESS</b></a></dt>
-  <dd>Disable compression</dd>
-  <dt id="ASCII_CHAT_KEY"><a class="permalink" href="#ASCII_CHAT_KEY"><b>ASCII_CHAT_KEY</b></a></dt>
-  <dd>SSH/GPG key file path</dd>
-  <dt id="ASCII_CHAT_PASSWORD"><a class="permalink" href="#ASCII_CHAT_PASSWORD"><b>ASCII_CHAT_PASSWORD</b></a></dt>
-  <dd>Shared password for authentication</dd>
-  <dt id="ASCII_CHAT_UPNP"><a class="permalink" href="#ASCII_CHAT_UPNP"><b>ASCII_CHAT_UPNP</b></a></dt>
-  <dd>Enable UPnP/NAT-PMP for automatic router port mapping (direct TCP for
-      ~70%% of home users)</dd>
+  <dt id="ASCII_CHAT_LOG_LEVEL"><a class="permalink" href="#ASCII_CHAT_LOG_LEVEL"><b>ASCII_CHAT_LOG_LEVEL</b></a></dt>
+  <dd>Set log level: dev, debug, info, warn, error, fatal</dd>
+  <dt id="ASCII_CHAT_VERBOSE"><a class="permalink" href="#ASCII_CHAT_VERBOSE"><b>ASCII_CHAT_VERBOSE</b></a></dt>
+  <dd>Increase log verbosity (stackable: -VV, -VVV, or --verbose)</dd>
+  <dt id="ASCII_CHAT_QUIET"><a class="permalink" href="#ASCII_CHAT_QUIET"><b>ASCII_CHAT_QUIET</b></a></dt>
+  <dd>Disable console logging (log to file only)</dd>
   <dt id="ASCII_CHAT_WIDTH"><a class="permalink" href="#ASCII_CHAT_WIDTH"><b>ASCII_CHAT_WIDTH</b></a></dt>
   <dd>Terminal width in characters</dd>
   <dt id="ASCII_CHAT_HEIGHT"><a class="permalink" href="#ASCII_CHAT_HEIGHT"><b>ASCII_CHAT_HEIGHT</b></a></dt>
   <dd>Terminal height in characters</dd>
   <dt id="ASCII_CHAT_WEBCAM_INDEX"><a class="permalink" href="#ASCII_CHAT_WEBCAM_INDEX"><b>ASCII_CHAT_WEBCAM_INDEX</b></a></dt>
   <dd>Webcam device index</dd>
+  <dt id="ASCII_CHAT_WEBCAM_FLIP"><a class="permalink" href="#ASCII_CHAT_WEBCAM_FLIP"><b>ASCII_CHAT_WEBCAM_FLIP</b></a></dt>
+  <dd>Flip webcam horizontally</dd>
   <dt id="WEBCAM_DISABLED"><a class="permalink" href="#WEBCAM_DISABLED"><b>WEBCAM_DISABLED</b></a></dt>
   <dd>Use test pattern instead of webcam</dd>
   <dt id="ASCII_CHAT_COLOR_MODE"><a class="permalink" href="#ASCII_CHAT_COLOR_MODE"><b>ASCII_CHAT_COLOR_MODE</b></a></dt>
@@ -553,18 +595,96 @@
   <dd>Render mode (foreground, background, half-block)</dd>
   <dt id="ASCII_CHAT_PALETTE"><a class="permalink" href="#ASCII_CHAT_PALETTE"><b>ASCII_CHAT_PALETTE</b></a></dt>
   <dd>ASCII palette type (standard, blocks, digital, minimal, cool, custom)</dd>
+  <dt id="ASCII_CHAT_PALETTE_CHARS"><a class="permalink" href="#ASCII_CHAT_PALETTE_CHARS"><b>ASCII_CHAT_PALETTE_CHARS</b></a></dt>
+  <dd>Custom palette characters (implies --palette=custom)</dd>
+  <dt id="ASCII_CHAT_SHOW_CAPABILITIES"><a class="permalink" href="#ASCII_CHAT_SHOW_CAPABILITIES"><b>ASCII_CHAT_SHOW_CAPABILITIES</b></a></dt>
+  <dd>Show terminal capabilities and exit</dd>
+  <dt id="ASCII_CHAT_UTF8"><a class="permalink" href="#ASCII_CHAT_UTF8"><b>ASCII_CHAT_UTF8</b></a></dt>
+  <dd>Force UTF-8 support</dd>
+  <dt id="ASCII_CHAT_STRETCH"><a class="permalink" href="#ASCII_CHAT_STRETCH"><b>ASCII_CHAT_STRETCH</b></a></dt>
+  <dd>Allow aspect ratio distortion</dd>
+  <dt id="ASCII_CHAT_STRIP_ANSI"><a class="permalink" href="#ASCII_CHAT_STRIP_ANSI"><b>ASCII_CHAT_STRIP_ANSI</b></a></dt>
+  <dd>Strip ANSI escape sequences</dd>
   <dt id="ASCII_CHAT_FPS"><a class="permalink" href="#ASCII_CHAT_FPS"><b>ASCII_CHAT_FPS</b></a></dt>
-  <dd>Target framerate (1-144, default: 60)</dd>
+  <dd>Target framerate (1-144, 0=use default)</dd>
   <dt id="ASCII_CHAT_SNAPSHOT"><a class="permalink" href="#ASCII_CHAT_SNAPSHOT"><b>ASCII_CHAT_SNAPSHOT</b></a></dt>
   <dd>Snapshot mode (one frame and exit)</dd>
   <dt id="ASCII_CHAT_SNAPSHOT_DELAY"><a class="permalink" href="#ASCII_CHAT_SNAPSHOT_DELAY"><b>ASCII_CHAT_SNAPSHOT_DELAY</b></a></dt>
   <dd>Snapshot delay in seconds</dd>
+  <dt id="ASCII_CHAT_COMPRESSION_LEVEL"><a class="permalink" href="#ASCII_CHAT_COMPRESSION_LEVEL"><b>ASCII_CHAT_COMPRESSION_LEVEL</b></a></dt>
+  <dd>zstd compression level (1-9)</dd>
+  <dt id="ASCII_CHAT_NO_COMPRESS"><a class="permalink" href="#ASCII_CHAT_NO_COMPRESS"><b>ASCII_CHAT_NO_COMPRESS</b></a></dt>
+  <dd>Disable compression</dd>
+  <dt id="ASCII_CHAT_ENCRYPT"><a class="permalink" href="#ASCII_CHAT_ENCRYPT"><b>ASCII_CHAT_ENCRYPT</b></a></dt>
+  <dd>Enable encryption</dd>
+  <dt id="ASCII_CHAT_KEY"><a class="permalink" href="#ASCII_CHAT_KEY"><b>ASCII_CHAT_KEY</b></a></dt>
+  <dd>SSH/GPG key file path</dd>
+  <dt id="ASCII_CHAT_PASSWORD"><a class="permalink" href="#ASCII_CHAT_PASSWORD"><b>ASCII_CHAT_PASSWORD</b></a></dt>
+  <dd>Shared password for authentication</dd>
+  <dt id="ASCII_CHAT_NO_ENCRYPT"><a class="permalink" href="#ASCII_CHAT_NO_ENCRYPT"><b>ASCII_CHAT_NO_ENCRYPT</b></a></dt>
+  <dd>Disable encryption</dd>
+  <dt id="ASCII_CHAT_SERVER_KEY"><a class="permalink" href="#ASCII_CHAT_SERVER_KEY"><b>ASCII_CHAT_SERVER_KEY</b></a></dt>
+  <dd>Expected server public key (client)</dd>
+  <dt id="ASCII_CHAT_CLIENT_KEYS"><a class="permalink" href="#ASCII_CHAT_CLIENT_KEYS"><b>ASCII_CHAT_CLIENT_KEYS</b></a></dt>
+  <dd>Allowed client keys (server)</dd>
+  <dt id="ASCII_CHAT_DISCOVERY_INSECURE"><a class="permalink" href="#ASCII_CHAT_DISCOVERY_INSECURE"><b>ASCII_CHAT_DISCOVERY_INSECURE</b></a></dt>
+  <dd>Skip server key verification (MITM-vulnerable, requires explicit
+    opt-in)</dd>
+  <dt id="ASCII_CHAT_DISCOVERY_SERVER_KEY"><a class="permalink" href="#ASCII_CHAT_DISCOVERY_SERVER_KEY"><b>ASCII_CHAT_DISCOVERY_SERVER_KEY</b></a></dt>
+  <dd>Discovery server public key for verification (SSH/GPG key or HTTPS
+    URL)</dd>
+  <dt id="ASCII_CHAT_PORT"><a class="permalink" href="#ASCII_CHAT_PORT"><b>ASCII_CHAT_PORT</b></a></dt>
+  <dd>Server port</dd>
+  <dt id="ASCII_CHAT_MAX_CLIENTS"><a class="permalink" href="#ASCII_CHAT_MAX_CLIENTS"><b>ASCII_CHAT_MAX_CLIENTS</b></a></dt>
+  <dd>Maximum concurrent clients (server only)</dd>
+  <dt id="ASCII_CHAT_RECONNECT_ATTEMPTS"><a class="permalink" href="#ASCII_CHAT_RECONNECT_ATTEMPTS"><b>ASCII_CHAT_RECONNECT_ATTEMPTS</b></a></dt>
+  <dd>Number of reconnection attempts (-1=infinite, 0=none)</dd>
+  <dt id="ASCII_CHAT_PORT_FORWARDING"><a class="permalink" href="#ASCII_CHAT_PORT_FORWARDING"><b>ASCII_CHAT_PORT_FORWARDING</b></a></dt>
+  <dd>Enable UPnP/NAT-PMP port mapping for direct TCP</dd>
+  <dt id="ASCII_CHAT_SCAN"><a class="permalink" href="#ASCII_CHAT_SCAN"><b>ASCII_CHAT_SCAN</b></a></dt>
+  <dd>Scan for servers on local network via mDNS</dd>
+  <dt id="ASCII_CHAT_WEBRTC"><a class="permalink" href="#ASCII_CHAT_WEBRTC"><b>ASCII_CHAT_WEBRTC</b></a></dt>
+  <dd>Use WebRTC P2P mode (default: Direct TCP)</dd>
+  <dt id="ASCII_CHAT_NO_WEBRTC"><a class="permalink" href="#ASCII_CHAT_NO_WEBRTC"><b>ASCII_CHAT_NO_WEBRTC</b></a></dt>
+  <dd>Disable WebRTC, use Direct TCP only</dd>
+  <dt id="ASCII_CHAT_PREFER_WEBRTC"><a class="permalink" href="#ASCII_CHAT_PREFER_WEBRTC"><b>ASCII_CHAT_PREFER_WEBRTC</b></a></dt>
+  <dd>Try WebRTC before direct TCP</dd>
+  <dt id="ASCII_CHAT_WEBRTC_SKIP_STUN"><a class="permalink" href="#ASCII_CHAT_WEBRTC_SKIP_STUN"><b>ASCII_CHAT_WEBRTC_SKIP_STUN</b></a></dt>
+  <dd>Skip WebRTC+STUN stage, go straight to TURN relay</dd>
+  <dt id="ASCII_CHAT_WEBRTC_DISABLE_TURN"><a class="permalink" href="#ASCII_CHAT_WEBRTC_DISABLE_TURN"><b>ASCII_CHAT_WEBRTC_DISABLE_TURN</b></a></dt>
+  <dd>Disable WebRTC+TURN relay, use STUN only</dd>
+  <dt id="ASCII_CHAT_STUN_SERVERS"><a class="permalink" href="#ASCII_CHAT_STUN_SERVERS"><b>ASCII_CHAT_STUN_SERVERS</b></a></dt>
+  <dd>Comma-separated list of STUN server URLs</dd>
+  <dt id="ASCII_CHAT_TURN_SERVERS"><a class="permalink" href="#ASCII_CHAT_TURN_SERVERS"><b>ASCII_CHAT_TURN_SERVERS</b></a></dt>
+  <dd>Comma-separated list of TURN server URLs</dd>
+  <dt id="ASCII_CHAT_TURN_USERNAME"><a class="permalink" href="#ASCII_CHAT_TURN_USERNAME"><b>ASCII_CHAT_TURN_USERNAME</b></a></dt>
+  <dd>Username for TURN authentication</dd>
+  <dt id="ASCII_CHAT_TURN_CREDENTIAL"><a class="permalink" href="#ASCII_CHAT_TURN_CREDENTIAL"><b>ASCII_CHAT_TURN_CREDENTIAL</b></a></dt>
+  <dd>Credential/password for TURN authentication</dd>
+  <dt id="ASCII_CHAT_TURN_SECRET"><a class="permalink" href="#ASCII_CHAT_TURN_SECRET"><b>ASCII_CHAT_TURN_SECRET</b></a></dt>
+  <dd>Shared secret for dynamic TURN credential generation (HMAC-SHA1)</dd>
+  <dt id="ASCII_CHAT_FILE"><a class="permalink" href="#ASCII_CHAT_FILE"><b>ASCII_CHAT_FILE</b></a></dt>
+  <dd>Stream from media file or stdin (use '-' for stdin)</dd>
+  <dt id="ASCII_CHAT_URL"><a class="permalink" href="#ASCII_CHAT_URL"><b>ASCII_CHAT_URL</b></a></dt>
+  <dd>Stream from network URL (HTTP/HTTPS/YouTube/RTSP)</dd>
+  <dt id="ASCII_CHAT_LOOP"><a class="permalink" href="#ASCII_CHAT_LOOP"><b>ASCII_CHAT_LOOP</b></a></dt>
+  <dd>Loop media file playback (not supported for --url)</dd>
+  <dt id="ASCII_CHAT_SEEK"><a class="permalink" href="#ASCII_CHAT_SEEK"><b>ASCII_CHAT_SEEK</b></a></dt>
+  <dd>Seek to timestamp before playback (format: seconds, MM:SS, or
+    HH:MM:SS.ms)</dd>
+  <dt id="ASCII_CHAT_COOKIES_FROM_BROWSER"><a class="permalink" href="#ASCII_CHAT_COOKIES_FROM_BROWSER"><b>ASCII_CHAT_COOKIES_FROM_BROWSER</b></a></dt>
+  <dd>yt-dlp option (man yt-dlp). Browser for reading cookies from (chrome,
+      firefox, edge, safari, brave, opera, vivaldi, whale). Use without argument
+      to default to chrome.</dd>
+  <dt id="ASCII_CHAT_NO_COOKIES_FROM_BROWSER"><a class="permalink" href="#ASCII_CHAT_NO_COOKIES_FROM_BROWSER"><b>ASCII_CHAT_NO_COOKIES_FROM_BROWSER</b></a></dt>
+  <dd>yt-dlp option (man yt-dlp). Explicitly disable reading cookies from
+      browser</dd>
   <dt id="ASCII_CHAT_AUDIO"><a class="permalink" href="#ASCII_CHAT_AUDIO"><b>ASCII_CHAT_AUDIO</b></a></dt>
   <dd>Enable audio streaming</dd>
   <dt id="ASCII_CHAT_MICROPHONE_INDEX"><a class="permalink" href="#ASCII_CHAT_MICROPHONE_INDEX"><b>ASCII_CHAT_MICROPHONE_INDEX</b></a></dt>
-  <dd>Microphone device index (-1=default)</dd>
+  <dd>Microphone device index</dd>
   <dt id="ASCII_CHAT_SPEAKERS_INDEX"><a class="permalink" href="#ASCII_CHAT_SPEAKERS_INDEX"><b>ASCII_CHAT_SPEAKERS_INDEX</b></a></dt>
-  <dd>Speakers device index (-1=default)</dd>
+  <dd>Speakers device index</dd>
   <dt id="ASCII_CHAT_MICROPHONE_SENSITIVITY"><a class="permalink" href="#ASCII_CHAT_MICROPHONE_SENSITIVITY"><b>ASCII_CHAT_MICROPHONE_SENSITIVITY</b></a></dt>
   <dd>Microphone volume multiplier (0.0-1.0)</dd>
   <dt id="ASCII_CHAT_SPEAKERS_VOLUME"><a class="permalink" href="#ASCII_CHAT_SPEAKERS_VOLUME"><b>ASCII_CHAT_SPEAKERS_VOLUME</b></a></dt>
@@ -572,23 +692,24 @@
   <dt id="ASCII_CHAT_AUDIO_ANALYSIS"><a class="permalink" href="#ASCII_CHAT_AUDIO_ANALYSIS"><b>ASCII_CHAT_AUDIO_ANALYSIS</b></a></dt>
   <dd>Enable audio analysis (debug)</dd>
   <dt id="ASCII_CHAT_NO_AUDIO_PLAYBACK"><a class="permalink" href="#ASCII_CHAT_NO_AUDIO_PLAYBACK"><b>ASCII_CHAT_NO_AUDIO_PLAYBACK</b></a></dt>
-  <dd>Disable speaker playback (debug)</dd>
+  <dd>Disable speaker playback</dd>
   <dt id="ASCII_CHAT_ENCODE_AUDIO"><a class="permalink" href="#ASCII_CHAT_ENCODE_AUDIO"><b>ASCII_CHAT_ENCODE_AUDIO</b></a></dt>
   <dd>Enable Opus audio encoding</dd>
   <dt id="ASCII_CHAT_NO_ENCODE_AUDIO"><a class="permalink" href="#ASCII_CHAT_NO_ENCODE_AUDIO"><b>ASCII_CHAT_NO_ENCODE_AUDIO</b></a></dt>
   <dd>Disable Opus audio encoding</dd>
-  <dt id="ASCII_CHAT_STUN_SERVERS"><a class="permalink" href="#ASCII_CHAT_STUN_SERVERS"><b>ASCII_CHAT_STUN_SERVERS</b></a></dt>
-  <dd>Comma-separated STUN server URLs (debug/test only - ACDS provides in
-      production)</dd>
-  <dt id="ASCII_CHAT_TURN_SERVERS"><a class="permalink" href="#ASCII_CHAT_TURN_SERVERS"><b>ASCII_CHAT_TURN_SERVERS</b></a></dt>
-  <dd>Comma-separated TURN server URLs (debug/test only - ACDS provides in
-      production)</dd>
-  <dt id="ASCII_CHAT_TURN_USERNAME"><a class="permalink" href="#ASCII_CHAT_TURN_USERNAME"><b>ASCII_CHAT_TURN_USERNAME</b></a></dt>
-  <dd>TURN authentication username (debug/test only - ACDS provides in
-      production)</dd>
-  <dt id="ASCII_CHAT_TURN_CREDENTIAL"><a class="permalink" href="#ASCII_CHAT_TURN_CREDENTIAL"><b>ASCII_CHAT_TURN_CREDENTIAL</b></a></dt>
-  <dd>TURN authentication credential (debug/test only - ACDS provides in
-      production)
+  <dt id="ASCII_CHAT_DATABASE"><a class="permalink" href="#ASCII_CHAT_DATABASE"><b>ASCII_CHAT_DATABASE</b></a></dt>
+  <dd>Path to SQLite database for discovery service</dd>
+  <dt id="ASCII_CHAT_DISCOVERY_SERVER"><a class="permalink" href="#ASCII_CHAT_DISCOVERY_SERVER"><b>ASCII_CHAT_DISCOVERY_SERVER</b></a></dt>
+  <dd>Discovery service address (for ACDS registration)</dd>
+  <dt id="ASCII_CHAT_DISCOVERY_PORT"><a class="permalink" href="#ASCII_CHAT_DISCOVERY_PORT"><b>ASCII_CHAT_DISCOVERY_PORT</b></a></dt>
+  <dd>Discovery service port</dd>
+  <dt id="ASCII_CHAT_DISCOVERY_EXPOSE_IP"><a class="permalink" href="#ASCII_CHAT_DISCOVERY_EXPOSE_IP"><b>ASCII_CHAT_DISCOVERY_EXPOSE_IP</b></a></dt>
+  <dd>Allow public IP disclosure in discovery sessions (requires
+    confirmation)</dd>
+  <dt id="ASCII_CHAT_REQUIRE_SERVER_IDENTITY"><a class="permalink" href="#ASCII_CHAT_REQUIRE_SERVER_IDENTITY"><b>ASCII_CHAT_REQUIRE_SERVER_IDENTITY</b></a></dt>
+  <dd>ACDS: require servers to provide signed Ed25519 identity</dd>
+  <dt id="ASCII_CHAT_REQUIRE_CLIENT_IDENTITY"><a class="permalink" href="#ASCII_CHAT_REQUIRE_CLIENT_IDENTITY"><b>ASCII_CHAT_REQUIRE_CLIENT_IDENTITY</b></a></dt>
+  <dd>ACDS: require clients to provide signed Ed25519 identity
     <p class="Pp"></p>
   </dd>
 </dl>
