@@ -4,7 +4,6 @@ import Navigation from './components/Navigation'
 import Home from './pages/Home'
 import Crypto from './pages/Crypto'
 import Man from './pages/Man'
-import Env from './pages/Env'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -15,7 +14,6 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/crypto" element={<Crypto />} />
         <Route path="/man" element={<Man />} />
-        <Route path="/env" element={<Env />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Analytics />

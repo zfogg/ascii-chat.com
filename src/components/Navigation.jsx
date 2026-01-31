@@ -1,10 +1,10 @@
-import { useLocation } from 'react-router-dom'
-import TrackedLink from './TrackedLink'
+import { useLocation } from "react-router-dom";
+import TrackedLink from "./TrackedLink";
 
 export default function Navigation() {
-  const location = useLocation()
+  const location = useLocation();
 
-  const isActive = (path) => location.pathname === path
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav className="border-b border-gray-800 bg-gray-950/50 backdrop-blur-sm sticky top-0 z-50">
@@ -25,9 +25,9 @@ export default function Navigation() {
               to="/"
               label="Nav - Home"
               className={`transition-colors ${
-                isActive('/')
-                  ? 'text-cyan-400'
-                  : 'text-gray-400 hover:text-cyan-300'
+                isActive("/")
+                  ? "text-cyan-400"
+                  : "text-gray-400 hover:text-cyan-300"
               }`}
             >
               Home
@@ -36,9 +36,9 @@ export default function Navigation() {
               to="/crypto"
               label="Nav - Crypto"
               className={`transition-colors ${
-                isActive('/crypto')
-                  ? 'text-purple-400'
-                  : 'text-gray-400 hover:text-purple-300'
+                isActive("/crypto")
+                  ? "text-purple-400"
+                  : "text-gray-400 hover:text-purple-300"
               }`}
             >
               Crypto
@@ -47,27 +47,16 @@ export default function Navigation() {
               to="/man"
               label="Nav - Man"
               className={`transition-colors ${
-                isActive('/man')
-                  ? 'text-pink-400'
-                  : 'text-gray-400 hover:text-pink-300'
+                isActive("/man")
+                  ? "text-pink-400"
+                  : "text-gray-400 hover:text-pink-300"
               }`}
             >
-              Man
-            </TrackedLink>
-            <TrackedLink
-              to="/env"
-              label="Nav - Env"
-              className={`transition-colors ${
-                isActive('/env')
-                  ? 'text-green-400'
-                  : 'text-gray-400 hover:text-green-300'
-              }`}
-            >
-              Env
+              Man Page
             </TrackedLink>
           </div>
         </div>
       </div>
     </nav>
-  )
+  );
 }
